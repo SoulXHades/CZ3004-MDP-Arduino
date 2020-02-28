@@ -37,10 +37,9 @@ RunningMedian runningMedian_PS6(SAMPLE_SIZE);
 //  PS6_value = -1;
 //  }
 
-void calibrateSensor()
+void getObstacleLocations()
 {
   sensorResult = "";
-  PS2_value = -1;
   
   // clear all data
   runningMedian_PS1.clear();

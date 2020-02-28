@@ -3,8 +3,11 @@
 #include <PID_v1.h>
 #include <RunningMedian.h>
 #include <SharpIR.h>
+
 DualVNH5019MotorShield md;
+
 volatile bool setFlag = true;
+volatile bool notStartFastestPath = true;
 String testOfTextFromRPi;
 String sensorResult;
 
@@ -24,35 +27,80 @@ void setup() {
 
 void loop() {
 //Serial.setTimeout(50);
+////To clear the memory in the buffer
 //memset(buffer, 0, sizeof buffer);
+
+//  // true if there are incoming bytes
 //   if (Serial.available() > 0)
 //    { 
-      //Wait for input
+//    // e.g of string format to receive "PA: A2"
 //    Serial.readBytes(buffer, sizeof buffer);
 //
 //    //converts char array to string for easier processing
 //    String inputString(buffer); 
 //    int inputString_length = inputString.length();
-//    char cmd = inputString.charAt(0);
-//    long distance_to_Move = inputString.substring(1,inputString_length-1).toInt();
-//    //double distance_to_Move_1 = getDistanceAccurateCM(distance_to_Move);
+//    char cmd = inputString.charAt(4);
+//    // only extract the number of grids to move if there is
+//    long distance_to_Move = inputString.substring(1,inputString_length-2).toInt();
 //
-//        switch(cmd){
+//    // commands received and process them    
+//    switch(cmd){
+//        // forward command
 //        case 'W' :
 //        case 'w' : 
+//                  forward(distance_to_Move);
+//                  // only send back the obstacle locations if is exploration run
+//                  if (notStartFastestPath)
+//                    goto sendObstacleLoc;
 //                  break;
+//
+//        // turn left
 //        case 'A' :
 //        case 'a' : 
+//                  leftTurn(90);
+//                  // only send back the obstacle locations if is exploration run
+//                  if (notStartFastestPath)
+//                    goto sendObstacleLoc;
 //                  break;
+//
+//        // turn right
 //        case 'D' : 
 //        case 'd' : 
+//                  rightTurn(90);
+//                  // only send back the obstacle locations if is exploration run
+//                  if (notStartFastestPath)
+//                    goto sendObstacleLoc;
 //                  break;
-//        case 'S' : 
+//
+//        // move backwards
 //        case 's' : 
+//                  backward(distance_to_Move);
 //                  break;
+//
+//        // set mode of arduino to fastest path
+//        case 'S':
+//                  // reset motor setting and PID
+//                  motorStart();
+//                  // so that it will know if need to check for obstacles depending if is fastest path or exploration run
+//                  notStartFastestPath = false;
+//                  // send back data to the sender that the robot is now ready to move
+//                  Serial.write(inputString.charAt(1) + inputString.charAt(0) + ": started");
+//                  break;
+//
+//        // for calibration command
+//        case 'C':
+//                  break;
+//
+//        // get obstacle locations
+//        default:
+//        sendObstacleLoc:
+//                  // get obstacle locations
+//                  getObstacleLocations();
+//                  // send obstacle locations to every other devices
+//                  Serial.write(("AE: " + sensorResult).c_str());
 //        }  
 //   }
-  //calibrateSensor();
+
 // forward(15);
 //  if(PS2_value == 1)
 //  {

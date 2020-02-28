@@ -7,7 +7,8 @@ volatile double error; //difference between left and right steps
 volatile const int SPEED =  250; //Set the speed of the motor
 
 // PID Parameters
-volatile double Kp=8, Ki=0, Kd=0.008; //Set PID values //Previous adjusted PID values: Kp=23, Ki=80, Kd=0
+// PID values for obstacle avoidance checklist because interupt not working well due to delay checking the sensor: Kp=8, Ki=0, Kd=0.008
+volatile double Kp=8, Ki=0, Kd=0.008; //Set PID values //Previous adjusted PID values: Kp=23, Ki=80, Kd=0.02
 volatile double Output = 0; // Adjusted speed
 
 // Create PID Instance
