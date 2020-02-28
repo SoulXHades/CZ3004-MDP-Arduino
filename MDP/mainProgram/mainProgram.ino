@@ -57,6 +57,7 @@ void loop() {
 //    delay(1000);
 //    }
 //
+// for obstacle avoidance checklist
   if (setFlag)
   {
     setFlag = false;
