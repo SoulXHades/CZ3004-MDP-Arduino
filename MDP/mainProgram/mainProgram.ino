@@ -25,10 +25,13 @@ void setup() {
 void loop() {
 //Serial.setTimeout(50);
 //memset(buffer, 0, sizeof buffer);
-//   if (Serial.available() > 0) { //Wait for input
-//    Serial.readBytes(buffer, 25);
+//   if (Serial.available() > 0)
+//    { 
+      //Wait for input
+//    Serial.readBytes(buffer, sizeof buffer);
 //
-//    String inputString = Serial.readString(); 
+//    //converts char array to string for easier processing
+//    String inputString(buffer); 
 //    int inputString_length = inputString.length();
 //    char cmd = inputString.charAt(0);
 //    long distance_to_Move = inputString.substring(1,inputString_length-1).toInt();

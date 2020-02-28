@@ -43,52 +43,46 @@ void calibrateSensor()
   PS2_value = -1;
   
   // clear all data
-  //runningMedian_PS1.clear();
+  runningMedian_PS1.clear();
   runningMedian_PS2.clear();
-  /*runningMedian_PS3.clear();
+  runningMedian_PS3.clear();
   runningMedian_PS4.clear();
   runningMedian_PS5.clear();
-  runningMedian_PS6.clear();*/
+  runningMedian_PS6.clear();
 
   // to get reading and add them to the median calculator library
   for(int i = 0; i < SAMPLE_SIZE ; i++)
   {
-    //runningMedian_PS1.add(sharpIR_PS1.distance());
+    runningMedian_PS1.add(sharpIR_PS1.distance());
     runningMedian_PS2.add(sharpIR_PS2.distance());
-    /*runningMedian_PS3.add(sharpIR_PS3.distance());
+    runningMedian_PS3.add(sharpIR_PS3.distance());
     runningMedian_PS4.add(sharpIR_PS4.distance());
     runningMedian_PS5.add(sharpIR_PS5.distance());
-    runningMedian_PS6.add(sharpIR_PS6.distance());*/
+    runningMedian_PS6.add(sharpIR_PS6.distance());
   }
 
 
   // to return obstacle location via grid
   // PS1
-  /*if (runningMedian_PS1.getMedian() < 12.0)
+  if (runningMedian_PS1.getMedian() < 12.0)
     sensorResult += "1,";
   else if (runningMedian_PS1.getMedian() < 24.0)
     sensorResult += "2,";
   else
-    sensorResult += "-1,";*/
+    sensorResult += "-1,";
 
   // to return obstacle location via grid
   // PS2
   if (runningMedian_PS2.getMedian() < 12.5)
-  {
     sensorResult += "1,";
-    PS2_value = 1;
-  }
   else if (runningMedian_PS2.getMedian() < 22.0)
-  {
-    PS2_value = 2;
     sensorResult += "2,";
-  }
   else
     sensorResult += "-1,";
 
   // to return obstacle location via grid
   // PS3
-  /*if (runningMedian_PS3.getMedian() < 12.5)
+  if (runningMedian_PS3.getMedian() < 12.5)
     sensorResult += "1,";
   else if (runningMedian_PS3.getMedian() < 23.0)
     sensorResult += "2,";
@@ -124,7 +118,7 @@ void calibrateSensor()
   else if (runningMedian_PS6.getMedian() < 64.0)
     sensorResult += "6\n";
   else
-    sensorResult += "-1\n";*/
+    sensorResult += "-1\n";
 }
 
 void PS2_obstacleDetection()
