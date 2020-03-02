@@ -68,7 +68,7 @@ void getObstacleLocations()
   else if (runningMedian_PS1.getMedian() < 24.0)
     sensorResult += "2,";
   else
-    sensorResult += "-1,";
+    sensorResult += "8,";
 
   // to return obstacle location via grid
   // PS2
@@ -77,7 +77,7 @@ void getObstacleLocations()
   else if (runningMedian_PS2.getMedian() < 22.0)
     sensorResult += "2,";
   else
-    sensorResult += "-1,";
+    sensorResult += "8,";
 
   // to return obstacle location via grid
   // PS3
@@ -86,7 +86,7 @@ void getObstacleLocations()
   else if (runningMedian_PS3.getMedian() < 23.0)
     sensorResult += "2,";
   else
-    sensorResult += "-1,";
+    sensorResult += "8,";
 
   // to return obstacle location via grid
   // PS4
@@ -95,7 +95,7 @@ void getObstacleLocations()
   else if (runningMedian_PS4.getMedian() < 22.0)
     sensorResult += "2,";
   else
-    sensorResult += "-1,";
+    sensorResult += "8,";
 
   // to return obstacle location via grid
   // PS5
@@ -104,7 +104,7 @@ void getObstacleLocations()
   else if (runningMedian_PS5.getMedian() < 21.0)
     sensorResult += "2,";
   else
-    sensorResult += "-1,";
+    sensorResult += "8,";
 
   // to return obstacle location via grid
   // PS6
@@ -117,7 +117,7 @@ void getObstacleLocations()
   else if (runningMedian_PS6.getMedian() < 64.0)
     sensorResult += "6\n";
   else
-    sensorResult += "-1\n";
+    sensorResult += "8\n";
 }
 
 void PS2_obstacleDetection()
@@ -139,7 +139,7 @@ void PS2_obstacleDetection()
   else if (runningMedian_PS2.getMedian() < 22.0)
     PS2_value = 2;
   else
-    PS2_value = -1;
+    PS2_value = 8;
 }
 
 /*
