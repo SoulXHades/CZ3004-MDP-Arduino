@@ -8,7 +8,7 @@ volatile const int SPEED =  250; //Set the speed of the motor
 
 // PID Parameters
 // PID values for obstacle avoidance checklist because interupt not working well due to delay checking the sensor: Kp=8, Ki=0, Kd=0.008
-volatile double Kp=8, Ki=0, Kd=0.008; //Set PID values //Previous adjusted PID values: Kp=23, Ki=80, Kd=0.02
+volatile double Kp=23, Ki=80, Kd=0.02; //Set PID values //Previous adjusted PID values: Kp=23, Ki=80, Kd=0.02
 volatile double Output = 0; // Adjusted speed
 
 // Create PID Instance
@@ -38,7 +38,7 @@ void avoid(){
       delay(100);
       leftTurn(45);
       delay(100);
-      forward(4);
+      forward(3);
       delay(100);
       rightTurn(45);
       motorStop();
@@ -93,7 +93,7 @@ void backward(double gridNumber){
 
 void leftTurn(double degree){
   
-  double totalSteps = totalAngularSteps_L(degree);
+  double totalSteps = totalAngularSteps(degree);
 
   motorStart();
   for(int i=0; i<=SPEED; i++){
@@ -113,7 +113,7 @@ void leftTurn(double degree){
   }
 
 void rightTurn(double degree){
-  double totalSteps = totalAngularSteps_R(degree);
+  double totalSteps = totalAngularSteps(degree);
 
   motorStart();
   for(int i=0; i<=SPEED; i++){
