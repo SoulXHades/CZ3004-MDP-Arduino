@@ -132,58 +132,36 @@ void rightTurn(double degree){
   delay(10);
 }
 
-/*
-// Calibrate robot to targetDist from the wall
-void caliDist() {
-  int SPEEDL = 70;
-  int SPEEDR = 70;
-  while (getDistance(1) < 30 && getDistance(2) < 30 && count != 50)//30
-  {
-    if ((getDistance(1) >= 10.65 && getDistance(1) < 11) || (getDistance(2) >= 10.65 && getDistance(2) < 11))//10.6,11.5 //10.95,11.05
-    {
-      md.setBrakes(100, 100);
-      break;
-    }
-    else if (getDistance(1) < 10.65 || getDistance(2) < 10.65)
-    {
-      md.setSpeeds(-SPEEDL, -SPEEDR);
-    }
-    else {
-      md.setSpeeds(SPEEDL, SPEEDR);
-    }
-  }
-  md.setBrakes(100, 100);
-}
 
+// calibrate robot to correct angle from the wall of front and left of the robot
 void CaliAngle()
 {
   double targetDist = 10.5;
   int SPEEDL = 70;
   int SPEEDR = 70;
   int count = 0;
-  while (getDistance(1) < 30 && getDistance(2) < 30)
+  while (getDistance(3) < 30 && getDistance(1) < 30)
   {
     if (count == 150) {
       md.setBrakes(100, 100);
-      caliFlag = false;
       caliDist();
       break;
     }
-    double distDiff = getDistance(1) - getDistance(2);
+    double distDiff = getDistance(3) - getDistance(1);
     if (distDiff >= 0.15 || distDiff <= -0.15) {
-      if ((distDiff >= 0.15  && distDiff < 7) && (getDistance(1) >= targetDist)) {
+      if ((distDiff >= 0.15  && distDiff < 7) && (getDistance(3) >= targetDist)) {
         md.setSpeeds(SPEEDL, 0);
         count++;
       }
-      else if ((distDiff <= -0.15 && distDiff > -7) && (getDistance(1) < targetDist)) {
+      else if ((distDiff <= -0.15 && distDiff > -7) && (getDistance(3) < targetDist)) {
         md.setSpeeds(-SPEEDL, 0);
         count++;
       }
-      else if ((distDiff >= 0.15 && distDiff < 7) && (getDistance(1) < targetDist)) {
+      else if ((distDiff >= 0.15 && distDiff < 7) && (getDistance(3) < targetDist)) {
         md.setSpeeds(0, -SPEEDR);
         count++;
       }
-      else if ((distDiff <= -0.15 && distDiff > -7) && (getDistance(1) >= targetDist)) {
+      else if ((distDiff <= -0.15 && distDiff > -7) && (getDistance(3) >= targetDist)) {
         md.setSpeeds(0, SPEEDR);
         count++;
       }
@@ -196,9 +174,31 @@ void CaliAngle()
     }
   }
 }
-*/
 
-  
+
+// calibrate robot to targetDist from the wall of front and left of the robot
+void caliDist() {
+  int SPEEDL = 70;
+  int SPEEDR = 70;
+  while (getDistance(2) < 30 && getDistance(4) < 30)//30
+  {
+    if ((getDistance(2) >= 10.65 && getDistance(2) < 11) || (getDistance(4) >= 10.65 && getDistance(4) < 11))//10.6,11.5 //10.95,11.05
+    {
+      md.setBrakes(100, 100);
+      break;
+    }
+    else if (getDistance(2) < 10.65 || getDistance(4) < 10.65)
+    {
+      md.setSpeeds(-SPEEDL, -SPEEDR);
+    }
+    else {
+      md.setSpeeds(SPEEDL, SPEEDR);
+    }
+  }
+  md.setBrakes(100, 100);
+}
+
+
 // for obstacle avoidance checklist
 void forwardTest(){
   
@@ -253,19 +253,20 @@ void leftTurnTest(double degree){
   double totalSteps = totalAngularSteps_L(degree);
 
   motorStart();
-  
   for(int i=0; i<=SPEED; i++){
     md.setSpeeds(i, -i);
   }
   
-  while (step_R <= totalSteps || step_L <= totalSteps )
-  {
-    computeRPM();
-    myPID.Compute();
-    error = step_L - step_R;
-    double adjust = (error!=0) ? (error>0 ? 1 : -1) : 0;
-    md.setSpeeds(SPEED + adjust + Output, -SPEED + adjust);
+  while (step_R <= totalSteps || step_L <= totalSteps ) {
+  computeRPM();
+  myPID.Compute();
+  error = step_L - step_R;
+  double adjust = (error!=0) ? (error>0 ? 1 : -1) : 0;
+  md.setSpeeds(SPEED + adjust + Output, -SPEED + adjust);
   }
+
+  motorStop();
+  delay(10);
 }
 
 // for obstacle avoidance checklist
@@ -273,18 +274,16 @@ void rightTurnTest(double degree){
   double totalSteps = totalAngularSteps_R(degree);
 
   motorStart();
-  
   for(int i=0; i<=SPEED; i++){
     md.setSpeeds(-i, i);
   }
   
-  while (step_R <= totalSteps || step_L <= totalSteps )
-  {
-    computeRPM();
-    myPID.Compute();
-    error = step_L - step_R;
-    double adjust = (error!=0) ? (error>0 ? 1 : -1) : 0;
-    md.setSpeeds(-SPEED - adjust - Output, SPEED - adjust);
+  while (step_R <= totalSteps || step_L <= totalSteps ) {
+  computeRPM();
+  myPID.Compute();
+  error = step_L - step_R;
+  double adjust = (error!=0) ? (error>0 ? 1 : -1) : 0;
+  md.setSpeeds(-SPEED - adjust - Output, SPEED - adjust);
   }
 
   motorStop();

@@ -27,7 +27,7 @@ void setup() {
   Serial.write(("AE: " + sensorResult).c_str());
   
   //Motor test functions
-//  forward(15);
+  //forward(15);
  // leftTurn(720);
 //  rightTurn(90);
 //  backward(6);
@@ -57,6 +57,7 @@ memset(buffer, 0, sizeof buffer);
         case 'M' :
         case 'm' : 
                   forward(distance_to_Move);
+                  // to send IR sensor reading of obstacles to everyone
                   goto getSensorData;
                   break;
 
@@ -64,6 +65,7 @@ memset(buffer, 0, sizeof buffer);
         case 'L' :
         case 'l' : 
                   leftTurn(90);
+                  // to send IR sensor reading of obstacles to everyone
                   goto getSensorData;
                   break;
 
@@ -71,6 +73,7 @@ memset(buffer, 0, sizeof buffer);
         case 'R' : 
         case 'r' : 
                   rightTurn(90);
+                  // to send IR sensor reading of obstacles to everyone
                   goto getSensorData;
                   break;
 
@@ -78,6 +81,7 @@ memset(buffer, 0, sizeof buffer);
         case 'U' : 
         case 'u' :
                   rightTurn(180);
+                  // to send IR sensor reading of obstacles to everyone
                   goto getSensorData;
                   break;
 
@@ -95,8 +99,10 @@ memset(buffer, 0, sizeof buffer);
         // for calibration command
         case 'C' :
         case 'c' :
+                  CaliAngle();
                   break;
 
+        // to send IR sensor reading of obstacles to everyone
         getSensorData:
           // only send back the obstacle locations if is exploration run
           if(notStartFastestPath)
@@ -109,13 +115,7 @@ memset(buffer, 0, sizeof buffer);
         }
    }
 
-// forward(15);
-//  if(PS2_value == 1)
-//  {
-//    motorStop();
-//    delay(1000);
-//    }
-//
+
 // for obstacle avoidance checklist
 //  if (setFlag)
 //  {
@@ -123,15 +123,6 @@ memset(buffer, 0, sizeof buffer);
 //    
 //    forwardTest();
 //  }
-
-  // only send back the obstacle locations if is exploration run
-  if(notStartFastestPath)
-  {
-    // get obstacle locations
-    getObstacleLocations();
-    // send obstacle locations to every other devices
-    Serial.write(("AE: " + sensorResult).c_str());
-  }
 }
 
   // Example of receiving data from RPi and to RPi

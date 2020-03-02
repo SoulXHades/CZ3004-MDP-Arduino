@@ -37,6 +37,39 @@ RunningMedian runningMedian_PS6(SAMPLE_SIZE);
 //  PS6_value = -1;
 //  }
 
+
+// get distance of robot from the wall/obstacle from that sensor
+double getDistance(int sensorNum)
+{
+  switch(sensorNum)
+  {
+    // PS1
+    case 1:
+      return sharpIR_PS1.distance();
+
+    // PS2
+    case 2:
+      return sharpIR_PS2.distance();
+
+    // PS3
+    case 3:
+      return sharpIR_PS3.distance();
+
+    // PS4
+    case 4:
+      return sharpIR_PS4.distance();
+
+    // PS5
+    case 5:
+      return sharpIR_PS5.distance();
+
+    // PS6
+    case 6:
+      return sharpIR_PS6.distance();
+  }
+}
+
+
 void getObstacleLocations()
 {
   sensorResult = "";
