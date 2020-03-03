@@ -195,10 +195,10 @@ void CaliAngle()
     // if different is a lot, means the robot is not perpenticular to the wall
     distDiff = getDistance(3) - getDistance(1);
 
-    // too tilted to the left
+    // too tilted to the left, turn to the right
     if (distDiff >= 0.15) 
       rightTurn(1);
-    // too titled to the right
+    // too titled to the right, turn to the left
     else if (distDiff <= -0.15)
       leftTurn(1);
     // correct angle
