@@ -137,11 +137,11 @@ void rightTurn(double degree){
 // if the angle is correct, both the readings shouldn't deviate much
 void CaliAngle()
 {
-  double targetDist = 10.5;
+  double targetDist = 5;
   int SPEEDL = 70;
   int SPEEDR = 70;
   int count = 0;
-  while (getDistance(3) < 30 && getDistance(1) < 30)
+  while (getDistance(3) < 5 && getDistance(1) < 30)
   {
     if (count == 150) {
       md.setBrakes(100, 100);
@@ -176,24 +176,28 @@ void CaliAngle()
   }
 }
 
-
-// calibrate robot to targetDist from the wall of front using front right (PS1) and front left (PS3) sensors
-void caliDist() {
+// Calibrate robot to targetDist from the wall of front using front right (PS1) and front left (PS3) sensors.
+// Uses PS1 and PS3 cause there if those wall/obstacle exist for PS1 and PS3 to calibrate angle, 
+//    it can too for distance calibration which there maybe be no wall/obstacle at PS2's direction
+void caliDist()
+{
   int SPEEDL = 70;
   int SPEEDR = 70;
-  while (getDistance(3) < 30 && getDistance(1) < 30)//30
+
+  // infinite WHILE loop till it's completed
+  while (1)
   {
-    if ((getDistance(3) >= 10.65 && getDistance(3) < 11) || (getDistance(1) >= 10.65 && getDistance(1) < 11))//10.6,11.5 //10.95,11.05
+    // if too far off, move closer
+    if (getDistance(3) > 5.5 || getDistance(1) > 5.5)
+      md.setSpeeds(SPEEDL, SPEEDR);
+    // if too close, reverse
+    else if (getDistance(3) < 4.5 || getDistance(1) < 4.5)
+      md.setSpeeds(-SPEEDL, -SPEEDR);
+    // within acceptable range, stop calibrating
+    else 
     {
       md.setBrakes(100, 100);
       break;
-    }
-    else if (getDistance(3) < 10.65 || getDistance(1) < 10.65)
-    {
-      md.setSpeeds(-SPEEDL, -SPEEDR);
-    }
-    else {
-      md.setSpeeds(SPEEDL, SPEEDR);
     }
   }
   md.setBrakes(100, 100);
