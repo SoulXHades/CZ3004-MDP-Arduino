@@ -47,9 +47,9 @@ memset(buffer, 0, sizeof buffer);
     //converts char array to string for easier processing
     String inputString(buffer); 
     int inputString_length = inputString.length();
-    char cmd = inputString.charAt(4);
+    char cmd = inputString.charAt(0);
     // only extract the number of grids to move if there is
-    long distance_to_Move = inputString.substring(1,inputString_length-2).toInt();
+    long distance_to_Move = inputString.substring(1,inputString_length-1).toInt();
 
     // commands received and process them    
     switch(cmd){
@@ -93,7 +93,7 @@ memset(buffer, 0, sizeof buffer);
                   // so that it will know if need to check for obstacles depending if is fastest path or exploration run
                   notStartFastestPath = false;
                   // send back data to the sender that the robot is now ready to move
-                  Serial.write(inputString.charAt(1) + inputString.charAt(0) + ": started");
+                  Serial.write("AE: started");
                   break;
 
         // for calibration command
