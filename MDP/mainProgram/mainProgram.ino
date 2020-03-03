@@ -18,13 +18,6 @@ void setup() {
   // put your setup code here, to run once:
   Serial.begin(115200); 
   motorInit();
-
-  // delay 1sec before sending obstacle detection result to algo
-  delay(1000);
-  // get obstacle locations
-  getObstacleLocations();
-  // send obstacle locations to every other devices
-  Serial.write(("AE: " + sensorResult).c_str());
   
   //Motor test functions
   //forward(15);
@@ -86,8 +79,8 @@ memset(buffer, 0, sizeof buffer);
                   break;
 
         // set mode of arduino to fastest path
-        case 'S' :
-        case 's' :
+        case 'F' :
+        case 'f' :
                   // reset motor setting and PID
                   motorStart();
                   // so that it will know if need to check for obstacles depending if is fastest path or exploration run
@@ -103,7 +96,9 @@ memset(buffer, 0, sizeof buffer);
                   break;
 
         // to send IR sensor reading of obstacles to everyone
-        getSensorData:
+        case 'S':
+        case 's':
+         getSensorData:
           // only send back the obstacle locations if is exploration run
           if(notStartFastestPath)
           {
