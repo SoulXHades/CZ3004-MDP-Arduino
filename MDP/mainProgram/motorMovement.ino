@@ -137,7 +137,7 @@ void rightTurn(double degree){
 // if the angle is correct, both the readings shouldn't deviate much
 void CaliAngle()
 {
-  double targetDist = 5.0;
+  double targetDist = 10.5;
   int SPEEDL = 70;
   int SPEEDR = 70;
   int count = 0;
