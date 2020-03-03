@@ -16,13 +16,13 @@ int PS2_value = -1;
 bool secondAvoid = false;
 void setup() {
   // put your setup code here, to run once:
-  Serial.begin(115200); 
+  Serial.begin(250000); 
   motorInit();
   
   //Motor test functions
-  //forward(15);
- // leftTurn(720);
-//  rightTurn(90);
+  //forward(7);
+  //leftTurn(90);
+  //rightTurn(90);
 //  backward(6);
 }
 
@@ -109,7 +109,6 @@ memset(buffer, 0, sizeof buffer);
           }
         }
    }
-
 
   //for obstacle avoidance checklist
 //  if (setFlag)

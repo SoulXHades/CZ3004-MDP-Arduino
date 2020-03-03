@@ -137,11 +137,11 @@ void rightTurn(double degree){
 // if the angle is correct, both the readings shouldn't deviate much
 void CaliAngle()
 {
-  double targetDist = 5;
+  double targetDist = 10.5;
   int SPEEDL = 70;
   int SPEEDR = 70;
   int count = 0;
-  while (getDistance(3) < 5 && getDistance(1) < 30)
+  while (getDistance(3) < 30 && getDistance(1) < 30)
   {
     if (count == 150) {
       md.setBrakes(100, 100);
