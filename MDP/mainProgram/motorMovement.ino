@@ -132,12 +132,12 @@ void rightTurn(double degree){
   //delay(10);
 }
 
-
+/*
 // calibrate robot to correct angle from the wall of front using front right (PS1) and front left (PS3) sensors
 // if the angle is correct, both the readings shouldn't deviate much
 void CaliAngle()
 {
-  double targetDist = 10.5;
+  double targetDist = 5.0;
   int SPEEDL = 70;
   int SPEEDR = 70;
   int count = 0;
@@ -149,7 +149,8 @@ void CaliAngle()
       break;
     }
     double distDiff = getDistance(3) - getDistance(1);
-    if (distDiff >= 0.15 || distDiff <= -0.15) {
+    if (distDiff >= 0.15 || distDiff <= -0.15) 
+    {
       if ((distDiff >= 0.15  && distDiff < 7) && (getDistance(3) >= targetDist)) {
         md.setSpeeds(SPEEDL, 0);
         count++;
@@ -170,6 +171,39 @@ void CaliAngle()
     else
     {
       md.setBrakes(100, 100);
+      caliDist();
+      break;
+    }
+  }
+}
+*/
+
+// calibrate robot to correct angle from the wall of front using front right (PS1) and front left (PS3) sensors
+// if the angle is correct, both the readings shouldn't deviate much
+void CaliAngle()
+{
+  double distDiff;
+  int count = 0;
+  while (getDistance(3) < 30 && getDistance(1) < 30)
+  {
+    // so won't have infinite loop as it will never be fully perfect
+    if (count == 150) {
+      caliDist();
+      break;
+    }
+
+    // if different is a lot, means the robot is not perpenticular to the wall
+    distDiff = getDistance(3) - getDistance(1);
+
+    // too tilted to the left
+    if (distDiff >= 0.15) 
+      rightTurn(1);
+    // too titled to the right
+    else if (distDiff <= -0.15)
+      leftTurn(1);
+    // correct angle
+    else
+    {
       caliDist();
       break;
     }
