@@ -116,7 +116,7 @@ memset(buffer, 0, sizeof buffer);
    }
 
 
-// for obstacle avoidance checklist
+  //for obstacle avoidance checklist
 //  if (setFlag)
 //  {
 //    setFlag = false;

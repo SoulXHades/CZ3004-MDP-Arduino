@@ -25,7 +25,7 @@ double totalAngularSteps(double degree){ //Calculates the number of steps needed
 }
 
 double totalAngularSteps_L(double degree){ //Calculates the number of steps needed to rotate in a angular motion
-  return ceil(degree * 4.8); //4.53,.18
+  return ceil(degree * 4.3); //4.53,.18
 }
 
 double totalAngularSteps_R(double degree){ //Calculates the number of steps needed to rotate in a angular motion

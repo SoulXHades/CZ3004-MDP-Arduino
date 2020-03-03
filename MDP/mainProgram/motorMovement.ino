@@ -8,7 +8,7 @@ volatile const int SPEED =  250; //Set the speed of the motor
 
 // PID Parameters
 // PID values for obstacle avoidance checklist because interupt not working well due to delay checking the sensor: Kp=8, Ki=0, Kd=0.008
-volatile double Kp=23, Ki=80, Kd=0.02; //Set PID values //Previous adjusted PID values: Kp=23, Ki=80, Kd=0.02
+volatile double Kp=6, Ki=0, Kd=0.008; //Set PID values //Previous adjusted PID values: Kp=23, Ki=80, Kd=0.02
 volatile double Output = 0; // Adjusted speed
 
 // Create PID Instance
@@ -133,7 +133,8 @@ void rightTurn(double degree){
 }
 
 
-// calibrate robot to correct angle from the wall of front and left of the robot
+// calibrate robot to correct angle from the wall of front using front right (PS1) and front left (PS3) sensors
+// if the angle is correct, both the readings shouldn't deviate much
 void CaliAngle()
 {
   double targetDist = 10.5;
@@ -176,18 +177,18 @@ void CaliAngle()
 }
 
 
-// calibrate robot to targetDist from the wall of front and left of the robot
+// calibrate robot to targetDist from the wall of front using front right (PS1) and front left (PS3) sensors
 void caliDist() {
   int SPEEDL = 70;
   int SPEEDR = 70;
-  while (getDistance(2) < 30 && getDistance(4) < 30)//30
+  while (getDistance(3) < 30 && getDistance(1) < 30)//30
   {
-    if ((getDistance(2) >= 10.65 && getDistance(2) < 11) || (getDistance(4) >= 10.65 && getDistance(4) < 11))//10.6,11.5 //10.95,11.05
+    if ((getDistance(3) >= 10.65 && getDistance(3) < 11) || (getDistance(1) >= 10.65 && getDistance(1) < 11))//10.6,11.5 //10.95,11.05
     {
       md.setBrakes(100, 100);
       break;
     }
-    else if (getDistance(2) < 10.65 || getDistance(4) < 10.65)
+    else if (getDistance(3) < 10.65 || getDistance(1) < 10.65)
     {
       md.setSpeeds(-SPEEDL, -SPEEDR);
     }
