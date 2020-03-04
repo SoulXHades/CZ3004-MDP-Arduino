@@ -27,15 +27,17 @@ void setup() {
 }
 
 void loop() {
-//Serial.setTimeout(50);
-  //To clear the memory in the buffer
-  memset(buffer, NULL, sizeof buffer);
+  //Serial.setTimeout(50);
+
+  // clear buffer if is not empty (memset is time consuming hence check before doing so)
+  // clear memory outside of Serial.available() block as waiting for new commands so won't waste time clearing when receiving commands from RPi (more optimize)
+  if (buffer[0] != NULL)
+    //To clear the memory in the buffer
+    memset(buffer, NULL, sizeof buffer);
 
   // true if there are incoming bytes
    if (Serial.available() > 0)
     { 
-      //To clear the memory in the buffer
-      memset(buffer, NULL, sizeof buffer);
       // e.g of string format to receive "PA: A2"
       Serial.readBytes(buffer, sizeof buffer);
   
