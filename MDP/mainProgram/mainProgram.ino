@@ -29,23 +29,26 @@ void setup() {
 void loop() {
 //Serial.setTimeout(50);
   //To clear the memory in the buffer
-  memset(buffer, 0, sizeof buffer);
+  memset(buffer, NULL, sizeof buffer);
 
   // true if there are incoming bytes
    if (Serial.available() > 0)
     { 
-    // e.g of string format to receive "PA: A2"
-    Serial.readBytes(buffer, sizeof buffer);
-
-    //converts char array to string for easier processing
-    String inputString(buffer); 
-    int inputString_length = inputString.length();
-    char cmd = inputString.charAt(0);
-    // only extract the number of grids to move if there is
-    long distance_to_Move = inputString.substring(1,inputString_length-1).toInt();
-
-    // commands received and process them    
-    switch(cmd){
+      //To clear the memory in the buffer
+      memset(buffer, NULL, sizeof buffer);
+      // e.g of string format to receive "PA: A2"
+      Serial.readBytes(buffer, sizeof buffer);
+  
+      //converts char array to string for easier processing
+      String inputString(buffer); 
+      int inputString_length = inputString.length();
+      char cmd = inputString.charAt(0);
+      // only extract the number of grids to move if there is
+      long distance_to_Move = inputString.substring(1,inputString_length-1).toInt();
+  
+      // commands received and process them    
+      switch(cmd)
+      {
         // forward command
         case 'M' :
         case 'm' : 
@@ -53,7 +56,7 @@ void loop() {
                   // to send IR sensor reading of obstacles to everyone
                   goto getSensorData;
                   break;
-
+  
         // turn left
         case 'L' :
         case 'l' : 
@@ -61,7 +64,7 @@ void loop() {
                   // to send IR sensor reading of obstacles to everyone
                   goto getSensorData;
                   break;
-
+  
         // turn right
         case 'R' : 
         case 'r' : 
@@ -69,7 +72,7 @@ void loop() {
                   // to send IR sensor reading of obstacles to everyone
                   goto getSensorData;
                   break;
-
+  
         // u-turn
         case 'U' : 
         case 'u' :
@@ -77,7 +80,7 @@ void loop() {
                   // to send IR sensor reading of obstacles to everyone
                   goto getSensorData;
                   break;
-
+  
         // set mode of arduino to fastest path
         case 'F' :
         case 'f' :
@@ -88,15 +91,14 @@ void loop() {
                   // send back data to the sender that the robot is now ready to move
                   Serial.write("AE: started");
                   break;
-
+  
         // for calibration command
         case 'C' :
         case 'c' :
                   // possible command from Algo PC: CF, CFL, CL (robot designed to be left hugging so won't have right wall to calibrate)
                   // F is front, L is left
                   for(uint8_t i=1; i<inputString.length(); i++)
-                  {
-                    
+                  {          
                     // algo PC let us know if left wall exist to allow calibration
                     if (inputString.charAt(i) == 'L')
                     {
@@ -113,21 +115,21 @@ void loop() {
                       CaliAngle();
                     }
                   }
-                  
+                    
                   break;
-
+  
         // to send IR sensor reading of obstacles to everyone
         case 'S':
         case 's':
-         getSensorData:
-          // only send back the obstacle locations if is exploration run
-          if(notStartFastestPath)
-          {
-            // get obstacle locations
-            getObstacleLocations();
-            // send obstacle locations to every other devices
-            Serial.write(("AE: " + sensorResult).c_str());
-          }
+                  getSensorData:
+                  // only send back the obstacle locations if is exploration run
+                  if(notStartFastestPath)
+                  {
+                     // get obstacle locations
+                     getObstacleLocations();
+                    // send obstacle locations to every other devices
+                    Serial.write(("AE: " + sensorResult).c_str());
+                  }
         }
    }
 
