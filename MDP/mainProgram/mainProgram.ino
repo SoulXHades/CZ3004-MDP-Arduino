@@ -102,7 +102,7 @@ memset(buffer, 0, sizeof buffer);
                     {
                       // turn left to calibrate from left wall
                       leftTurn(90);
-                      // calibrate angle and distance based on left wall
+                      // calibrate angle and distance from the wall
                       CaliAngle();
                       // go back to facing front
                       rightTurn(90);
@@ -112,13 +112,13 @@ memset(buffer, 0, sizeof buffer);
                     {
                       // turn right to calibrate from right wall
                       rightTurn(90);
-                      // calibrate angle and distance based on right wall
+                      // calibrate angle and distance
                       CaliAngle();
                       // go back to facing front
                       leftTurn(90);
                     }
                     else
-                      // calibrate angle and distance from the front wall
+                      // calibrate angle and distance from the front wall since read 'F'
                       CaliAngle();
                   }
                   
