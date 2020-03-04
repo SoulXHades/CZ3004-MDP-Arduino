@@ -28,8 +28,8 @@ void setup() {
 
 void loop() {
 //Serial.setTimeout(50);
-//To clear the memory in the buffer
-memset(buffer, 0, sizeof buffer);
+  //To clear the memory in the buffer
+  memset(buffer, 0, sizeof buffer);
 
   // true if there are incoming bytes
    if (Serial.available() > 0)
@@ -92,8 +92,8 @@ memset(buffer, 0, sizeof buffer);
         // for calibration command
         case 'C' :
         case 'c' :
-                  // possible command from Algo PC: CF, CFR, CFL, CR, CL
-                  // F is front, R is right, L is left
+                  // possible command from Algo PC: CF, CFL, CL (robot designed to be left hugging so won't have right wall to calibrate)
+                  // F is front, L is left
                   for(uint8_t i=1; i<inputString.length(); i++)
                   {
                     
@@ -106,16 +106,6 @@ memset(buffer, 0, sizeof buffer);
                       CaliAngle();
                       // go back to facing front
                       rightTurn(90);
-                    }
-                    // algo PC let us know if right wall exist to allow calibration
-                    else if (inputString.charAt(i) == 'R')
-                    {
-                      // turn right to calibrate from right wall
-                      rightTurn(90);
-                      // calibrate angle and distance
-                      CaliAngle();
-                      // go back to facing front
-                      leftTurn(90);
                     }
                     else
                       // calibrate angle and distance from the front wall since read 'F'
