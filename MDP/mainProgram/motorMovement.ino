@@ -91,9 +91,9 @@ void backward(double gridNumber){
   //delay(10);
   }
 
-void leftTurn(double degree){
-  
-  double totalSteps = totalAngularSteps(degree);
+void leftTurn(double degree)
+{
+  double totalSteps = totalAngularSteps_L(degree);
 
   motorStart();
   for(int i=0; i<=SPEED; i++){
@@ -112,11 +112,55 @@ void leftTurn(double degree){
   //delay(10);
   }
 
-void rightTurn(double degree){
-  double totalSteps = totalAngularSteps(degree);
+  void leftTurnCal(double degree)
+  {
+    double totalSteps = totalAngularSteps_L(degree);
+    int calSpeed = 70;
+  
+    motorStart();
+    for(int i=0; i<=calSpeed; i++){
+      md.setSpeeds(i, -i);
+    }
+    
+    while (step_R <= totalSteps || step_L <= totalSteps ) {
+    computeRPM();
+    myPID.Compute();
+    error = step_L - step_R;
+    double adjust = (error!=0) ? (error>0 ? 1 : -1) : 0;
+    md.setSpeeds(SPEED + adjust + Output, -SPEED + adjust);
+    }
+  
+    motorStop();
+  }
+
+void rightTurn(double degree)
+{
+  double totalSteps = totalAngularSteps_R(degree);
 
   motorStart();
   for(int i=0; i<=SPEED; i++){
+    md.setSpeeds(-i, i);
+  }
+  
+  while (step_R <= totalSteps || step_L <= totalSteps ) {
+  computeRPM();
+  myPID.Compute();
+  error = step_L - step_R;
+  double adjust = (error!=0) ? (error>0 ? 1 : -1) : 0;
+  md.setSpeeds(-SPEED - adjust - Output, SPEED - adjust);
+  }
+
+  motorStop();
+  //delay(10);
+}
+
+void rightTurnCal(double degree)
+{
+  double totalSteps = totalAngularSteps_R(degree);
+  int calSpeed = 70;
+
+  motorStart();
+  for(int i=0; i<=calSpeed; i++){
     md.setSpeeds(-i, i);
   }
   
@@ -184,6 +228,8 @@ void CaliAngle()
 {
   double distDiff;
   int count = 0;
+  int calSPEED = 50;
+  
   while (getDistance(3) < 30 && getDistance(1) < 30)
   {
     // so won't have infinite loop as it will never be fully perfect
@@ -197,10 +243,10 @@ void CaliAngle()
 
     // too tilted to the left, turn to the right
     if (distDiff >= 0.15) 
-      rightTurn(3);
+      md.setSpeeds(-calSPEED, calSPEED);
     // too titled to the right, turn to the left
-    else if (distDiff <= -0.15)
-      leftTurn(3);
+    else if (distDiff <= -0.0001)
+      md.setSpeeds(calSPEED, -calSPEED);
     // correct angle
     else
     {
@@ -223,10 +269,10 @@ void caliDist()
   {
     // if too far off, move closer
     if (getDistance(3) > 5.5 || getDistance(1) > 5.5)
-      md.setSpeeds(SPEEDL, SPEEDR);
+      md.setSpeeds(SPEEDR, SPEEDL);
     // if too close, reverse
     else if (getDistance(3) < 4.5 || getDistance(1) < 4.5)
-      md.setSpeeds(-SPEEDL, -SPEEDR);
+      md.setSpeeds(-SPEEDR, -SPEEDL);
     // within acceptable range, stop calibrating
     else 
     {

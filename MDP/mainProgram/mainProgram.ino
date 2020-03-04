@@ -30,7 +30,6 @@ void loop() {
 //Serial.setTimeout(50);
   //To clear the memory in the buffer
   memset(buffer, 0, sizeof buffer);
-  getObstacleLocations();
 
   // true if there are incoming bytes
    if (Serial.available() > 0)
@@ -137,8 +136,6 @@ void loop() {
 //    
 //    forwardTest();
 //  }
-
-  delay(1000);
 }
 
   // Example of receiving data from RPi and to RPi
