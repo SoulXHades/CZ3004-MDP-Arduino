@@ -108,8 +108,10 @@ void loop() {
                       rightTurn(90);
                     }
                     else
+                    {
                       // calibrate angle and distance from the front wall since read 'F'
                       CaliAngle();
+                    }
                   }
                   
                   break;
