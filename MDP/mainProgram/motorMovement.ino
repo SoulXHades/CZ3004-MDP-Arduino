@@ -197,10 +197,10 @@ void CaliAngle()
 
     // too tilted to the left, turn to the right
     if (distDiff >= 0.15) 
-      rightTurn(1);
+      rightTurn(3);
     // too titled to the right, turn to the left
     else if (distDiff <= -0.15)
-      leftTurn(1);
+      leftTurn(3);
     // correct angle
     else
     {

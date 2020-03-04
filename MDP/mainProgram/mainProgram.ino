@@ -92,7 +92,36 @@ memset(buffer, 0, sizeof buffer);
         // for calibration command
         case 'C' :
         case 'c' :
-                  CaliAngle();
+                  // possible command from Algo PC: CF, CFR, CFL, CR, CL
+                  // F is front, R is right, L is left
+                  for(uint8_t i=1; i<inputString.length(); i++)
+                  {
+                    
+                    // algo PC let us know if left wall exist to allow calibration
+                    if (inputString.charAt(i) == 'L')
+                    {
+                      // turn left to calibrate from left wall
+                      leftTurn(90);
+                      // calibrate angle and distance based on left wall
+                      CaliAngle();
+                      // go back to facing front
+                      rightTurn(90);
+                    }
+                    // algo PC let us know if right wall exist to allow calibration
+                    else if (inputString.charAt(i) == 'R')
+                    {
+                      // turn right to calibrate from right wall
+                      rightTurn(90);
+                      // calibrate angle and distance based on right wall
+                      CaliAngle();
+                      // go back to facing front
+                      leftTurn(90);
+                    }
+                    else
+                      // calibrate angle and distance from the front wall
+                      CaliAngle();
+                  }
+                  
                   break;
 
         // to send IR sensor reading of obstacles to everyone
