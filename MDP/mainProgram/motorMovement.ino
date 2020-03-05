@@ -112,55 +112,12 @@ void leftTurn(double degree)
   //delay(10);
   }
 
-  void leftTurnCal(double degree)
-  {
-    double totalSteps = totalAngularSteps_L(degree);
-    int calSpeed = 70;
-  
-    motorStart();
-    for(int i=0; i<=calSpeed; i++){
-      md.setSpeeds(i, -i);
-    }
-    
-    while (step_R <= totalSteps || step_L <= totalSteps ) {
-    computeRPM();
-    myPID.Compute();
-    error = step_L - step_R;
-    double adjust = (error!=0) ? (error>0 ? 1 : -1) : 0;
-    md.setSpeeds(SPEED + adjust + Output, -SPEED + adjust);
-    }
-  
-    motorStop();
-  }
-
 void rightTurn(double degree)
 {
   double totalSteps = totalAngularSteps_R(degree);
 
   motorStart();
   for(int i=0; i<=SPEED; i++){
-    md.setSpeeds(-i, i);
-  }
-  
-  while (step_R <= totalSteps || step_L <= totalSteps ) {
-  computeRPM();
-  myPID.Compute();
-  error = step_L - step_R;
-  double adjust = (error!=0) ? (error>0 ? 1 : -1) : 0;
-  md.setSpeeds(-SPEED - adjust - Output, SPEED - adjust);
-  }
-
-  motorStop();
-  //delay(10);
-}
-
-void rightTurnCal(double degree)
-{
-  double totalSteps = totalAngularSteps_R(degree);
-  int calSpeed = 70;
-
-  motorStart();
-  for(int i=0; i<=calSpeed; i++){
     md.setSpeeds(-i, i);
   }
   
@@ -233,16 +190,16 @@ void CaliAngle()
   while (getDistance(3) < 30 && getDistance(1) < 30)
   {
     // so won't have infinite loop as it will never be fully perfect
-    if (count == 150) {
-      caliDist();
-      break;
+    if (count == 15+0) {
+      rightTurn(10);
+      count = 0;
     }
 
     // if different is a lot, means the robot is not perpenticular to the wall
     distDiff = getDistance(3) - getDistance(1);
 
     // too tilted to the left, turn to the right
-    if (distDiff >= 0.15) 
+    if (distDiff >= 0.10) 
       md.setSpeeds(-calSPEED, calSPEED);
     // too titled to the right, turn to the left
     else if (distDiff <= -0.0001)
@@ -268,14 +225,14 @@ void caliDist()
   // infinite WHILE loop till it's completed
   while (1)
   {
-    if(count == 50)
+    if(count == 200)
       break;
     
     // if too far off, move closer
-    if (getDistance(3) > 6.0 || getDistance(1) > 6.0)
+    if (getDistance(3) > 5.6 || getDistance(1) > 5.6)
       md.setSpeeds(SPEEDR, SPEEDL);
     // if too close, reverse
-    else if (getDistance(3) < 4.0 || getDistance(1) < 4.0)
+    else if (getDistance(3) < 4.4 || getDistance(1) < 4.4)
       md.setSpeeds(-SPEEDR, -SPEEDL);
     // within acceptable range, stop calibrating
     else 
@@ -283,6 +240,8 @@ void caliDist()
       md.setBrakes(100, 100);
       break;
     }
+
+    ++count;
   }
   md.setBrakes(100, 100);
 }

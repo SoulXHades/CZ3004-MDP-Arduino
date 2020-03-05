@@ -18,6 +18,15 @@ void setup() {
   // put your setup code here, to run once:
   Serial.begin(1000000); 
   motorInit();
+
+  delay(1500);
+  rightTurn(180);
+  delay(100);
+  CaliAngle();
+  rightTurn(90);
+  delay(100);
+  CaliAngle();
+  rightTurn(90);
   
   //Motor test functions
   //forward(7);
@@ -116,6 +125,7 @@ void loop() {
         // turn left
         case 'L' :
         case 'l' : 
+                  delay(100);
                   leftTurn(90);
                   // to send IR sensor reading of obstacles to everyone
                   goto getSensorData;
@@ -124,6 +134,7 @@ void loop() {
         // turn right
         case 'R' : 
         case 'r' : 
+                  delay(100);
                   rightTurn(90);
                   // to send IR sensor reading of obstacles to everyone
                   goto getSensorData;
@@ -132,6 +143,7 @@ void loop() {
         // u-turn
         case 'U' : 
         case 'u' :
+                  delay(100);
                   rightTurn(180);
                   // to send IR sensor reading of obstacles to everyone
                   goto getSensorData;
@@ -155,10 +167,13 @@ void loop() {
                   CaliAngle();
                   // turn left to calibrate from left wall
                   leftTurn(90);
+                  delay(100);
                   // calibrate angle and distance from the left wall
                   CaliAngle();
                   // go back to facing front
                   rightTurn(90);
+                  // to send IR sensor reading of obstacles to everyone
+                  goto getSensorData;
                     
                   break;
 
@@ -167,10 +182,13 @@ void loop() {
         case 'b' :
                   // turn left to calibrate from left wall
                   leftTurn(90);
+                  delay(100);
                   // calibrate angle and distance from the left wall
                   CaliAngle();
                   // go back to facing front
                   rightTurn(90);
+                  // to send IR sensor reading of obstacles to everyone
+                  goto getSensorData;
                     
                   break;
 
@@ -179,6 +197,8 @@ void loop() {
         case 'c' :
                   // calibrate angle and distance from the front wall
                   CaliAngle();
+                  // to send IR sensor reading of obstacles to everyone
+                  goto getSensorData;
                     
                   break;
   
