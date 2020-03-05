@@ -16,7 +16,7 @@ int PS2_value = -1;
 bool secondAvoid = false;
 void setup() {
   // put your setup code here, to run once:
-  Serial.begin(250000); 
+  Serial.begin(115200); 
   motorInit();
   
   //Motor test functions
@@ -28,12 +28,6 @@ void setup() {
 
 void loop() {
   //Serial.setTimeout(50);
-
-  // clear buffer if is not empty (memset is time consuming hence check before doing so)
-  // clear memory outside of Serial.available() block as waiting for new commands so won't waste time clearing when receiving commands from RPi (more optimize)
-  if (buffer[0] != NULL)
-    //To clear the memory in the buffer
-    memset(buffer, NULL, sizeof buffer);
 
   // true if there are incoming bytes
    if (Serial.available() > 0)
@@ -133,6 +127,9 @@ void loop() {
                     Serial.write(("AE: " + sensorResult).c_str());
                   }
         }
+
+        //To clear the memory in the buffer
+        memset(buffer, NULL, sizeof buffer);
    }
 
   //for obstacle avoidance checklist
