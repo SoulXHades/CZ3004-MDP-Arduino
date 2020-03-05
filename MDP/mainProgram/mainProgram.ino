@@ -27,6 +27,14 @@ void setup() {
   delay(100);
   CaliAngle();
   rightTurn(90);
+
+//  leftTurn(90);
+//  delay(100);
+//  leftTurn(90);
+//  delay(100);
+//  leftTurn(90);
+//  delay(100);
+//  leftTurn(90);
   
   //Motor test functions
   //forward(7);
@@ -143,8 +151,11 @@ void loop() {
         // u-turn
         case 'U' : 
         case 'u' :
+                  // turning 180 degrees have some issues. Seperate the turns to 90 90 is more accurate
                   delay(100);
-                  rightTurn(180);
+                  rightTurn(90);
+                  delay(100);
+                  rightTurn(90);
                   // to send IR sensor reading of obstacles to everyone
                   goto getSensorData;
                   break;
