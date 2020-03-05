@@ -16,7 +16,7 @@ int PS2_value = -1;
 bool secondAvoid = false;
 void setup() {
   // put your setup code here, to run once:
-  Serial.begin(115200); 
+  Serial.begin(1000000); 
   motorInit();
   
   //Motor test functions
@@ -27,28 +27,88 @@ void setup() {
 }
 
 void loop() {
+  //memset(buffer, NULL, sizeof buffer);
   //Serial.setTimeout(50);
 
   // true if there are incoming bytes
    if (Serial.available() > 0)
     { 
       // e.g of string format to receive "PA: A2"
-      Serial.readBytes(buffer, sizeof buffer);
+      //Serial.readBytes(buffer, sizeof buffer);
+      // read content from RPi (Serial.read() is processed by Arduino way faster than Serial.readbytes())
+      char cmd = Serial.read();
   
-      //converts char array to string for easier processing
+      /*//converts char array to string for easier processing
       String inputString(buffer); 
       int inputString_length = inputString.length();
       char cmd = inputString.charAt(0);
       // only extract the number of grids to move if there is
-      long distance_to_Move = inputString.substring(1,inputString_length-1).toInt();
+      long distance_to_Move = inputString.substring(1,inputString_length-1).toInt();*/
   
       // commands received and process them    
       switch(cmd)
       {
-        // forward command
+        // forward 1 grid command
+        case '1' :
         case 'M' :
-        case 'm' : 
-                  forward(distance_to_Move);
+        case 'm' :
+                  forward(1);
+                  // to send IR sensor reading of obstacles to everyone
+                  goto getSensorData;
+                  break;
+
+        // forward 2 grids command
+        case '2' :
+                  forward(2);
+                  // to send IR sensor reading of obstacles to everyone
+                  goto getSensorData;
+                  break;
+
+        // forward 3 grids command
+        case '3' :
+                  forward(3);
+                  // to send IR sensor reading of obstacles to everyone
+                  goto getSensorData;
+                  break;
+
+        // forward 4 grids command
+        case '4' :
+                  forward(4);
+                  // to send IR sensor reading of obstacles to everyone
+                  goto getSensorData;
+                  break;
+
+        // forward 5 grids command
+        case '5' :
+                  forward(5);
+                  // to send IR sensor reading of obstacles to everyone
+                  goto getSensorData;
+                  break;
+
+        // forward 6 grids command
+        case '6' :
+                  forward(6);
+                  // to send IR sensor reading of obstacles to everyone
+                  goto getSensorData;
+                  break;
+
+        // forward 7 grids command
+        case '7' :
+                  forward(7);
+                  // to send IR sensor reading of obstacles to everyone
+                  goto getSensorData;
+                  break;
+
+        // forward 8 grids command
+        case '8' :
+                  forward(8);
+                  // to send IR sensor reading of obstacles to everyone
+                  goto getSensorData;
+                  break;
+
+        // forward 9 grids command
+        case '9' :
+                  forward(9);
                   // to send IR sensor reading of obstacles to everyone
                   goto getSensorData;
                   break;
@@ -88,36 +148,44 @@ void loop() {
                   Serial.write("AE: started");
                   break;
   
-        // for calibration command
+        // for calibrate front and left
+        case 'A' :
+        case 'a' :
+                  // calibrate angle and distance from the front wall
+                  CaliAngle();
+                  // turn left to calibrate from left wall
+                  leftTurn(90);
+                  // calibrate angle and distance from the left wall
+                  CaliAngle();
+                  // go back to facing front
+                  rightTurn(90);
+                    
+                  break;
+
+        // for calibrate left
+        case 'B' :
+        case 'b' :
+                  // turn left to calibrate from left wall
+                  leftTurn(90);
+                  // calibrate angle and distance from the left wall
+                  CaliAngle();
+                  // go back to facing front
+                  rightTurn(90);
+                    
+                  break;
+
+        // for calibrate left
         case 'C' :
         case 'c' :
-                  // possible command from Algo PC: CF, CFL, CL (robot designed to be left hugging so won't have right wall to calibrate)
-                  // F is front, L is left
-                  for(uint8_t i=1; i<inputString.length(); i++)
-                  {          
-                    // algo PC let us know if left wall exist to allow calibration
-                    if (inputString.charAt(i) == 'L')
-                    {
-                      // turn left to calibrate from left wall
-                      leftTurn(90);
-                      // calibrate angle and distance from the wall
-                      CaliAngle();
-                      // go back to facing front
-                      rightTurn(90);
-                    }
-                    else
-                    {
-                      // calibrate angle and distance from the front wall since read 'F'
-                      CaliAngle();
-                    }
-                  }
+                  // calibrate angle and distance from the front wall
+                  CaliAngle();
                     
                   break;
   
         // to send IR sensor reading of obstacles to everyone
         case 'S':
         case 's':
-                  getSensorData:
+        getSensorData:
                   // only send back the obstacle locations if is exploration run
                   if(notStartFastestPath)
                   {

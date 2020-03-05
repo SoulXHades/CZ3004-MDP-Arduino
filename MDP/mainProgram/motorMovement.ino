@@ -263,15 +263,19 @@ void caliDist()
 {
   int SPEEDL = 70;
   int SPEEDR = 70;
+  int count = 0;
 
   // infinite WHILE loop till it's completed
   while (1)
   {
+    if(count == 50)
+      break;
+    
     // if too far off, move closer
-    if (getDistance(3) > 5.5 || getDistance(1) > 5.5)
+    if (getDistance(3) > 6.0 || getDistance(1) > 6.0)
       md.setSpeeds(SPEEDR, SPEEDL);
     // if too close, reverse
-    else if (getDistance(3) < 4.5 || getDistance(1) < 4.5)
+    else if (getDistance(3) < 4.0 || getDistance(1) < 4.0)
       md.setSpeeds(-SPEEDR, -SPEEDL);
     // within acceptable range, stop calibrating
     else 
