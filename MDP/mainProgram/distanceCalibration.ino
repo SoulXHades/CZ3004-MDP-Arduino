@@ -1,4 +1,4 @@
-const double one_grid = 9.165 *1;
+const double one_grid = 9.185 *1;
 const double two_grid = 9.365 *2;
 const double three_grid = 9.365 *3;
 const double four_grid = 9.455 *4;
@@ -15,6 +15,8 @@ const double fourteen_grid = 9.365 *14;
 const double fifteen_grid = 9.565 *15;
 
 const double degree_90 = 90; //90 degree turn 86.5
+
+// for dynamic angular offset (deciding if we need dynamic angular calibration or not)
 double r_angularOffset = 0;
 double l_angularOffset = 0;
 
@@ -34,6 +36,7 @@ double totalAngularSteps_R(double degree){ //Calculates the number of steps need
   return ceil(degree * 4.375); //4.375 (2nd battery - Fully charged)
 }
 
+// (deciding if we need dynamic angular calibration or not)
 // to dynamically calibrate the turning degree to counter voltage of battery constant changes at the start of each run
 int dynamicAngularCalibration()
 {
