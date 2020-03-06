@@ -1,4 +1,4 @@
-const double one_grid = 9.515 *1; // let it go slightly more than a grid to counter skidding on the spot
+const double one_grid = 9.495 *1; // let it go slightly more than a grid to counter skidding on the spot
 const double two_grid = 9.365 *2;
 const double three_grid = 9.365 *3;
 const double four_grid = 9.455 *4;
@@ -45,10 +45,10 @@ int dynamicAngularCalibration()
   // align robot properly before doing dynamic calibration
   leftTurn(90);
   delay(100);
-  CaliAngle();
+  CaliAngle(true);
   leftTurn(90);
   delay(100);
-  CaliAngle();
+  CaliAngle(true);
 
   // dynamically calibrate left turn
   for (uint16_t i=0; i<20; i++)
@@ -62,7 +62,7 @@ int dynamicAngularCalibration()
     delay(100);
     leftTurn(90);
     delay(100);
-    distDiff = CaliAngle();
+    distDiff = CaliAngle(true);
 
     // not turning left enough so increase offset
     if (distDiff >= 0.10)
@@ -87,7 +87,7 @@ int dynamicAngularCalibration()
     delay(100);
     rightTurn(90);
     delay(100);
-    distDiff = CaliAngle();
+    distDiff = CaliAngle(true);
 
     // not turning left enough so increase offset
     if (distDiff >= 0.10)

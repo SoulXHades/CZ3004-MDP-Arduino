@@ -181,12 +181,12 @@ void loop() {
         case 'A' :
         case 'a' :
                   // calibrate angle and distance from the front wall
-                  CaliAngle();
+                  CaliAngle(true);
                   // turn left to calibrate from left wall
                   leftTurn(90);
                   delay(100);
                   // calibrate angle and distance from the left wall
-                  CaliAngle();
+                  CaliAngle(true);
                   // go back to facing front
                   rightTurn(90);
                   // to send IR sensor reading of obstacles to everyone
@@ -201,7 +201,7 @@ void loop() {
                   leftTurn(90);
                   delay(100);
                   // calibrate angle and distance from the left wall
-                  CaliAngle();
+                  CaliAngle(true);
                   // go back to facing front
                   rightTurn(90);
                   // to send IR sensor reading of obstacles to everyone
@@ -213,7 +213,7 @@ void loop() {
         case 'C' :
         case 'c' :
                   // calibrate angle and distance from the front wall
-                  CaliAngle();
+                  CaliAngle(true);
                   // to send IR sensor reading of obstacles to everyone
                   goto getSensorData;
                     

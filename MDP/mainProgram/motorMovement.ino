@@ -181,7 +181,7 @@ void CaliAngle()
 
 // calibrate robot to correct angle from the wall of front using front right (PS1) and front left (PS3) sensors
 // if the angle is correct, both the readings shouldn't deviate much
-double CaliAngle()
+double CaliAngle(bool firstTime)
 {
   double distDiff;
   double distDiff_retVal = 0;
@@ -191,7 +191,7 @@ double CaliAngle()
   while (getDistance(3) < 30 && getDistance(1) < 30)
   {
     // so won't have infinite loop as it will never be fully perfect
-    if (count == 15+0) {
+    if (count == 150) {
       rightTurn(10);
       count = 0;
     }
@@ -212,7 +212,9 @@ double CaliAngle()
     // correct angle
     else
     {
-      caliDist();
+      // calibrate angle again after moving (useful if robot was too far from the wall when calibrating angle causing angle calibration to be off)
+      if (firstTime)
+        caliDist();
       break;
     }
   }
@@ -251,6 +253,9 @@ void caliDist()
     ++count;
   }
   md.setBrakes(100, 100);
+
+  // calibrate angle again after moving (useful if robot was too far from the wall when calibrating angle causing angle calibration to be off)
+  CaliAngle(false);
 }
 
 void alignment()
@@ -260,10 +265,10 @@ void alignment()
   {
     rightTurn(180);
     delay(100);
-    CaliAngle();
+    CaliAngle(true);
     rightTurn(90);
     delay(100);
-    CaliAngle();
+    CaliAngle(true);
     rightTurn(90);
     delay(200);
   }
