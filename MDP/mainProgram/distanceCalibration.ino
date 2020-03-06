@@ -81,10 +81,10 @@ int dynamicAngularCalibration()
 
     // not turning left enough so increase offset
     if (distDiff >= 0.10)
-      r_angularOffset += 0.05;
+      r_angularOffset -= 0.05;
     // turned left too much so decrease offset
     else if (distDiff <= -0.0001)
-      r_angularOffset -= 0.05;
+      r_angularOffset += 0.05;
     // roughly good to go hence exit calibrating left turn
     else
       break;
