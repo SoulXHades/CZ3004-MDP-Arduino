@@ -15,6 +15,8 @@ const double fourteen_grid = 9.365 *14;
 const double fifteen_grid = 9.565 *15;
 
 const double degree_90 = 90; //90 degree turn 86.5
+double r_angularOffset = 0;
+double l_angularOffset = 0;
 
 double totalRegularSteps(double steps){ //Calculates the number of steps needed to move in a straight line motion
   return ceil(steps * 31.6);
@@ -30,6 +32,66 @@ double totalAngularSteps_L(double degree){ //Calculates the number of steps need
 
 double totalAngularSteps_R(double degree){ //Calculates the number of steps needed to rotate in a angular motion
   return ceil(degree * 4.35); //4.53
+}
+
+// to dynamically calibrate the turning degree to counter voltage of battery constant changes at the start of each run
+int dynamicAngularCalibration()
+{
+  double distDiff;
+
+  // align robot properly before doing dynamic calibration
+  leftTurn(90);
+  delay(100);
+  CaliAngle();
+  leftTurn(90);
+  delay(100);
+  CaliAngle();
+
+  // dynamically calibrate left turn
+  for (uint16_t i=0; i<20; i++)
+  {
+    leftTurn(90);
+    leftTurn(90);
+    leftTurn(90);
+    leftTurn(90);
+    distDiff = CaliAngle();
+
+    // not turning left enough so increase offset
+    if (distDiff >= 0.10)
+      l_angularOffset += 0.05;
+    // turned left too much so decrease offset
+    else if (distDiff <= -0.0001)
+      l_angularOffset -= 0.05;
+    // roughly good to go hence exit calibrating left turn
+    else
+      break;
+  }
+
+  // dynamically calibrate right turn
+  for (uint16_t i=0; i<20; i++)
+  {
+    rightTurn(90);
+    rightTurn(90);
+    rightTurn(90);
+    rightTurn(90);
+    distDiff = CaliAngle();
+
+    // not turning left enough so increase offset
+    if (distDiff >= 0.10)
+      r_angularOffset += 0.05;
+    // turned left too much so decrease offset
+    else if (distDiff <= -0.0001)
+      r_angularOffset -= 0.05;
+    // roughly good to go hence exit calibrating left turn
+    else
+      break;
+  }
+
+  // left robot face the front of the start point
+  leftTurn(180);
+
+  // align the robot nicely at the start position
+  alignment();
 }
 
 

@@ -181,9 +181,10 @@ void CaliAngle()
 
 // calibrate robot to correct angle from the wall of front using front right (PS1) and front left (PS3) sensors
 // if the angle is correct, both the readings shouldn't deviate much
-void CaliAngle()
+double CaliAngle()
 {
   double distDiff;
+  double distDiff_retVal = 0;
   int count = 0;
   int calSPEED = 50;
   
@@ -198,6 +199,10 @@ void CaliAngle()
     // if different is a lot, means the robot is not perpenticular to the wall
     distDiff = getDistance(3) - getDistance(1);
 
+    // assign the original off value to be used for dynamic initial calibration
+    if(distDiff > distDiff_retVal)
+      distDiff_retVal = distDiff;
+
     // too tilted to the left, turn to the right
     if (distDiff >= 0.10) 
       md.setSpeeds(-calSPEED, calSPEED);
@@ -211,6 +216,8 @@ void CaliAngle()
       break;
     }
   }
+
+  return distDiff_retVal;
 }
 
 // Calibrate robot to targetDist from the wall of front using front right (PS1) and front left (PS3) sensors.
@@ -246,6 +253,20 @@ void caliDist()
   md.setBrakes(100, 100);
 }
 
+void alignment()
+{
+  delay(1500);
+  rightTurn(180);
+  delay(100);
+  CaliAngle();
+  rightTurn(90);
+  delay(100);
+  CaliAngle();
+  rightTurn(90);
+}
+
+
+//////////////////////////////////////////////////// Obstacle avoidance checklist ////////////////////////////////////////////////////
 
 // for obstacle avoidance checklist
 void forwardTest(){

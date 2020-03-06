@@ -19,14 +19,8 @@ void setup() {
   Serial.begin(1000000); 
   motorInit();
 
-  delay(1500);
-  rightTurn(180);
-  delay(100);
-  CaliAngle();
-  rightTurn(90);
-  delay(100);
-  CaliAngle();
-  rightTurn(90);
+  // align the robot to start position properly
+  alignment();
 
 //  leftTurn(90);
 //  delay(100);
@@ -44,8 +38,6 @@ void setup() {
 }
 
 void loop() {
-  //memset(buffer, NULL, sizeof buffer);
-  //Serial.setTimeout(50);
 
   // true if there are incoming bytes
    if (Serial.available() > 0)
@@ -203,7 +195,7 @@ void loop() {
                     
                   break;
 
-        // for calibrate left
+        // for calibrate front
         case 'C' :
         case 'c' :
                   // calibrate angle and distance from the front wall
@@ -226,9 +218,6 @@ void loop() {
                     Serial.write(("AE: " + sensorResult).c_str());
                   }
         }
-
-        //To clear the memory in the buffer
-        memset(buffer, NULL, sizeof buffer);
    }
 
   //for obstacle avoidance checklist
