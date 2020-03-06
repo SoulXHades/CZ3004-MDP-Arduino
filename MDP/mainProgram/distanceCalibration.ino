@@ -17,8 +17,8 @@ const double fifteen_grid = 9.565 *15;
 const double degree_90 = 90; //90 degree turn 86.5
 
 // for dynamic angular offset (deciding if we need dynamic angular calibration or not)
-double r_angularOffset = 0;
-double l_angularOffset = 0;
+double r_angularOffset = 0.0;
+double l_angularOffset = 0.0;
 
 double totalRegularSteps(double steps){ //Calculates the number of steps needed to move in a straight line motion
   return ceil(steps * 31.6);
@@ -53,10 +53,15 @@ int dynamicAngularCalibration()
   // dynamically calibrate left turn
   for (uint16_t i=0; i<20; i++)
   {
+    delay(100);
     leftTurn(90);
+    delay(100);
     leftTurn(90);
+    delay(100);
     leftTurn(90);
+    delay(100);
     leftTurn(90);
+    delay(100);
     distDiff = CaliAngle();
 
     // not turning left enough so increase offset
@@ -73,10 +78,15 @@ int dynamicAngularCalibration()
   // dynamically calibrate right turn
   for (uint16_t i=0; i<20; i++)
   {
+    delay(100);
     rightTurn(90);
+    delay(100);
     rightTurn(90);
+    delay(100);
     rightTurn(90);
+    delay(100);
     rightTurn(90);
+    delay(100);
     distDiff = CaliAngle();
 
     // not turning left enough so increase offset

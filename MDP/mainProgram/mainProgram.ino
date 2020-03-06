@@ -20,7 +20,7 @@ void setup() {
   motorInit();
 
   // align the robot to start position properly
-  //alignment();
+  alignment();
   //dynamicAngularCalibration();
 
   // turning manual calibration code
@@ -217,6 +217,12 @@ void loop() {
                   // to send IR sensor reading of obstacles to everyone
                   goto getSensorData;
                     
+                  break;
+
+        // for starting position alignment of the robot
+        case 'P' :
+        case 'p' :
+                  alignment();
                   break;
   
         // to send IR sensor reading of obstacles to everyone
