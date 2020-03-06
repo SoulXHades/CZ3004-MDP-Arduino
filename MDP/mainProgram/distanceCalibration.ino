@@ -27,11 +27,11 @@ double totalAngularSteps(double degree){ //Calculates the number of steps needed
 }
 
 double totalAngularSteps_L(double degree){ //Calculates the number of steps needed to rotate in a angular motion
-  return ceil(degree * 4.355); //4.53,.18
+  return ceil(degree * 4.38); //4.38 (2nd battery - Fully charged)
 }
 
 double totalAngularSteps_R(double degree){ //Calculates the number of steps needed to rotate in a angular motion
-  return ceil(degree * 4.35); //4.53
+  return ceil(degree * 4.375); //4.375 (2nd battery - Fully charged)
 }
 
 // to dynamically calibrate the turning degree to counter voltage of battery constant changes at the start of each run
