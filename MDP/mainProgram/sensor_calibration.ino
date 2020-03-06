@@ -140,9 +140,12 @@ void getObstacleLocations()
   else
     sensorResult += "8,";
 
+  Serial.println(runningMedian_PS6.getMedian());
   // to return obstacle location via grid
   // PS6
-  if (25.0 <= runningMedian_PS6.getMedian() && runningMedian_PS6.getMedian() < 34.0)
+  if (runningMedian_PS6.getMedian() < 25.0)
+    sensorResult += "8\n";
+  else if (runningMedian_PS6.getMedian() < 34.0)
     sensorResult += "3\n";
   else if (runningMedian_PS6.getMedian() < 43.0)
     sensorResult += "4\n";

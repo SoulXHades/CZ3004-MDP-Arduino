@@ -256,13 +256,17 @@ void caliDist()
 void alignment()
 {
   delay(1500);
-  rightTurn(180);
-  delay(100);
-  CaliAngle();
-  rightTurn(90);
-  delay(100);
-  CaliAngle();
-  rightTurn(90);
+  for (uint8_t i=0; i<2; i++)
+  {
+    rightTurn(180);
+    delay(100);
+    CaliAngle();
+    rightTurn(90);
+    delay(100);
+    CaliAngle();
+    rightTurn(90);
+    delay(200);
+  }
 }
 
 
