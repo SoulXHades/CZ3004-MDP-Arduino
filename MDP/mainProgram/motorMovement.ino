@@ -225,18 +225,18 @@ double CaliAngle()
 //    it can too for distance calibration which there maybe be no wall/obstacle at PS2's direction
 void caliDist()
 {
-  int SPEEDL = 70;
-  int SPEEDR = 70;
+  int SPEEDL = 100;
+  int SPEEDR = 100;
   int count = 0;
 
   // infinite WHILE loop till it's completed
   while (1)
   {
-    if(count == 200)
+    if(count == 1000)
       break;
     
     // if too far off, move closer
-    if (getDistance(3) > 5.6 || getDistance(1) > 5.6)
+    if (getDistance(3) > 5.1 || getDistance(1) > 5.1)
       md.setSpeeds(SPEEDR, SPEEDL);
     // if too close, reverse
     else if (getDistance(3) < 4.4 || getDistance(1) < 4.4)
