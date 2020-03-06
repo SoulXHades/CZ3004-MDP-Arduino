@@ -72,6 +72,7 @@ double getDistance(int sensorNum)
 
 void getObstacleLocations()
 {
+  // clear string
   sensorResult = "";
   
   // clear all data
@@ -140,7 +141,6 @@ void getObstacleLocations()
   else
     sensorResult += "8,";
 
-  Serial.println(runningMedian_PS6.getMedian());
   // to return obstacle location via grid
   // PS6
   if (runningMedian_PS6.getMedian() < 25.0)

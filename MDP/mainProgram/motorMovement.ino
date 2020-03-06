@@ -16,39 +16,6 @@ PID myPID(&rpm_R, &Output, &rpm_L, Kp, Ki, Kd, DIRECT);
 /*Where parameters of the function are:
 myPID(input(rpm), output(speed), setpoint(rpm), proportional value, intergral value, derative value, motor direction)*/
 
-// for obstacle avoidance checklist
-void avoid(){
-  PS2_obstacleDetection();
-
-  if(PS2_value == 2)
-  {
-    if (secondAvoid)
-      return;
-    else
-    {
-      motorStop();
-      delay(100);
-      rightTurnTest(45);
-      delay(100);
-      forward(3);
-      delay(100);
-      leftTurnTest(45);
-      delay(100);
-      forward(5);
-      delay(100);
-      leftTurnTest(45);
-      delay(100);
-      forward(3);
-      delay(100);
-      rightTurnTest(45);
-      motorStop();
-
-      // hardcode stop before the end of the arena
-      secondAvoid = true;
-      }
-  }
-}
-
 void forward(double gridNumber){
   
   double totalSteps = totalRegularSteps(getFinalSteps(gridNumber));
@@ -133,52 +100,6 @@ void rightTurn(double degree)
   //delay(10);
 }
 
-/*
-// calibrate robot to correct angle from the wall of front using front right (PS1) and front left (PS3) sensors
-// if the angle is correct, both the readings shouldn't deviate much
-void CaliAngle()
-{
-  double targetDist = 10.5;
-  int SPEEDL = 70;
-  int SPEEDR = 70;
-  int count = 0;
-  while (getDistance(3) < 30 && getDistance(1) < 30)
-  {
-    if (count == 150) {
-      md.setBrakes(100, 100);
-      caliDist();
-      break;
-    }
-    double distDiff = getDistance(3) - getDistance(1);
-    if (distDiff >= 0.15 || distDiff <= -0.15) 
-    {
-      if ((distDiff >= 0.15  && distDiff < 7) && (getDistance(3) >= targetDist)) {
-        md.setSpeeds(SPEEDL, 0);
-        count++;
-      }
-      else if ((distDiff <= -0.15 && distDiff > -7) && (getDistance(3) < targetDist)) {
-        md.setSpeeds(-SPEEDL, 0);
-        count++;
-      }
-      else if ((distDiff >= 0.15 && distDiff < 7) && (getDistance(3) < targetDist)) {
-        md.setSpeeds(0, -SPEEDR);
-        count++;
-      }
-      else if ((distDiff <= -0.15 && distDiff > -7) && (getDistance(3) >= targetDist)) {
-        md.setSpeeds(0, SPEEDR);
-        count++;
-      }
-    }
-    else
-    {
-      md.setBrakes(100, 100);
-      caliDist();
-      break;
-    }
-  }
-}
-*/
-
 // calibrate robot to correct angle from the wall of front using front right (PS1) and front left (PS3) sensors
 // if the angle is correct, both the readings shouldn't deviate much
 double CaliAngle(bool firstTime)
@@ -260,6 +181,7 @@ void caliDist()
   CaliAngle(false);
 }
 
+// alignment of robot to the starting position
 void alignment()
 {
   delay(1500);
@@ -275,6 +197,39 @@ void alignment()
 
 
 //////////////////////////////////////////////////// Obstacle avoidance checklist ////////////////////////////////////////////////////
+
+// for obstacle avoidance checklist
+void avoid(){
+  PS2_obstacleDetection();
+
+  if(PS2_value == 2)
+  {
+    if (secondAvoid)
+      return;
+    else
+    {
+      motorStop();
+      delay(100);
+      rightTurnTest(45);
+      delay(100);
+      forward(3);
+      delay(100);
+      leftTurnTest(45);
+      delay(100);
+      forward(5);
+      delay(100);
+      leftTurnTest(45);
+      delay(100);
+      forward(3);
+      delay(100);
+      rightTurnTest(45);
+      motorStop();
+
+      // hardcode stop before the end of the arena
+      secondAvoid = true;
+      }
+  }
+}
 
 // for obstacle avoidance checklist
 void forwardTest(){

@@ -21,6 +21,8 @@ void setup() {
 
   // align the robot to start position properly
   alignment();
+
+  // for dynamic angular calibration
   //dynamicAngularCalibration();
 
   // turning manual calibration code
@@ -53,7 +55,7 @@ void setup() {
 
 void loop() {
 
-  // true if there are incoming bytes
+  // true if there are incoming byte(s)
    if (Serial.available() > 0)
     { 
       // e.g of string format to receive "PA: A2"
