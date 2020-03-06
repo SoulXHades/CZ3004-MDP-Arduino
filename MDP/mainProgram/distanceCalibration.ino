@@ -1,4 +1,4 @@
-const double one_grid = 9.195 *1; // let it go slightly more than a grid to counter skidding on the spot
+const double one_grid = 9.515 *1; // let it go slightly more than a grid to counter skidding on the spot
 const double two_grid = 9.365 *2;
 const double three_grid = 9.365 *3;
 const double four_grid = 9.455 *4;
@@ -33,7 +33,7 @@ double totalAngularSteps_L(double degree){ //Calculates the number of steps need
 }
 
 double totalAngularSteps_R(double degree){ //Calculates the number of steps needed to rotate in a angular motion
-  return ceil(degree * (4.36+r_angularOffset)); //4.36 (2nd battery - Fully charged)
+  return ceil(degree * (4.355+r_angularOffset)); //4.355 (2nd battery - Fully charged)
 }
 
 // (deciding if we need dynamic angular calibration or not)
