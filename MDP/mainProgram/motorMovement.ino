@@ -269,7 +269,6 @@ void alignment()
   CaliAngle(true);
   rightTurn(90);
   delay(200);
-  }
 }
 
 
