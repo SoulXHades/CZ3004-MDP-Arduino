@@ -187,11 +187,13 @@ double CaliAngle(bool firstTime)
   double distDiff_retVal = 0;
   int count = 0;
   int calSPEED = 50;
-  
+
+  // range that sensor is still roughly stable hence can use those values to calibrate
   while (getDistance(3) < 30 && getDistance(1) < 30)
   {
     // so won't have infinite loop as it will never be fully perfect
-    if (count == 150) {
+    if (count == 180)
+    {
       rightTurn(10);
       count = 0;
     }
