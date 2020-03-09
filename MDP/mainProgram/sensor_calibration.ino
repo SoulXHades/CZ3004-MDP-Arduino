@@ -134,9 +134,9 @@ void getObstacleLocations()
 
   // to return obstacle location via grid
   // PS5
-  if (runningMedian_PS5.getMedian() < 10.0)
+  if (runningMedian_PS5.getMedian() < 12.0)
     sensorResult += "1,";
-  else if (runningMedian_PS5.getMedian() < 21.0)
+  else if (runningMedian_PS5.getMedian() < 22.0)
     sensorResult += "2,";
   else
     sensorResult += "8,";

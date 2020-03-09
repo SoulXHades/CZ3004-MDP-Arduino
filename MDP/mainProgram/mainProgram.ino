@@ -20,7 +20,7 @@ void setup() {
   motorInit();
 
   // align the robot to start position properly
-  alignment();
+  //alignment();
 
   // for dynamic angular calibration
   //dynamicAngularCalibration();
@@ -53,8 +53,8 @@ void setup() {
 //  backward(6);
 }
 
-void loop() {
-
+void loop() 
+{
   // true if there are incoming byte(s)
    if (Serial.available() > 0)
     { 
@@ -134,6 +134,14 @@ void loop() {
         // forward 9 grids command
         case '9' :
                   forward(9);
+                  // to send IR sensor reading of obstacles to everyone
+                  goto getSensorData;
+                  break;
+
+        // move backwards 1 grid command
+        case 'D' : 
+        case 'd' :
+                  backward(1);
                   // to send IR sensor reading of obstacles to everyone
                   goto getSensorData;
                   break;
