@@ -387,16 +387,16 @@ float SharpIR::distance()
 			// offset:
 			// for 10cm
 			if (calibratedDist < 18.5)
-				return calibratedDist - 5.0;
+				return calibratedDist + 1.0;
 			// for 20cm
 			else if (calibratedDist < 31.0)
-				return calibratedDist - 8.0;
+				return calibratedDist - 2.0;
 			// for 30cm
 			else if (calibratedDist < 43.0)
-				return calibratedDist - 10.0;
+				return calibratedDist - 5.0;
 			// for 40cm
 			else if (calibratedDist < 55.0)
-				return calibratedDist - 12.0;
+				return calibratedDist - 8.0;
 			// for 50cm
 			else if (calibratedDist < 67.0)
 				return calibratedDist - 13.0;
