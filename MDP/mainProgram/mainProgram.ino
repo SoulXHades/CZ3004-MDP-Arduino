@@ -35,17 +35,21 @@ void setup() {
 //  rightTurn(90);
   
   //Motor test functions
+//  for(int i=0; i<3; i++)
+//  {
 //  forward(1);
-//  delay(100);
+//  delay(250);
 //  forward(1);
-//  delay(100);
+//  delay(250);
 //  forward(1);
-//  delay(100);
+//  delay(250);
 //  forward(1);
-//  delay(100);
+//  delay(250);
 //  forward(1);
-//  delay(100);
+//  delay(250);
 //  forward(1);
+//  delay(250);
+//  }
 //  delay(100);
 //  forward(1);
   //leftTurn(90);
