@@ -25,12 +25,13 @@ void forward(double gridNumber){
     md.setSpeeds(i, i);
   }
   
-  while (step_R <= totalSteps || step_L <= totalSteps ) {
-  computeRPM();
-  myPID.Compute();
-  error = step_L - step_R;
-  double adjust = (error!=0) ? (error>0 ? 1 : -1) : 0;
-  md.setSpeeds(SPEED + adjust + Output, SPEED - adjust);
+  while (step_R <= totalSteps || step_L <= totalSteps ) 
+  {
+    computeRPM();
+    myPID.Compute();
+    error = step_L - step_R;
+    double adjust = (error!=0) ? (error>0 ? 1 : -1) : 0;
+    md.setSpeeds(SPEED + adjust + Output, SPEED - adjust);
   }
 
   motorStop();
@@ -45,7 +46,8 @@ void backward(double gridNumber){
     md.setSpeeds(-i, -i);
   }
   
-  while (step_R <= totalSteps || step_L <= totalSteps ) {
+  while (step_R <= totalSteps || step_L <= totalSteps )
+  {
     //Serial.print(step_R); // debug
     computeRPM();
     myPID.Compute();
@@ -63,16 +65,18 @@ void leftTurn(double degree)
   double totalSteps = totalAngularSteps_L(degree);
 
   motorStart();
-  for(int i=0; i<=SPEED; i++){
+  for(int i=0; i<=SPEED; i++)
+  {
     md.setSpeeds(i, -i);
   }
   
-  while (step_R <= totalSteps || step_L <= totalSteps ) {
-  computeRPM();
-  myPID.Compute();
-  error = step_L - step_R;
-  double adjust = (error!=0) ? (error>0 ? 1 : -1) : 0;
-  md.setSpeeds(SPEED + adjust + Output, -SPEED + adjust);
+  while (step_R <= totalSteps || step_L <= totalSteps )
+  {
+    computeRPM();
+    myPID.Compute();
+    error = step_L - step_R;
+    double adjust = (error!=0) ? (error>0 ? 1 : -1) : 0;
+    md.setSpeeds(SPEED + adjust + Output, -SPEED + adjust);
   }
 
   motorStop();
@@ -88,12 +92,13 @@ void rightTurn(double degree)
     md.setSpeeds(-i, i);
   }
   
-  while (step_R <= totalSteps || step_L <= totalSteps ) {
-  computeRPM();
-  myPID.Compute();
-  error = step_L - step_R;
-  double adjust = (error!=0) ? (error>0 ? 1 : -1) : 0;
-  md.setSpeeds(-SPEED - adjust - Output, SPEED - adjust);
+  while (step_R <= totalSteps || step_L <= totalSteps )
+  {
+    computeRPM();
+    myPID.Compute();
+    error = step_L - step_R;
+    double adjust = (error!=0) ? (error>0 ? 1 : -1) : 0;
+    md.setSpeeds(-SPEED - adjust - Output, SPEED - adjust);
   }
 
   motorStop();
