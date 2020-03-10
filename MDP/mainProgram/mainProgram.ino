@@ -142,21 +142,20 @@ void loop()
                   goto getSensorData;
                   break;
 
+        // keep moving forward while sending to Algo PC sensor data every 1 grid after moving. Only stop when have at least one obstacle 1 grid from it
         case 'G' :
         case 'g' :
                   while(1)
                   {
                     forward(1);
+                    delay(10);
                     // get obstacle locations
-                     getObstacleLocations();
+                    getObstacleLocations();
                     // send obstacle locations to every other devices
                     Serial.write(("AE: " + sensorResult).c_str());
 
-                    PS1_obstacleDetection();
-                    PS2_obstacleDetection();
-                    PS3_obstacleDetection();
-
-                    if (PS1_value != 8 || PS2_value != 8 || PS3_value != 8)
+                    // check if there is any obstacle infront of the robot (at 1 grid) using PS1, PS2, PS3 sensors. If have, stop moving forward and wait for commands from Algorithm PC.
+                    if (sensorResult.charAt(0) == '1' || sensorResult.charAt(2) == '1' || sensorResult.charAt(4) == '1')
                       break;
                   }
 
