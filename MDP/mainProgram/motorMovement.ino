@@ -46,12 +46,12 @@ void backward(double gridNumber){
   }
   
   while (step_R <= totalSteps || step_L <= totalSteps ) {
-    Serial.print(step_R);
-  computeRPM();
-  myPID.Compute();
-  error = step_L - step_R;
-  double adjust = (error!=0) ? (error>0 ? 1 : -1) : 0;
-  md.setSpeeds(-SPEED - adjust - Output, -SPEED + adjust);
+    //Serial.print(step_R); // debug
+    computeRPM();
+    myPID.Compute();
+    error = step_L - step_R;
+    double adjust = (error!=0) ? (error>0 ? 1 : -1) : 0;
+    md.setSpeeds(-SPEED - adjust - Output, -SPEED + adjust);
   }
 
   motorStop();
