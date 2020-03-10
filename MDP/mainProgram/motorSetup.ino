@@ -54,15 +54,15 @@ void computeRPM(){ //Computes the rpm of both left and right motors
 void leftMotorRpm() { //Prints individually the rpm of the left motor
   rpm_L = pulseIn(pinLeft, HIGH);                            
   rpm_L = 60000/(1.1245*rpm_L);
-  Serial.print(rpm_L);
-  Serial.print("\n");
+//  Serial.print(rpm_L);
+//  Serial.print("\n");
 }
 
 void rightMotorRPM() { //Prints individually the rpm of the right motor
   rpm_R = pulseIn(pinRight, HIGH);                          
   rpm_R = 60000/(1.1245*rpm_R);
-  Serial.print(rpm_R);
-  Serial.print("\n");
+//  Serial.print(rpm_R);
+//  Serial.print("\n");
 }
 
 /*Step Test -> to be placed in void loop() for testing*/

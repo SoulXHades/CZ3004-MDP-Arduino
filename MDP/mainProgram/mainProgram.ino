@@ -38,18 +38,18 @@ void setup() {
 //  for(int i=0; i<3; i++)
 //  {
 //  forward(1);
-//  delay(250);
+//  delay(100);
 //  forward(1);
-//  delay(250);
+//  delay(100);
 //  forward(1);
-//  delay(250);
+//  delay(100);
 //  forward(1);
-//  delay(250);
+//  delay(100);
 //  forward(1);
-//  delay(250);
-//  forward(1);
-//  delay(250);
+//  delay(100);
 //  }
+//  forward(1);
+//  delay(100);
 //  delay(100);
 //  forward(1);
   //leftTurn(90);
@@ -142,6 +142,24 @@ void loop()
                   goto getSensorData;
                   break;
 
+        case 'G' :
+        case 'g' :
+                  while(1)
+                  {
+                    forward(1);
+                    // get obstacle locations
+                     getObstacleLocations();
+                    // send obstacle locations to every other devices
+                    Serial.write(("AE: " + sensorResult).c_str());
+
+                    PS1_obstacleDetection();
+                    PS2_obstacleDetection();
+                    PS3_obstacleDetection();
+
+                    if (PS1_value != 8 || PS2_value != 8 || PS3_value != 8)
+                      break;
+                  }
+
         // move backwards 1 grid command
         case 'D' : 
         case 'd' :
@@ -153,7 +171,7 @@ void loop()
         // turn left
         case 'L' :
         case 'l' : 
-                  delay(100);
+                  delay(75);
                   leftTurn(90);
                   // to send IR sensor reading of obstacles to everyone
                   goto getSensorData;
@@ -162,7 +180,7 @@ void loop()
         // turn right
         case 'R' : 
         case 'r' : 
-                  delay(100);
+                  delay(75);
                   rightTurn(90);
                   // to send IR sensor reading of obstacles to everyone
                   goto getSensorData;
@@ -172,9 +190,9 @@ void loop()
         case 'U' : 
         case 'u' :
                   // turning 180 degrees have some issues. Seperate the turns to 90 90 is more accurate
-                  delay(100);
+                  delay(75);
                   rightTurn(90);
-                  delay(100);
+                  delay(75);
                   rightTurn(90);
                   // to send IR sensor reading of obstacles to everyone
                   goto getSensorData;
@@ -186,9 +204,9 @@ void loop()
                   // reset motor setting and PID
                   motorStart();
                   // so that it will know if need to check for obstacles depending if is fastest path or exploration run
-                  notStartFastestPath = false;
-                  // send back data to the sender that the robot is now ready to move
-                  Serial.write("AE: started");
+                  notStartFastestPath = !notStartFastestPath;
+                  // to send IR sensor reading of obstacles to everyone
+                  goto getSensorData;
                   break;
   
         // for calibrate front and left
@@ -198,7 +216,7 @@ void loop()
                   CaliAngle(true);
                   // turn left to calibrate from left wall
                   leftTurn(90);
-                  delay(100);
+                  delay(75);
                   // calibrate angle and distance from the left wall
                   CaliAngle(true);
                   // go back to facing front
@@ -213,7 +231,7 @@ void loop()
         case 'b' :
                   // turn left to calibrate from left wall
                   leftTurn(90);
-                  delay(100);
+                  delay(75);
                   // calibrate angle and distance from the left wall
                   CaliAngle(true);
                   // go back to facing front
@@ -233,10 +251,22 @@ void loop()
                     
                   break;
 
+        // turn right to sense for obstacle before turning back
+        case 'E' :
+        case 'e' :
+                  rightTurn(90);
+                  // get obstacle locations
+                  getObstacleLocations();
+                  // send obstacle locations to every other devices
+                  Serial.write(("AE: " + sensorResult).c_str());
+                  leftTurn(90);
+
         // for starting position alignment of the robot
         case 'P' :
         case 'p' :
                   alignment();
+                  // to send IR sensor reading of obstacles to everyone
+                  goto getSensorData;
                   break;
   
         // to send IR sensor reading of obstacles to everyone

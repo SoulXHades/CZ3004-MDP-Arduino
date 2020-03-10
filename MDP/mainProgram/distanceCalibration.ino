@@ -1,4 +1,4 @@
-const double one_grid = 9.375 *1; // let it go slightly more than a grid to counter skidding on the spot
+const double one_grid = 9.38 *1; // let it go slightly more than a grid to counter skidding on the spot
 const double two_grid = 9.365 *2;
 const double three_grid = 9.365 *3;
 const double four_grid = 9.455 *4;

@@ -94,7 +94,7 @@ void getObstacleLocations()
     runningMedian_PS6.add(sharpIR_PS6.distance());
   }
 
-  //Serial.println(runningMedian_PS5.getMedian());  // debug
+  //Serial.println(runningMedian_PS1.getMedian());  // debug
 
   // to return obstacle location via grid
   // PS1
@@ -107,36 +107,36 @@ void getObstacleLocations()
 
   // to return obstacle location via grid
   // PS2
-  if (runningMedian_PS2.getMedian() < 12.5)
+  if (runningMedian_PS2.getMedian() < 12.0)
     sensorResult += "1,";
-  else if (runningMedian_PS2.getMedian() < 22.0)
+  else if (runningMedian_PS2.getMedian() < 21.0)
     sensorResult += "2,";
   else
     sensorResult += "8,";
 
   // to return obstacle location via grid
   // PS3
-  if (runningMedian_PS3.getMedian() < 12.5)
+  if (runningMedian_PS3.getMedian() < 13.0)
     sensorResult += "1,";
-  else if (runningMedian_PS3.getMedian() < 23.0)
+  else if (runningMedian_PS3.getMedian() < 24.0)
     sensorResult += "2,";
   else
     sensorResult += "8,";
 
   // to return obstacle location via grid
   // PS4
-  if (runningMedian_PS4.getMedian() < 12.5)
+  if (runningMedian_PS4.getMedian() < 10.0)
     sensorResult += "1,";
-  else if (runningMedian_PS4.getMedian() < 21.0)
+  else if (runningMedian_PS4.getMedian() <= 19.0)
     sensorResult += "2,";
   else
     sensorResult += "8,";
 
   // to return obstacle location via grid
   // PS5
-  if (runningMedian_PS5.getMedian() < 12.0)
+  if (runningMedian_PS5.getMedian() < 11.0)
     sensorResult += "1,";
-  else if (runningMedian_PS5.getMedian() < 22.0)
+  else if (runningMedian_PS5.getMedian() <= 21.0)
     sensorResult += "2,";
   else
     sensorResult += "8,";
@@ -159,6 +159,28 @@ void getObstacleLocations()
   //Serial.println(sensorResult); // debug
 }
 
+void PS1_obstacleDetection()
+{
+  // clear all data
+  runningMedian_PS1.clear();
+
+  // to get reading and add them to the median calculator library
+  for(int i = 0; i < SAMPLE_SIZE ; i++)
+  {
+    runningMedian_PS1.add(sharpIR_PS1.distance());
+  }
+
+
+  // to return obstacle location via grid
+  // PS1
+  if (runningMedian_PS1.getMedian() < 12.0)
+    PS1_value = 1;
+  else if (runningMedian_PS1.getMedian() < 21.0)
+    PS1_value = 2;
+  else
+    PS1_value = 8;
+}
+
 void PS2_obstacleDetection()
 {
   // clear all data
@@ -179,6 +201,28 @@ void PS2_obstacleDetection()
     PS2_value = 2;
   else
     PS2_value = 8;
+}
+
+void PS3_obstacleDetection()
+{
+  // clear all data
+  runningMedian_PS3.clear();
+
+  // to get reading and add them to the median calculator library
+  for(int i = 0; i < SAMPLE_SIZE ; i++)
+  {
+    runningMedian_PS3.add(sharpIR_PS3.distance());
+  }
+
+
+  // to return obstacle location via grid
+  // PS3
+  if (runningMedian_PS3.getMedian() < 13.0)
+    PS3_value = 1;
+  else if (runningMedian_PS3.getMedian() < 24.0)
+    PS3_value = 2;
+  else
+    PS3_value = 8;
 }
 
 /*
