@@ -311,22 +311,19 @@ float SharpIR::distance()
 			// calibrate distance based on percentage
 			calibratedDist = distanceList[numOfSamples/2] * (10.0/13.0);
 
-			// optimization
-			// return if knowing is 20cm or less
-			if (calibratedDist < 25.0)
-				return calibratedDist;
-
-			// percentage method no longer work hence need to offset somemore
 			// offset:
+			// for 10cm
+			if (calibratedDist < 15.0)
+				return calibratedDist + 0.77;
+			// for 20cm
+			else if (calibratedDist < 23.0)
+				return calibratedDist + 0.77;
 			// for 30cm
-			if (25.0 < calibratedDist && calibratedDist < 35.0)
-				return calibratedDist - 0.77;
-			// for 40cm
-			else if (35.0 < calibratedDist && calibratedDist < 45.0)
-				return calibratedDist - 2.31;
-			// for 50cm
-			else if (45.0 < calibratedDist && calibratedDist < 55.0)
-				return calibratedDist - 2.31;
+			else if (calibratedDist < 30.0)
+				return calibratedDist + 1.54;
+			// too unstable so don't want to affect the correct readings
+			else
+				return calibratedDist + 30.0;
 
 			// return original detected distance
 			return calibratedDist;
