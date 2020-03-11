@@ -45,10 +45,10 @@ int dynamicAngularCalibration()
   // align robot properly before doing dynamic calibration
   leftTurn(90);
   delay(100);
-  CaliAngle(true);
+  CaliAngle(true, true);
   leftTurn(90);
   delay(100);
-  CaliAngle(true);
+  CaliAngle(true, false);
 
   // dynamically calibrate left turn
   for (uint16_t i=0; i<20; i++)
@@ -62,7 +62,7 @@ int dynamicAngularCalibration()
     delay(100);
     leftTurn(90);
     delay(100);
-    distDiff = CaliAngle(true);
+    distDiff = CaliAngle(true, false);
 
     // not turning left enough so increase offset
     if (distDiff >= 0.10)
@@ -87,7 +87,7 @@ int dynamicAngularCalibration()
     delay(100);
     rightTurn(90);
     delay(100);
-    distDiff = CaliAngle(true);
+    distDiff = CaliAngle(true, false);
 
     // not turning left enough so increase offset
     if (distDiff >= 0.10)

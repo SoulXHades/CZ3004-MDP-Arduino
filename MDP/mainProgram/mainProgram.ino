@@ -83,76 +83,84 @@ void loop()
         case 'm' :
                   forward(1);
                   // to send IR sensor reading of obstacles to everyone
-                  goto getSensorData;
+                  if (notStartFastestPath)
+                      getSensorData();
                   break;
 
         // forward 2 grids command
         case '2' :
                   forward(2);
                   // to send IR sensor reading of obstacles to everyone
-                  goto getSensorData;
+                  if (notStartFastestPath)
+                      getSensorData();
                   break;
 
         // forward 3 grids command
         case '3' :
                   forward(3);
                   // to send IR sensor reading of obstacles to everyone
-                  goto getSensorData;
+                  if (notStartFastestPath)
+                      getSensorData();
                   break;
 
         // forward 4 grids command
         case '4' :
                   forward(4);
                   // to send IR sensor reading of obstacles to everyone
-                  goto getSensorData;
+                  if (notStartFastestPath)
+                      getSensorData();
                   break;
 
         // forward 5 grids command
         case '5' :
                   forward(5);
                   // to send IR sensor reading of obstacles to everyone
-                  goto getSensorData;
+                  if (notStartFastestPath)
+                      getSensorData();
                   break;
 
         // forward 6 grids command
         case '6' :
                   forward(6);
                   // to send IR sensor reading of obstacles to everyone
-                  goto getSensorData;
+                  if (notStartFastestPath)
+                      getSensorData();
                   break;
 
         // forward 7 grids command
         case '7' :
                   forward(7);
                   // to send IR sensor reading of obstacles to everyone
-                  goto getSensorData;
+                  if (notStartFastestPath)
+                      getSensorData();
                   break;
 
         // forward 8 grids command
         case '8' :
                   forward(8);
                   // to send IR sensor reading of obstacles to everyone
-                  goto getSensorData;
+                  if (notStartFastestPath)
+                      getSensorData();
                   break;
 
         // forward 9 grids command
         case '9' :
                   forward(9);
                   // to send IR sensor reading of obstacles to everyone
-                  goto getSensorData;
+                  if (notStartFastestPath)
+                      getSensorData();
                   break;
 
         // keep moving forward while sending to Algo PC sensor data every 1 grid after moving. Only stop when have at least one obstacle 1 grid from it
-        case 'G' :
-        case 'g' :
+        case 'N' :
+        case 'n' :
                   while(1)
                   {
                     forward(1);
                     delay(10);
-                    // get obstacle locations
-                    getObstacleLocations();
-                    // send obstacle locations to every other devices
-                    Serial.write(("AE: " + sensorResult).c_str());
+                    // to send IR sensor reading of obstacles to everyone
+                    if (notStartFastestPath)
+                      getSensorData();
 
                     // check if there is any obstacle infront of the robot (at 1 grid) using PS1, PS2, PS3 sensors. If have, stop moving forward and wait for commands from Algorithm PC.
                     if (sensorResult.charAt(0) == '1' || sensorResult.charAt(2) == '1' || sensorResult.charAt(4) == '1')
@@ -164,7 +172,8 @@ void loop()
         case 'd' :
                   backward(1);
                   // to send IR sensor reading of obstacles to everyone
-                  goto getSensorData;
+                  if (notStartFastestPath)
+                    getSensorData();
                   break;
   
         // turn left
@@ -173,7 +182,8 @@ void loop()
                   delay(75);
                   leftTurn(90);
                   // to send IR sensor reading of obstacles to everyone
-                  goto getSensorData;
+                  if (notStartFastestPath)
+                    getSensorData();
                   break;
   
         // turn right
@@ -182,7 +192,8 @@ void loop()
                   delay(75);
                   rightTurn(90);
                   // to send IR sensor reading of obstacles to everyone
-                  goto getSensorData;
+                  if (notStartFastestPath)
+                    getSensorData();
                   break;
   
         // u-turn
@@ -194,7 +205,8 @@ void loop()
                   delay(75);
                   rightTurn(90);
                   // to send IR sensor reading of obstacles to everyone
-                  goto getSensorData;
+                  if (notStartFastestPath)
+                    getSensorData();
                   break;
   
         // set mode of arduino to fastest path
@@ -204,24 +216,27 @@ void loop()
                   motorStart();
                   // so that it will know if need to check for obstacles depending if is fastest path or exploration run
                   notStartFastestPath = !notStartFastestPath;
-                  // to send IR sensor reading of obstacles to everyone
-                  goto getSensorData;
                   break;
   
         // for calibrate front and left
         case 'A' :
         case 'a' :
                   // calibrate angle and distance from the front wall
-                  CaliAngle(true);
+                  CaliAngle(true, true);
                   // turn left to calibrate from left wall
                   leftTurn(90);
                   delay(75);
                   // calibrate angle and distance from the left wall
-                  CaliAngle(true);
+                  CaliAngle(true, false);
                   // go back to facing front
-                  rightTurn(90);
-                  // to send IR sensor reading of obstacles to everyone
-                  goto getSensorData;
+                  //rightTurn(90);  // cause now robot going to face right to check for obstacle so commented this
+                  // robot shall face the right to get sensor reading
+                  leftTurn(90);
+                  leftTurn(90);
+                  // get obstacle locations
+                  getSensorData();
+                  // robot will face the front again
+                  leftTurn(90);
                     
                   break;
 
@@ -232,32 +247,49 @@ void loop()
                   leftTurn(90);
                   delay(75);
                   // calibrate angle and distance from the left wall
-                  CaliAngle(true);
+                  CaliAngle(true, true);
                   // go back to facing front
-                  rightTurn(90);
-                  // to send IR sensor reading of obstacles to everyone
-                  goto getSensorData;
-                    
+                  //rightTurn(90);  // cause now robot going to face right to check for obstacle so commented this
+                  // robot shall face the right to get sensor reading
+                  leftTurn(90);
+                  leftTurn(90);
+                  // get obstacle locations
+                  getSensorData();
+                  // robot will face the front again
+                  leftTurn(90);
                   break;
 
         // for calibrate front
         case 'C' :
         case 'c' :
                   // calibrate angle and distance from the front wall
-                  CaliAngle(true);
+                  CaliAngle(true, false);
+                  // face right to send sensor data to everyone to check for blind spot
+                  rightTurn(90);
                   // to send IR sensor reading of obstacles to everyone
-                  goto getSensorData;
+                  getSensorData();
+                  leftTurn(90);
                     
                   break;
 
-        // turn right to sense for obstacle before turning back
+        // for calibrate front and right
+        case 'G' :
+        case 'g' :
+                  // calibrate angle and distance from the front wall. Assume left wall does not exist
+                  CaliAngle(true, false);
+                  rightTurn(90);
+                  delay(75);
+                  // calibrate angle and distance from the front wall. After turning, left wall exist
+                  CaliAngle(true, true);
+                  leftTurn(90);
+
+        // for calibrate right
         case 'E' :
         case 'e' :
                   rightTurn(90);
-                  // get obstacle locations
-                  getObstacleLocations();
-                  // send obstacle locations to every other devices
-                  Serial.write(("AE: " + sensorResult).c_str());
+                  delay(75);
+                  // calibrate angle and distance from the front wall
+                  CaliAngle(true, false);
                   leftTurn(90);
 
         // for starting position alignment of the robot
@@ -265,21 +297,13 @@ void loop()
         case 'p' :
                   alignment();
                   // to send IR sensor reading of obstacles to everyone
-                  goto getSensorData;
+                  getSensorData();
                   break;
   
         // to send IR sensor reading of obstacles to everyone
         case 'S':
         case 's':
-        getSensorData:
-                  // only send back the obstacle locations if is exploration run
-                  if(notStartFastestPath)
-                  {
-                     // get obstacle locations
-                     getObstacleLocations();
-                    // send obstacle locations to every other devices
-                    Serial.write(("AE: " + sensorResult).c_str());
-                  }
+                getSensorData();
         }
    }
 
@@ -290,6 +314,14 @@ void loop()
 //    
 //    forwardTest();
 //  }
+}
+
+void getSensorData()
+{
+  // get obstacle locations
+  getObstacleLocations();
+  // send obstacle locations to every other devices
+  Serial.write(("AE: " + sensorResult).c_str());
 }
 
   // Example of receiving data from RPi and to RPi
