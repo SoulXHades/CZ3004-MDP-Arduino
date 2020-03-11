@@ -306,26 +306,28 @@ float SharpIR::distance()
 
 			return calibratedDist;
 
-		// PS2 (short range IR sensor)
-		case 1081:
-			// calibrate distance based on percentage
-			calibratedDist = distanceList[numOfSamples/2] * (10.0/13.0);
+		// best sensor with stable readings still 40cm
+		// PS4 (short range Front Center IR sensor)
+		case 1083:
+			calibratedDist = distanceList[numOfSamples/2];
 
 			// offset:
 			// for 10cm
 			if (calibratedDist < 15.0)
-				return calibratedDist + 0.77;
+				return calibratedDist - 2.0;
 			// for 20cm
-			else if (calibratedDist < 23.0)
-				return calibratedDist + 0.77;
-			// for 30cm
 			else if (calibratedDist < 30.0)
-				return calibratedDist + 1.54;
-			// too unstable so don't want to affect the correct readings
-			else
-				return calibratedDist + 30.0;
+				return calibratedDist - 5.0;
+			// for 30cm
+			else if (calibratedDist < 40.0)
+				return calibratedDist - 5.0;
+			// for 40cm
+			else if (calibratedDist < 47.0)
+				return calibratedDist - 5.0;
+			// for 50cm (Not accurate as too unstable)
+			else if (calibratedDist < 70.0)
+				return calibratedDist;
 
-			// return original detected distance
 			return calibratedDist;
 
 		// PS3 (short range IR sensor)
@@ -353,28 +355,29 @@ float SharpIR::distance()
 			return calibratedDist;
 			break;
 
-		// best sensor with stable readings still 40cm
-		// PS4 (short range IR sensor)
-		case 1083:
-			calibratedDist = distanceList[numOfSamples/2];
+		// PS2 (short range IR sensor)
+		case 1081:
+			// calibrate distance based on percentage
+			calibratedDist = distanceList[numOfSamples/2] * (10.0/13.0);
 
 			// offset:
 			// for 10cm
-			if (calibratedDist < 20.0)
-				return calibratedDist - 6.0;
+			if (calibratedDist < 15.0)
+				return calibratedDist - 3.08;
 			// for 20cm
-			else if (calibratedDist < 30.0)
-				return calibratedDist - 8.0;
+			else if (calibratedDist < 28.0)
+				return calibratedDist - 3.85;
 			// for 30cm
-			else if (calibratedDist < 45.0)
-				return calibratedDist - 8.0;
+			else if (calibratedDist < 40)
+				return calibratedDist - 6.15;
 			// for 40cm
-			else if (calibratedDist < 55.0)
-				return calibratedDist - 10.0;
-			// for 50cm
-			else if (calibratedDist < 70.0)
-				return calibratedDist - 13.0;
+			else if (calibratedDist < 60.0)
+				return calibratedDist - 17.69;
+			// too unstable so don't want to affect the correct readings
+			else
+				return calibratedDist + 30.0;
 
+			// return original detected distance
 			return calibratedDist;
 
 		// PS5 (short range IR sensor)
