@@ -21,7 +21,6 @@ void setup() {
 
   // align the robot to start position properly
   alignment();
-
   // for dynamic angular calibration
   //dynamicAngularCalibration();
 
@@ -202,7 +201,6 @@ void loop()
                   // turning 180 degrees have some issues. Seperate the turns to 90 90 is more accurate
                   delay(75);
                   rightTurn(90);
-                  delay(75);
                   rightTurn(90);
                   // to send IR sensor reading of obstacles to everyone
                   if (notStartFastestPath)
@@ -225,24 +223,21 @@ void loop()
         // for calibrate front and left
         case 'A' :
         case 'a' :
+                  delay(75);
                   // calibrate angle and distance from the front wall
                   CaliAngle(true, true);
-                  delay(75);
                   // turn left to calibrate from left wall
                   rightTurn(90);
                   // send obstacle locations
                   getSensorData();
                   rightTurn(180);
-                  delay(75);
                   // calibrate angle and distance from the left wall
                   CaliAngle(true, false);
-                  delay(75);
                   // go back to facing front
                   rightTurn(90);
-                  delay(75);
                   // calibrate angle and distance from the front wall
                   CaliAngle(true, true);
-                  delay(100);
+                  //delay(100);
                   break;
 
         // for calibrate left
@@ -254,13 +249,11 @@ void loop()
                   getSensorData();
                   // robot will face the front again
                   rightTurn(180);
-                  delay(75);
                   // calibrate angle and distance from the left wall
                   CaliAngle(true, true);
-                  delay(75);
                   // go back to facing front
                   rightTurn(90);
-                  delay(100);
+                  //delay(100);
                   break;
 
         // for calibrate front
@@ -268,16 +261,14 @@ void loop()
         case 'c' :
                   // calibrate angle and distance from the front wall
                   CaliAngle(true, false);
-                  delay(75);
                   // face right to send sensor data to everyone to check for blind spot
                   rightTurn(90);
                   // to send IR sensor reading of obstacles to everyone
                   getSensorData();
                   leftTurn(90);
-                  delay(75);
                   // calibrate angle and distance from the front wall
                   CaliAngle(true, false);
-                  delay(100);
+                  //delay(100);
                     
                   break;
 
@@ -287,24 +278,20 @@ void loop()
                   // calibrate angle and distance from the front wall. Assume left wall does not exist
                   CaliAngle(true, false);
                   rightTurn(90);
-                  delay(75);
                   // calibrate angle and distance from the front wall. After turning, left wall exist
                   CaliAngle(true, true);
-                  delay(75);
                   leftTurn(90);
-                  delay(100);
+                  //delay(100);
                   break;
 
         // for calibrate right
         case 'E' :
         case 'e' :
                   rightTurn(90);
-                  delay(75);
                   // calibrate angle and distance from the front wall
                   CaliAngle(true, false);
-                  delay(75);
                   leftTurn(90);
-                  delay(100);
+                  //delay(100);
                   break;
 
         // for starting position alignment of the robot

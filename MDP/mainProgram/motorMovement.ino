@@ -80,7 +80,7 @@ void leftTurn(double degree)
   }
 
   motorStop();
-  //delay(10);
+  delay(75);
   }
 
 void rightTurn(double degree)
@@ -102,7 +102,7 @@ void rightTurn(double degree)
   }
 
   motorStop();
-  //delay(10);
+  delay(75);
 }
 
 // calibrate robot to correct angle from the wall of front using front right (PS1) and front left (PS3) sensors
