@@ -43,27 +43,27 @@ double getDistance(int sensorNum)
 {
   switch(sensorNum)
   {
-    // PS1
+    // PS1 (Short Front Right)
     case 1:
       return sharpIR_PS1.distance();
 
-    // PS2
+    // PS2 (Shoft Left Right)
     case 2:
       return sharpIR_PS2.distance();
 
-    // PS3
+    // PS3 (Short Front Left)
     case 3:
       return sharpIR_PS3.distance();
 
-    // PS4
+    // PS4 (Short Front Center)
     case 4:
       return sharpIR_PS4.distance();
 
-    // PS5
+    // PS5 (Short Left Center)
     case 5:
       return sharpIR_PS5.distance();
 
-    // PS6
+    // PS6 (Short Right Center)
     case 6:
       return sharpIR_PS6.distance();
   }
@@ -94,10 +94,10 @@ void getObstacleLocations()
     runningMedian_PS6.add(sharpIR_PS6.distance());
   }
 
-  //Serial.println(runningMedian_PS1.getMedian());  // debug
+  Serial.println(runningMedian_PS2.getMedian());  // debug
 
   // to return obstacle location via grid
-  // PS1
+  // PS1 (Short Front Right)
   if (runningMedian_PS1.getMedian() < 12.0)
     sensorResult += "1,";
   else if (runningMedian_PS1.getMedian() < 21.0)
@@ -106,16 +106,16 @@ void getObstacleLocations()
     sensorResult += "8,";
 
   // to return obstacle location via grid
-  // PS2
-  if (runningMedian_PS2.getMedian() < 12.0)
+  // PS4 (Short Front Center)
+  if (runningMedian_PS4.getMedian() < 11.0)
     sensorResult += "1,";
-  else if (runningMedian_PS2.getMedian() < 21.0)
+  else if (runningMedian_PS4.getMedian() < 20.0)
     sensorResult += "2,";
   else
     sensorResult += "8,";
 
   // to return obstacle location via grid
-  // PS3
+  // PS3 (Short Front Left)
   if (runningMedian_PS3.getMedian() < 13.0)
     sensorResult += "1,";
   else if (runningMedian_PS3.getMedian() < 24.0)
@@ -124,25 +124,25 @@ void getObstacleLocations()
     sensorResult += "8,";
 
   // to return obstacle location via grid
-  // PS4
-  if (runningMedian_PS4.getMedian() < 10.0)
+  // PS2 (Short Left Right)
+  if (runningMedian_PS2.getMedian() < 11.0)
     sensorResult += "1,";
-  else if (runningMedian_PS4.getMedian() <= 19.0)
+  else if (runningMedian_PS2.getMedian() < 21.0)
     sensorResult += "2,";
   else
     sensorResult += "8,";
 
   // to return obstacle location via grid
-  // PS5
+  // PS5 (Short Left Center)
   if (runningMedian_PS5.getMedian() < 11.0)
     sensorResult += "1,";
-  else if (runningMedian_PS5.getMedian() <= 21.0)
+  else if (runningMedian_PS5.getMedian() < 21.0)
     sensorResult += "2,";
   else
     sensorResult += "8,";
 
   // to return obstacle location via grid
-  // PS6
+  // PS6 (Long Right Center)
   if (runningMedian_PS6.getMedian() < 25.0)
     sensorResult += "8\n";
   else if (runningMedian_PS6.getMedian() < 34.0)
