@@ -229,7 +229,6 @@ void loop()
                   // send obstacle locations
                   getSensorData();
                   rightTurn(180);
-                  delay(75);
                   // calibrate angle and distance from the left wall
                   CaliAngle(true, false);
                   delay(75);
@@ -237,7 +236,7 @@ void loop()
                   rightTurn(90);
                   // calibrate angle and distance from the front wall
                   CaliAngle(true, true);
-                  delay(75);
+                  delay(100);
                   break;
 
         // for calibrate left
@@ -249,13 +248,12 @@ void loop()
                   getSensorData();
                   // robot will face the front again
                   rightTurn(180);
-                  delay(75);
                   // calibrate angle and distance from the left wall
                   CaliAngle(true, true);
                   delay(75);
                   // go back to facing front
                   rightTurn(90);
-                  delay(75);
+                  delay(100);
                   break;
 
         // for calibrate front
@@ -272,7 +270,7 @@ void loop()
                   delay(75);
                   // calibrate angle and distance from the front wall
                   CaliAngle(true, false);
-                  delay(75);
+                  delay(100);
                     
                   break;
 
@@ -285,7 +283,9 @@ void loop()
                   delay(75);
                   // calibrate angle and distance from the front wall. After turning, left wall exist
                   CaliAngle(true, true);
+                  delay(75);
                   leftTurn(90);
+                  delay(100);
                   break;
 
         // for calibrate right
@@ -295,7 +295,9 @@ void loop()
                   delay(75);
                   // calibrate angle and distance from the front wall
                   CaliAngle(true, false);
+                  delay(75);
                   leftTurn(90);
+                  delay(100);
                   break;
 
         // for starting position alignment of the robot
@@ -304,6 +306,7 @@ void loop()
                   alignment();
                   // to send IR sensor reading of obstacles to everyone
                   getSensorData();
+                  delay(100);
                   break;
   
         // to send IR sensor reading of obstacles to everyone
