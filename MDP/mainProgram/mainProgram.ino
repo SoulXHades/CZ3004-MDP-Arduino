@@ -216,6 +216,10 @@ void loop()
                   motorStart();
                   // so that it will know if need to check for obstacles depending if is fastest path or exploration run
                   notStartFastestPath = !notStartFastestPath;
+
+                  // to send IR sensor reading of obstacles to everyone
+                  if (notStartFastestPath)
+                    getSensorData();
                   break;
   
         // for calibrate front and left
@@ -229,11 +233,13 @@ void loop()
                   // send obstacle locations
                   getSensorData();
                   rightTurn(180);
+                  delay(75);
                   // calibrate angle and distance from the left wall
                   CaliAngle(true, false);
                   delay(75);
                   // go back to facing front
                   rightTurn(90);
+                  delay(75);
                   // calibrate angle and distance from the front wall
                   CaliAngle(true, true);
                   delay(100);
@@ -248,6 +254,7 @@ void loop()
                   getSensorData();
                   // robot will face the front again
                   rightTurn(180);
+                  delay(75);
                   // calibrate angle and distance from the left wall
                   CaliAngle(true, true);
                   delay(75);
