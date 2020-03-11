@@ -223,40 +223,39 @@ void loop()
         case 'a' :
                   // calibrate angle and distance from the front wall
                   CaliAngle(true, true);
+                  delay(75);
                   // turn left to calibrate from left wall
-                  leftTurn(90);
+                  rightTurn(90);
+                  // send obstacle locations
+                  getSensorData();
+                  rightTurn(180);
                   delay(75);
                   // calibrate angle and distance from the left wall
                   CaliAngle(true, false);
+                  delay(75);
                   // go back to facing front
-                  //rightTurn(90);  // cause now robot going to face right to check for obstacle so commented this
-                  // robot shall face the right to get sensor reading
-                  leftTurn(90);
-                  leftTurn(90);
-                  // get obstacle locations
-                  getSensorData();
-                  // robot will face the front again
-                  leftTurn(90);
-                    
+                  rightTurn(90);
+                  // calibrate angle and distance from the front wall
+                  CaliAngle(true, true);
+                  delay(75);
                   break;
 
         // for calibrate left
         case 'B' :
         case 'b' :
-                  // turn left to calibrate from left wall
-                  leftTurn(90);
+                  // to read right blind spot readings
+                  rightTurn(90);
+                  // send obstacle locations
+                  getSensorData();
+                  // robot will face the front again
+                  rightTurn(180);
                   delay(75);
                   // calibrate angle and distance from the left wall
                   CaliAngle(true, true);
+                  delay(75);
                   // go back to facing front
-                  //rightTurn(90);  // cause now robot going to face right to check for obstacle so commented this
-                  // robot shall face the right to get sensor reading
-                  leftTurn(90);
-                  leftTurn(90);
-                  // get obstacle locations
-                  getSensorData();
-                  // robot will face the front again
-                  leftTurn(90);
+                  rightTurn(90);
+                  delay(75);
                   break;
 
         // for calibrate front
@@ -264,11 +263,16 @@ void loop()
         case 'c' :
                   // calibrate angle and distance from the front wall
                   CaliAngle(true, false);
+                  delay(75);
                   // face right to send sensor data to everyone to check for blind spot
                   rightTurn(90);
                   // to send IR sensor reading of obstacles to everyone
                   getSensorData();
                   leftTurn(90);
+                  delay(75);
+                  // calibrate angle and distance from the front wall
+                  CaliAngle(true, false);
+                  delay(75);
                     
                   break;
 
@@ -282,6 +286,7 @@ void loop()
                   // calibrate angle and distance from the front wall. After turning, left wall exist
                   CaliAngle(true, true);
                   leftTurn(90);
+                  break;
 
         // for calibrate right
         case 'E' :
@@ -291,6 +296,7 @@ void loop()
                   // calibrate angle and distance from the front wall
                   CaliAngle(true, false);
                   leftTurn(90);
+                  break;
 
         // for starting position alignment of the robot
         case 'P' :
@@ -304,6 +310,7 @@ void loop()
         case 'S':
         case 's':
                 getSensorData();
+                break;
         }
    }
 

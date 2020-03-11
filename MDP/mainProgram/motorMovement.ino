@@ -137,10 +137,10 @@ double CaliAngle(bool firstTime, bool leftWall)
       distDiff_retVal = distDiff;
 
     // too tilted to the left, turn to the right
-    if (distDiff >= 0.10) 
+    if (distDiff >= 0.05) 
       md.setSpeeds(-calSPEED, calSPEED);
     // too titled to the right, turn to the left
-    else if (distDiff <= -0.0001)
+    else if (distDiff <= -0.05)
       md.setSpeeds(calSPEED, -calSPEED);
     // correct angle
     else
