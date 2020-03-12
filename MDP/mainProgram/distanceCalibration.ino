@@ -29,11 +29,11 @@ double totalAngularSteps(double degree){ //Calculates the number of steps needed
 }
 
 double totalAngularSteps_L(double degree){ //Calculates the number of steps needed to rotate in a angular motion
-  return ceil(degree * (4.421+l_angularOffset)); //4.421 (2nd battery - Fully charged) (Weight consist of RPi with 2 of the given power banks)
+  return ceil(degree * (4.43+l_angularOffset)); //4.43 (2nd battery - Fully charged) (Weight consist of RPi with 2 of the given power banks)
 }
 
 double totalAngularSteps_R(double degree){ //Calculates the number of steps needed to rotate in a angular motion
-  return ceil(degree * (4.36+r_angularOffset)); //4.39 (2nd battery - Fully charged) (Weight consist of RPi with 2 of the given power banks)
+  return ceil(degree * (4.38+r_angularOffset)); //4.38 (2nd battery - Fully charged) (Weight consist of RPi with 2 of the given power banks)
 }
 
 // (deciding if we need dynamic angular calibration or not)

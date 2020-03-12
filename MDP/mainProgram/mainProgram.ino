@@ -25,13 +25,14 @@ void setup() {
   //dynamicAngularCalibration();
 
   // turning manual calibration code
-//  rightTurn(90);
+//  leftTurn(90);
 //  delay(100);
-//  rightTurn(90);
+//  leftTurn(90);
 //  delay(100);
-//  rightTurn(90);
+//  leftTurn(90);
 //  delay(100);
-//  rightTurn(90);
+//  leftTurn(90);
+//  forward(5);
   
   //Motor test functions
 //  for(int i=0; i<3; i++)
