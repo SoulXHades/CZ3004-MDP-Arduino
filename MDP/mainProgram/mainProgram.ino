@@ -20,19 +20,15 @@ void setup() {
   motorInit();
 
   // align the robot to start position properly
-  alignment();
+  //alignment();
   // for dynamic angular calibration
   //dynamicAngularCalibration();
 
   // turning manual calibration code
-//  leftTurn(90);
-//  delay(100);
-//  leftTurn(90);
-//  delay(100);
-//  leftTurn(90);
-//  delay(100);
-//  leftTurn(90);
-//  forward(5);
+  leftTurn(90);
+  leftTurn(90);
+  leftTurn(90);
+  leftTurn(90);
   
   //Motor test functions
 //  for(int i=0; i<3; i++)
