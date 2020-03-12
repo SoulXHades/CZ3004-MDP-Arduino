@@ -20,7 +20,7 @@ void setup() {
   motorInit();
 
   // align the robot to start position properly
-  alignment();
+  //alignment();
   // for dynamic angular calibration
   //dynamicAngularCalibration();
 

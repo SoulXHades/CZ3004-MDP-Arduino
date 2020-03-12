@@ -1,6 +1,6 @@
 const double one_grid = 9.38 *1; // let it go slightly more than a grid to counter skidding on the spot
-const double two_grid = 9.365 *2;
-const double three_grid = 9.365 *3;
+const double two_grid = 9.38 *2;
+const double three_grid = 9.38 *3;
 const double four_grid = 9.455 *4;
 const double five_grid = 9.515 *5;
 const double six_grid = 9.515 *6;
@@ -29,11 +29,11 @@ double totalAngularSteps(double degree){ //Calculates the number of steps needed
 }
 
 double totalAngularSteps_L(double degree){ //Calculates the number of steps needed to rotate in a angular motion
-  return ceil(degree * (4.34l+l_angularOffset)); //4.34l (2nd battery - Fully charged)
+  return ceil(degree * (4.421+l_angularOffset)); //4.421 (2nd battery - Fully charged) (Weight consist of RPi with 2 of the given power banks)
 }
 
 double totalAngularSteps_R(double degree){ //Calculates the number of steps needed to rotate in a angular motion
-  return ceil(degree * (4.32+r_angularOffset)); //4.32 (2nd battery - Fully charged)
+  return ceil(degree * (4.36+r_angularOffset)); //4.39 (2nd battery - Fully charged) (Weight consist of RPi with 2 of the given power banks)
 }
 
 // (deciding if we need dynamic angular calibration or not)
