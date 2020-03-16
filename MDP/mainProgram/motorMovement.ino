@@ -121,6 +121,9 @@ double CaliAngle(bool firstTime, bool leftWall)
     // so won't have infinite loop as it will never be fully perfect
     if (count == 180)
     {
+      // stop robot moving
+      motorStop();
+      
       // if got wall on the left of the robot, turn right a bit 1st
       if (leftWall)
         rightTurn(10);
@@ -146,6 +149,9 @@ double CaliAngle(bool firstTime, bool leftWall)
     // correct angle
     else
     {
+      // stop the robot from moving
+      motorStop();
+      
       // calibrate angle again after moving (useful if robot was too far from the wall when calibrating angle causing angle calibration to be off)
       if (firstTime)
         caliDist(leftWall);
@@ -179,14 +185,13 @@ void caliDist(bool leftWall)
       md.setSpeeds(-SPEEDR, -SPEEDL);
     // within acceptable range, stop calibrating
     else 
-    {
-      md.setBrakes(100, 100);
       break;
-    }
 
     ++count;
   }
-  md.setBrakes(100, 100);
+
+  // stop the robot from moving
+  motorStop();
 
   // calibrate angle again after moving (useful if robot was too far from the wall when calibrating angle causing angle calibration to be off)
   CaliAngle(false, leftWall);
