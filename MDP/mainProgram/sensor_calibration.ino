@@ -5,7 +5,7 @@
 #define PS5 A4 // short
 #define PS6 A5 // long
 
-#define SAMPLE_SIZE 21
+#define SAMPLE_SIZE 11
 
 SharpIR sharpIR_PS1(PS1, 1080);
 SharpIR sharpIR_PS2(PS2, 1081);
@@ -94,7 +94,7 @@ void getObstacleLocations()
     runningMedian_PS6.add(sharpIR_PS6.distance());
   }
 
-  Serial.println(runningMedian_PS2.getMedian());  // debug
+  //Serial.println(runningMedian_PS2.getMedian());  // debug
 
   // to return obstacle location via grid
   // PS1 (Short Front Right)

@@ -20,7 +20,7 @@ void setup() {
   motorInit();
 
   // align the robot to start position properly
-  alignment();
+  //alignment();
   // for dynamic angular calibration
   //dynamicAngularCalibration();
 
@@ -31,8 +31,9 @@ void setup() {
 //  leftTurn(90);
   
   //Motor test functions
-//  for(int i=0; i<3; i++)
-//  {
+// 
+CaliAngle(true, false);
+//delay(1000); 
 //  forward(1);
 //  delay(100);
 //  forward(1);
@@ -43,7 +44,24 @@ void setup() {
 //  delay(100);
 //  forward(1);
 //  delay(100);
-//  }
+//  forward(1);
+//  delay(100);
+//  forward(1);
+//  delay(100);
+//  forward(1);
+//  delay(100);
+//  forward(1);
+//  delay(100);
+//  forward(1);
+//  delay(100);
+//  forward(1);
+//  delay(100);
+//  forward(1);
+
+//delay(200);
+//    leftTurn(90);
+//  forward(7);
+
 //  forward(1);
 //  delay(100);
 //  delay(100);

@@ -4,11 +4,11 @@ volatile double step_L; //number of steps taken by the left motor
 volatile double step_R; //number of steps taken by the right motor
 volatile double error; //difference between left and right steps
 
-volatile const int SPEED =  250; //Set the speed of the motor
+volatile const int SPEED =  330; //Set the speed of the motor
 
 // PID Parameters
 // PID values for obstacle avoidance checklist because interupt not working well due to delay checking the sensor: Kp=6, Ki=0, Kd=0.008
-volatile double Kp=30, Ki=80, Kd=0.02; //Set PID values //Previous adjusted PID values: Kp=23, Ki=80, Kd=0.02 (When weight is one RPi and 2 powerbanks given PID values: Kp=30, Ki=80, Kd=0.02)
+volatile double Kp=23, Ki=100, Kd=0; //Set PID values //Previous adjusted PID values: Kp=23, Ki=80, Kd=0.02 (When weight is one RPi and 2 powerbanks given PID values: Kp=30, Ki=80, Kd=0.02)
 volatile double Output = 0; // Adjusted speed
 
 // Create PID Instance
@@ -31,7 +31,7 @@ void forward(double gridNumber){
     myPID.Compute();
     error = step_L - step_R;
     double adjust = (error!=0) ? (error>0 ? 1 : -1) : 0;
-    md.setSpeeds(SPEED + adjust + Output, SPEED - adjust);
+    md.setSpeeds(SPEED + adjust + Output +5, SPEED - adjust);
   }
 
   motorStop();
