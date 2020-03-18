@@ -31,7 +31,7 @@ void forward(double gridNumber){
     myPID.Compute();
     error = step_L - step_R;
     double adjust = (error!=0) ? (error>0 ? 1 : -1) : 0;
-    md.setSpeeds(SPEED + adjust + Output +5, SPEED - adjust);
+    md.setSpeeds(SPEED + adjust + Output + addSPEED_R, SPEED - adjust);
   }
 
   motorStop();
@@ -40,7 +40,7 @@ void forward(double gridNumber){
 
 void backward(double gridNumber){
   // seperate number of ticks cause of the weight unevenness
-  double totalSteps = totalRegularSteps(gridNumber * 9.28);
+  double totalSteps = totalRegularSteps(gridNumber * 8.2);
   
   motorStart();
   for(int i=0; i<=SPEED; i++){
@@ -110,6 +110,7 @@ void rightTurn(double degree)
 // if the angle is correct, both the readings shouldn't deviate much
 double CaliAngle(bool firstTime, bool leftWall)
 {
+  bool firstCounter = true;
   double distDiff;
   double distDiff_retVal = 0;
   int count = 0;
@@ -123,12 +124,26 @@ double CaliAngle(bool firstTime, bool leftWall)
     {
       // stop robot moving
       motorStop();
-      
-      // if got wall on the left of the robot, turn right a bit 1st
-      if (leftWall)
-        rightTurn(10);
+
+      // check if it didn't break out of the loop after turning a bit before then turn to the other side instead
+      if (firstCounter)
+      {
+        // if got wall on the left of the robot, turn right a bit 1st
+        if (leftWall)
+          rightTurn(10);
+        else
+          leftTurn(10);
+
+        firstCounter = false;
+      }
       else
-        leftTurn(10);
+      {
+        // 
+        if (leftWall)
+          leftTurn(20);
+        else
+          rightTurn(20);
+      }
       
       count = 0;
     }

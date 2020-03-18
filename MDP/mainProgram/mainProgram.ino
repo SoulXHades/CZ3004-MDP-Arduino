@@ -10,6 +10,7 @@ volatile bool setFlag = true;
 volatile bool notStartFastestPath = true;
 String testOfTextFromRPi;
 String sensorResult;
+int addSPEED_R = 5;
 
 char buffer[25];
 int PS2_value = -1;
@@ -20,43 +21,45 @@ void setup() {
   motorInit();
 
   // align the robot to start position properly
-  alignment();
+//  alignment();
   // for dynamic angular calibration
   //dynamicAngularCalibration();
 
   // turning manual calibration code
-//  rightTurn(90);
-//  rightTurn(90);
-//  rightTurn(90);
 //  leftTurn(90);
+//  leftTurn(90);
+//  leftTurn(90);
+//  leftTurn(90);
+//  forward(4);
   
   //Motor test functions
 // 
 //CaliAngle(true, false);
 //delay(1000); 
+  addSPEED_R = 18;  // to move straight for one grid by one grid with delay since don't want to change the PID values
 //  forward(1);
 //  delay(100);
 //  forward(1);
-//  delay(100);
-//  forward(1);
-//  delay(100);
-//  forward(1);
-//  delay(100);
-//  forward(1);
-//  delay(100);
-//  forward(1);
-//  delay(100);
-//  forward(1);
-//  delay(100);
-//  forward(1);
-//  delay(100);
-//  forward(1);
-//  delay(100);
-//  forward(1);
-//  delay(100);
-//  forward(1);
-//  delay(100);
-//  forward(1);
+  delay(100);
+  forward(1);
+  delay(100);
+  forward(1);
+  delay(100);
+  forward(1);
+  delay(100);
+  forward(1);
+  delay(100);
+  forward(1);
+  delay(100);
+  forward(1);
+  delay(100);
+  forward(1);
+  delay(100);
+  forward(1);
+  delay(100);
+  forward(1);
+  delay(100);
+  forward(1);
 
 //delay(200);
 //    leftTurn(90);
@@ -72,7 +75,7 @@ void setup() {
 }
 
 void loop() 
-{
+{ 
   // true if there are incoming byte(s)
    if (Serial.available() > 0)
     { 
@@ -95,10 +98,19 @@ void loop()
         case '1' :
         case 'M' :
         case 'm' :
+                  // 1 grid by 1 grid with delay is a bit off so need addition speed on right motor to make it straight for exploration (we don't want different PID values so change the speed only)
+                  if (notStartFastestPath)
+                    addSPEED_R = 19;
+                    
                   forward(1);
+                  
                   // to send IR sensor reading of obstacles to everyone
                   if (notStartFastestPath)
-                      getSensorData();
+                  {
+                    getSensorData();
+                    // reset back to original offset for right motor's speed since non-one grid by non-one grid with additional right motor speed of 5 allows it to move straight
+                    addSPEED_R = 5;
+                  }
                   break;
 
         // forward 2 grids command
@@ -171,7 +183,6 @@ void loop()
                   while(1)
                   {
                     forward(1);
-                    delay(10);
                     // to send IR sensor reading of obstacles to everyone
                     if (notStartFastestPath)
                       getSensorData();
@@ -247,7 +258,8 @@ void loop()
                     rightTurn(90);
                     // to send IR sensor reading of obstacles to everyone
                     getSensorData();
-                    rightTurn(180);
+                    // suppose to be 180 degrees but it is not turning enough so I set it a higher degree
+                    rightTurn(190);
                   }
                   else
                     // turn left to calibrate from left wall
@@ -272,8 +284,8 @@ void loop()
                     rightTurn(90);
                     // send obstacle locations
                     getSensorData();
-                    // robot will face the front again
-                    rightTurn(180);
+                    // suppose to be 180 degrees but it is not turning enough so I set it a higher degree
+                    rightTurn(190);
                   }
                   else
                     // turn left to calibrate from left wall
