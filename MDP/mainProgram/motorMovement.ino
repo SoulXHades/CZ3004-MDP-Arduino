@@ -144,7 +144,7 @@ double CaliAngle(bool firstTime, bool leftWall)
         else
           rightTurn(20);
       }
-      
+
       count = 0;
     }
 
@@ -182,6 +182,9 @@ double CaliAngle(bool firstTime, bool leftWall)
 //    it can too for distance calibration which there maybe be no wall/obstacle at PS2's direction
 void caliDist(bool leftWall)
 {
+  bool tooMuch = false;
+  bool tooLittle = false;
+  bool overFlow = false;
   int SPEEDL = 100;
   int SPEEDR = 100;
   int count = 0;
@@ -189,15 +192,31 @@ void caliDist(bool leftWall)
   // infinite WHILE loop till it's completed
   while (1)
   {
-    if(count == 1000)
+    if(count == 1000 || overFlow)
       break;
     
     // if too far off, move closer
     if (getDistance(3) > 4.9 || getDistance(1) > 4.9)
+    {
       md.setSpeeds(SPEEDR, SPEEDL);
+
+      // helps prevent robot moving back and forward too many times till count == 1000 if the speed of the robot is too high preventing the robot from reaching the acceptable threshold. 
+      if (tooLittle)
+        overFlow = true;
+      else
+        tooMuch = true;
+    }
     // if too close, reverse
     else if (getDistance(3) < 4.0 || getDistance(1) < 4.0)
+    {
       md.setSpeeds(-SPEEDR, -SPEEDL);
+
+      // helps prevent robot moving back and forward too many times till count == 1000 if the speed of the robot is too high preventing the robot from reaching the acceptable threshold. 
+      if (tooMuch)
+        overFlow = true;
+      else
+        tooLittle = true;
+    }
     // within acceptable range, stop calibrating
     else 
       break;
