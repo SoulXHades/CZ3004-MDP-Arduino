@@ -4,17 +4,15 @@ volatile double step_L; //number of steps taken by the left motor
 volatile double step_R; //number of steps taken by the right motor
 volatile double error; //difference between left and right steps
 
-volatile const int SPEED =  320; //Set the speed of the motor
+volatile const int SPEED =  250; //Set the speed of the motor
 
 // PID Parameters
 // PID values for obstacle avoidance checklist because interupt not working well due to delay checking the sensor: Kp=6, Ki=0, Kd=0.008
-volatile double Kp=19, Ki=0, Kd=0; //Set PID values //Previous adjusted PID values: Kp=23, Ki=80, Kd=0.02 (When weight is one RPi and 2 powerbanks given PID values: Kp=30, Ki=80, Kd=0.02)
-volatile double Kp1=13, Ki1=0, Kd1=0;
+volatile double Kp=30, Ki=80, Kd=0.02; //Set PID values //Previous adjusted PID values: Kp=23, Ki=80, Kd=0.02 (When weight is one RPi and 2 powerbanks given PID values: Kp=30, Ki=80, Kd=0.02)
 volatile double Output = 0; // Adjusted speed
 
 // Create PID Instance
 PID myPID(&rpm_R, &Output, &rpm_L, Kp, Ki, Kd, DIRECT);
-PID myPID1(&rpm_R, &Output, &rpm_L, Kp1, Ki1, Kd1, DIRECT);
 /*Where parameters of the function are:
 myPID(input(rpm), output(speed), setpoint(rpm), proportional value, intergral value, derative value, motor direction)*/
 
@@ -30,13 +28,10 @@ void forward(double gridNumber){
   while (step_R <= totalSteps || step_L <= totalSteps ) 
   {
     computeRPM();
-    if (gridNumber != 1)
-      myPID.Compute();
-    else
-      myPID1.Compute();
+    myPID.Compute();
     error = step_L - step_R;
     double adjust = (error!=0) ? (error>0 ? 1 : -1) : 0;
-    md.setSpeeds(SPEED + adjust + Output + addSPEED_R, SPEED - adjust);
+    md.setSpeeds(SPEED + adjust + Output, SPEED - adjust);
   }
 
   motorStop();
@@ -45,7 +40,7 @@ void forward(double gridNumber){
 
 void backward(double gridNumber){
   // seperate number of ticks cause of the weight unevenness
-  double totalSteps = totalRegularSteps(gridNumber * 8.2);
+  double totalSteps = totalRegularSteps(gridNumber * 9.28);
   
   motorStart();
   for(int i=0; i<=SPEED; i++){
@@ -56,10 +51,7 @@ void backward(double gridNumber){
   {
     //Serial.print(step_R); // debug
     computeRPM();
-    if (gridNumber != 1)
-      myPID.Compute();
-    else
-      myPID1.Compute();
+    myPID.Compute();
     error = step_L - step_R;
     double adjust = (error!=0) ? (error>0 ? 1 : -1) : 0;
     md.setSpeeds(-SPEED - adjust - Output, -SPEED + adjust);

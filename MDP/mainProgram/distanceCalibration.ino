@@ -1,6 +1,6 @@
-const double one_grid = 9.15 *1; // let it go slightly more than a grid to counter skidding on the spot
-const double two_grid = 9.48 *2;
-const double three_grid = 9.48 *3;
+const double one_grid = 9.38 *1; // let it go slightly more than a grid to counter skidding on the spot
+const double two_grid = 9.38 *2;
+const double three_grid = 9.38 *3;
 const double four_grid = 9.455 *4;
 const double five_grid = 9.515 *5;
 const double six_grid = 9.515 *6;
@@ -29,11 +29,11 @@ double totalAngularSteps(double degree){ //Calculates the number of steps needed
 }
 
 double totalAngularSteps_L(double degree){ //Calculates the number of steps needed to rotate in a angular motion
-  return ceil(degree * (4.24+l_angularOffset)); //4.345               (2nd battery - voltage 6.33) (Weight consist of RPi with 2 of the given power banks)
+  return ceil(degree * (4.345+l_angularOffset)); //4.345               (2nd battery - voltage 6.33) (Weight consist of RPi with 2 of the given power banks)
 }
 
 double totalAngularSteps_R(double degree){ //Calculates the number of steps needed to rotate in a angular motion
-  return ceil(degree * (4.18+r_angularOffset)); //4.33 (2nd battery - voltage 6.33) (Weight consist of RPi with 2 of the given power banks)
+  return ceil(degree * (4.32+r_angularOffset)); //4.33 (2nd battery - voltage 6.33) (Weight consist of RPi with 2 of the given power banks)
 }
 
 // (deciding if we need dynamic angular calibration or not)
@@ -53,42 +53,98 @@ int dynamicAngularCalibration()
   // dynamically calibrate left turn
   for (uint16_t i=0; i<20; i++)
   {
+    delay(100);
     leftTurn(90);
+    delay(100);
     leftTurn(90);
+    delay(100);
     leftTurn(90);
+    delay(100);
     leftTurn(90);
     delay(100);
     distDiff = CaliAngle(true, false);
 
     // not turning left enough so increase offset
-    if (distDiff >= 0.10)
+    if (distDiff >= 0.05)
       l_angularOffset -= 0.05;
     // turned left too much so decrease offset
-    else if (distDiff <= -0.0001)
+    else if (distDiff <= -0.05)
       l_angularOffset += 0.05;
     // roughly good to go hence exit calibrating left turn
     else
       break;
   }
 
-  delay(100);
+  // dynamically calibrate left turn
+  for (uint16_t i=0; i<20; i++)
+  {
+    delay(100);
+    leftTurn(90);
+    delay(100);
+    leftTurn(90);
+    delay(100);
+    leftTurn(90);
+    delay(100);
+    leftTurn(90);
+    delay(100);
+    distDiff = CaliAngle(true, false);
+
+    // not turning left enough so increase offset
+    if (distDiff >= 0.05)
+      l_angularOffset -= 0.02;
+    // turned left too much so decrease offset
+    else if (distDiff <= -0.05)
+      l_angularOffset += 0.02;
+    // roughly good to go hence exit calibrating left turn
+    else
+      break;
+  }
 
   // dynamically calibrate right turn
   for (uint16_t i=0; i<20; i++)
   {
+    delay(100);
     rightTurn(90);
+    delay(100);
     rightTurn(90);
+    delay(100);
     rightTurn(90);
+    delay(100);
     rightTurn(90);
     delay(100);
     distDiff = CaliAngle(true, false);
 
     // not turning left enough so increase offset
-    if (distDiff >= 0.10)
+    if (distDiff >= 0.05)
       r_angularOffset += 0.05;
     // turned left too much so decrease offset
     else if (distDiff <= -0.0001)
       r_angularOffset -= 0.05;
+    // roughly good to go hence exit calibrating left turn
+    else
+      break;
+  }
+
+  // dynamically calibrate right turn
+  for (uint16_t i=0; i<20; i++)
+  {
+    delay(100);
+    rightTurn(90);
+    delay(100);
+    rightTurn(90);
+    delay(100);
+    rightTurn(90);
+    delay(100);
+    rightTurn(90);
+    delay(100);
+    distDiff = CaliAngle(true, false);
+
+    // not turning left enough so increase offset
+    if (distDiff >= 0.05)
+      r_angularOffset += 0.02;
+    // turned left too much so decrease offset
+    else if (distDiff <= -0.0001)
+      r_angularOffset -= 0.02;
     // roughly good to go hence exit calibrating left turn
     else
       break;
