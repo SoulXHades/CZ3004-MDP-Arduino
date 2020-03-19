@@ -21,9 +21,10 @@ void setup() {
   motorInit();
 
   // align the robot to start position properly
-  alignment();
+ // alignment();
   // for dynamic angular calibration
   //dynamicAngularCalibration();
+
 
   // turning manual calibration code
 //  rightTurn(90);
@@ -42,25 +43,25 @@ void setup() {
 //  addSPEED_R = 5;  // to move straight for one grid by one grid with delay since don't want to change the PID values
 //  forward(10);
 //  delay(100);
-//  forward(1);
-//  delay(100);
-//  forward(1);
-//  delay(100);
-//  forward(1);
-//  delay(100);
-//  forward(1);
-//  delay(100);
-//  forward(1);
-//  delay(100);
-//  forward(1);
-//  delay(100);
-//  forward(1);
-//  delay(100);
-//  forward(1);
-//  delay(100);
-//  forward(1);
-//  delay(100);
-//  forward(1);
+  forward(1);
+  delay(100);
+  forward(1);
+  delay(100);
+  forward(1);
+  delay(100);
+  forward(1);
+  delay(100);
+  forward(1);
+  delay(100);
+  forward(1);
+  delay(100);
+  forward(1);
+  delay(100);
+  forward(1);
+  delay(100);
+  forward(1);
+  delay(100);
+  forward(1);
 
 //delay(200);
 //    leftTurn(90);
