@@ -4,7 +4,7 @@ volatile double step_L; //number of steps taken by the left motor
 volatile double step_R; //number of steps taken by the right motor
 volatile double error; //difference between left and right steps
 
-volatile const int SPEED =  330; //Set the speed of the motor
+volatile const int SPEED =  320; //Set the speed of the motor
 
 // PID Parameters
 // PID values for obstacle avoidance checklist because interupt not working well due to delay checking the sensor: Kp=6, Ki=0, Kd=0.008

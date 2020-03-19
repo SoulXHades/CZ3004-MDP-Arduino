@@ -26,20 +26,23 @@ void setup() {
   //dynamicAngularCalibration();
 
   // turning manual calibration code
+//  rightTurn(90);
+//  rightTurn(90);
+//  rightTurn(90);
+//  rightTurn(90);
 //  leftTurn(90);
 //  leftTurn(90);
 //  leftTurn(90);
 //  leftTurn(90);
-//  forward(4);
   
   //Motor test functions
 // 
 //CaliAngle(true, false);
 //delay(1000); 
-//  addSPEED_R = 18;  // to move straight for one grid by one grid with delay since don't want to change the PID values
-//  forward(1);
+//  addSPEED_R = 6;  // to move straight for one grid by one grid with delay since don't want to change the PID values
+//  forward(10);
 //  delay(100);
-////  forward(1);
+//  forward(1);
 //  delay(100);
 //  forward(1);
 //  delay(100);
@@ -100,7 +103,7 @@ void loop()
         case 'm' :
                   // 1 grid by 1 grid with delay is a bit off so need addition speed on right motor to make it straight for exploration (we don't want different PID values so change the speed only)
                   if (notStartFastestPath)
-                    addSPEED_R = 19;
+                    addSPEED_R = 10;
                     
                   forward(1);
                   
@@ -109,7 +112,7 @@ void loop()
                   {
                     getSensorData();
                     // reset back to original offset for right motor's speed since non-one grid by non-one grid with additional right motor speed of 5 allows it to move straight
-                    addSPEED_R = 5;
+                    addSPEED_R = 6;
                   }
                   break;
 
