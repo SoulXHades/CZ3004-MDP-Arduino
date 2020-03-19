@@ -125,6 +125,13 @@ double CaliAngle(bool firstTime, bool leftWall)
       // stop robot moving
       motorStop();
 
+      // if got wall on the left of the robot, turn right a bit 1st
+      if (leftWall)
+        rightTurn(10);
+      else
+        leftTurn(10);
+
+      /*// beta testing
       // check if it didn't break out of the loop after turning a bit before then turn to the other side instead
       if (firstCounter)
       {
@@ -136,14 +143,14 @@ double CaliAngle(bool firstTime, bool leftWall)
 
         firstCounter = false;
       }
-      else
+      // incase there is left wall and right wall then it gets stuck facing the corner of front wall and right wall while was attempting to turn right more
+      else if (leftWall)
       {
-        // 
-        if (leftWall)
-          leftTurn(20);
-        else
-          rightTurn(20);
+        leftTurn(90);
+        CaliAngle(true, false);
+        rightTurn(90);
       }
+      */
 
       count = 0;
     }
