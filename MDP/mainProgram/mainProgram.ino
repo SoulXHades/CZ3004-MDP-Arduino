@@ -10,7 +10,7 @@ volatile bool setFlag = true;
 volatile bool notStartFastestPath = true;
 String testOfTextFromRPi;
 String sensorResult;
-int addSPEED_R = 5;
+int addSPEED_R = 0;
 
 char buffer[25];
 int PS2_value = -1;
@@ -39,30 +39,28 @@ void setup() {
 // 
 //CaliAngle(true, false);
 //delay(1000); 
-//  addSPEED_R = 6;  // to move straight for one grid by one grid with delay since don't want to change the PID values
+  addSPEED_R = 7;  // to move straight for one grid by one grid with delay since don't want to change the PID values
 //  forward(10);
 //  delay(100);
-//  forward(1);
-//  delay(100);
-//  forward(1);
-//  delay(100);
-//  forward(1);
-//  delay(100);
-//  forward(1);
-//  delay(100);
-//  forward(1);
-//  delay(100);
-//  forward(1);
-//  delay(100);
-//  forward(1);
-//  delay(100);
-//  forward(1);
-//  delay(100);
-//  forward(1);
-//  delay(100);
-//  forward(1);
-//  delay(100);
-//  forward(1);
+  forward(1);
+  delay(100);
+  forward(1);
+  delay(100);
+  forward(1);
+  delay(100);
+  forward(1);
+  delay(100);
+  forward(1);
+  delay(100);
+  forward(1);
+  delay(100);
+  forward(1);
+  delay(100);
+  forward(1);
+  delay(100);
+  forward(1);
+  delay(100);
+  forward(1);
 
 //delay(200);
 //    leftTurn(90);
@@ -103,7 +101,7 @@ void loop()
         case 'm' :
                   // 1 grid by 1 grid with delay is a bit off so need addition speed on right motor to make it straight for exploration (we don't want different PID values so change the speed only)
                   if (notStartFastestPath)
-                    addSPEED_R = 10;
+                    addSPEED_R = 9;
                     
                   forward(1);
                   
@@ -112,7 +110,7 @@ void loop()
                   {
                     getSensorData();
                     // reset back to original offset for right motor's speed since non-one grid by non-one grid with additional right motor speed of 5 allows it to move straight
-                    addSPEED_R = 6;
+                    addSPEED_R = 0;
                   }
                   break;
 
