@@ -94,7 +94,7 @@ void getObstacleLocations()
     runningMedian_PS6.add(sharpIR_PS6.distance());
   }
 
-  Serial.println(runningMedian_PS2.getMedian());  // debug
+//  Serial.println(runningMedian_PS2.getMedian());  // debug
 
   // to return obstacle location via grid
   // PS1 (Short Front Right)

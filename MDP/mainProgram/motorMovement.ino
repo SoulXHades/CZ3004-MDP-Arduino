@@ -116,6 +116,29 @@ double CaliAngle(bool firstTime, bool leftWall)
   int count = 0;
   int calSPEED = 50;
 
+  // only if all 3 are less than 3 grids away from a wall
+  if (getDistance(3) < 30 && getDistance(4) < 30 && getDistance(1) < 30)
+  {
+    // used to check if the robot is facing a corner then might calibrate to the wrong position because left sensor and right sensor are detecting different walls.
+    // using of the middle front sensor will allow us to know the robot is facing a corner as the middle front sensor will shoot the corner of the walls which will get higher distance than the front two side sensors
+    while (getDistance(4) > getDistance(3) && getDistance(4) > getDistance(1))
+    {
+      // if there is a left wall, we can't confirm if the robot is facing corner between front and left wall or front and right wall (if there is a right wall too)
+      // since have left wall, turn left to calibrate to the left wall 1st
+      if (leftWall)
+      {
+        leftTurn(90);
+        CaliAngle(true, false);
+        rightTurn(90);
+        // break cause should have calibrated correctly so no need to check if the robot is still facing a corner
+        break;
+      }
+      else
+        // when the robot is likely to face a corner of front wall and right wall
+        leftTurn(10);
+    }
+  }
+
   // range that sensor is still roughly stable hence can use those values to calibrate
   while (getDistance(3) < 30 && getDistance(1) < 30)
   {
@@ -130,27 +153,6 @@ double CaliAngle(bool firstTime, bool leftWall)
         rightTurn(10);
       else
         leftTurn(10);
-
-      /*// beta testing
-      // check if it didn't break out of the loop after turning a bit before then turn to the other side instead
-      if (firstCounter)
-      {
-        // if got wall on the left of the robot, turn right a bit 1st
-        if (leftWall)
-          rightTurn(10);
-        else
-          leftTurn(10);
-
-        firstCounter = false;
-      }
-      // incase there is left wall and right wall then it gets stuck facing the corner of front wall and right wall while was attempting to turn right more
-      else if (leftWall)
-      {
-        leftTurn(90);
-        CaliAngle(true, false);
-        rightTurn(90);
-      }
-      */
 
       count = 0;
     }
