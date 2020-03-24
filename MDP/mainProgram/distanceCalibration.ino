@@ -29,11 +29,11 @@ double totalAngularSteps(double degree){ //Calculates the number of steps needed
 }
 
 double totalAngularSteps_L(double degree){ //Calculates the number of steps needed to rotate in a angular motion
-  return ceil(degree * (4.345+l_angularOffset)); //4.345               (2nd battery - voltage 6.33) (Weight consist of RPi with 2 of the given power banks)
+  return ceil(degree * (4.29+l_angularOffset)); //4.345               (2nd battery - voltage 6.33) (Weight consist of RPi with 2 of the given power banks)
 }
 
 double totalAngularSteps_R(double degree){ //Calculates the number of steps needed to rotate in a angular motion
-  return ceil(degree * (4.3+r_angularOffset)); //4.33 (2nd battery - voltage 6.33) (Weight consist of RPi with 2 of the given power banks)
+  return ceil(degree * (4.24+r_angularOffset)); //4.33 (2nd battery - voltage 6.33) (Weight consist of RPi with 2 of the given power banks)
 }
 
 // (deciding if we need dynamic angular calibration or not)
@@ -51,7 +51,7 @@ int dynamicAngularCalibration()
   CaliAngle(true, false);
 
   // dynamically calibrate left turn
-  for (uint16_t i=0; i<20; i++)
+  for (uint16_t i=0; i<10; i++)
   {
     delay(100);
     leftTurn(90);
@@ -90,18 +90,18 @@ int dynamicAngularCalibration()
     distDiff = CaliAngle(true, false);
 
     // not turning left enough so increase offset
-    if (distDiff >= 0.05)
-      l_angularOffset -= 0.02;
+    if (distDiff >= 0.01)
+      l_angularOffset -= 0.01;
     // turned left too much so decrease offset
-    else if (distDiff <= -0.05)
-      l_angularOffset += 0.02;
+    else if (distDiff <= -0.01)
+      l_angularOffset += 0.01;
     // roughly good to go hence exit calibrating left turn
     else
       break;
   }
 
   // dynamically calibrate right turn
-  for (uint16_t i=0; i<20; i++)
+  for (uint16_t i=0; i<10; i++)
   {
     delay(100);
     rightTurn(90);
@@ -118,7 +118,7 @@ int dynamicAngularCalibration()
     if (distDiff >= 0.05)
       r_angularOffset += 0.05;
     // turned left too much so decrease offset
-    else if (distDiff <= -0.0001)
+    else if (distDiff <= -0.05)
       r_angularOffset -= 0.05;
     // roughly good to go hence exit calibrating left turn
     else
@@ -140,11 +140,11 @@ int dynamicAngularCalibration()
     distDiff = CaliAngle(true, false);
 
     // not turning left enough so increase offset
-    if (distDiff >= 0.05)
-      r_angularOffset += 0.02;
+    if (distDiff >= 0.01)
+      r_angularOffset += 0.01;
     // turned left too much so decrease offset
-    else if (distDiff <= -0.0001)
-      r_angularOffset -= 0.02;
+    else if (distDiff <= -0.01)
+      r_angularOffset -= 0.01;
     // roughly good to go hence exit calibrating left turn
     else
       break;

@@ -21,8 +21,8 @@ void setup() {
 
   // align the robot to start position properly
  alignment();
-  // for dynamic angular calibration
-//  dynamicAngularCalibration();
+ // for d1ynamic angular calibration
+// dynamicAngularCalibration();
 
   // turning manual calibration code
 //  rightTurn(90);
@@ -35,6 +35,7 @@ void setup() {
 //  leftTurn(90);
   
   //Motor test functions
+//  delay(2000);
 //  forward(1);
 //  delay(100);
 //  forward(1);
@@ -272,7 +273,7 @@ void loop()
                     leftTurn(90);
                     
                   // calibrate angle and distance from the left wall
-                  CaliAngle(true, true);
+                  CaliAngle(true, false);
                   // go back to facing front
                   rightTurn(90);
                   //delay(100);
@@ -324,6 +325,8 @@ void loop()
         case 'P' :
         case 'p' :
                   alignment();
+                  // for dynamic angular calibration
+                  dynamicAngularCalibration();
                   // to send IR sensor reading of obstacles to everyone
                   getSensorData();
                   delay(100);

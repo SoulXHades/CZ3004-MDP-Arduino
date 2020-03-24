@@ -8,7 +8,7 @@ volatile const int SPEED =  250; //Set the speed of the motor
 
 // PID Parameters
 // PID values for obstacle avoidance checklist because interupt not working well due to delay checking the sensor: Kp=6, Ki=0, Kd=0.008
-volatile double Kp=30, Ki=80, Kd=0.02; //Set PID values //Previous adjusted PID values: Kp=23, Ki=80, Kd=0.02 (When weight is one RPi and 2 powerbanks given PID values: Kp=30, Ki=80, Kd=0.02)
+volatile double Kp=23, Ki=80, Kd=0.02; //Set PID values //Previous adjusted PID values: Kp=23, Ki=80, Kd=0.02 (When weight is one RPi and 2 powerbanks given PID values: Kp=30, Ki=80, Kd=0.02)
 volatile double Output = 0; // Adjusted speed
 
 // Create PID Instance
@@ -205,7 +205,7 @@ void caliDist(bool leftWall)
       break;
     
     // if too far off, move closer
-    if (getDistance(3) > 4.9 || getDistance(1) > 4.9)
+    if (getDistance(3) > 5.0 || getDistance(1) > 5.0)
     {
       md.setSpeeds(SPEEDR, SPEEDL);
 
@@ -216,7 +216,7 @@ void caliDist(bool leftWall)
         tooMuch = true;
     }
     // if too close, reverse
-    else if (getDistance(3) < 4.0 || getDistance(1) < 4.0)
+    else if (getDistance(3) < 4.4 || getDistance(1) < 4.4)
     {
       md.setSpeeds(-SPEEDR, -SPEEDL);
 
