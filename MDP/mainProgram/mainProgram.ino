@@ -46,6 +46,7 @@ void setup() {
 //  forward(4);
   
   //Motor test functions
+//  CaliAngle(true, false);
 //  delay(2000);
 //  forward(1);
 //  delay(100);
@@ -59,15 +60,16 @@ void setup() {
 //  delay(100);
 //  forward(1);
 //  delay(100);
-//  delay(100);
 //  forward(1);
 //  delay(100);
 //  forward(1);
 //  delay(100);
 //  forward(1);
 //  delay(100);
+//  forward(1);
 //  delay(100);
-//  forward(5);
+//  delay(100);
+//  forward(8);
 //  rightTurn(90);
 //  forward(2);
 //  leftTurn(90);
@@ -245,48 +247,31 @@ void loop()
                   // calibrate angle and distance from the front wall
                   CaliAngle(true, true);
                   // turn left to calibrate from left wall
-                  // only turn right to read right blind spot if not fastest path
-                  if (notStartFastestPath)
-                  {
-                    rightTurn(90);
-                    // to send IR sensor reading of obstacles to everyone
-                    getSensorData();
-                    rightTurn(180);
-                  }
-                  else
-                    // turn left to calibrate from left wall
-                    leftTurn(90);
-                  
+                  leftTurn(90);
                   // calibrate angle and distance from the left wall
                   CaliAngle(true, false);
                   // go back to facing front
                   rightTurn(90);
                   // calibrate angle and distance from the front wall
                   CaliAngle(true, true);
+                  // get sensor reading and send to Algorithm PC
+                  if (notStartFastestPath)
+                    getSensorData();
                   //delay(100);
                   break;
 
         // for calibrate left
         case 'B' :
         case 'b' :
-                  // only turn right to read right blind spot if not fastest path
-                  if (notStartFastestPath)
-                  {
-                    // to read right blind spot readings
-                    rightTurn(90);
-                    // send obstacle locations
-                    getSensorData();
-                    // robot will face the front again
-                    rightTurn(180);
-                  }
-                  else
-                    // turn left to calibrate from left wall
-                    leftTurn(90);
-                    
+                  // turn left to calibrate from left wall
+                  leftTurn(90);
                   // calibrate angle and distance from the left wall
                   CaliAngle(true, false);
                   // go back to facing front
                   rightTurn(90);
+                  // get sensor reading and send to Algorithm PC
+                  if (notStartFastestPath)
+                    getSensorData();
                   //delay(100);
                   break;
 
@@ -295,17 +280,9 @@ void loop()
         case 'c' :
                   // calibrate angle and distance from the front wall
                   CaliAngle(true, false);
-                  // only turn right to read right blind spot if not fastest path
+                  // get sensor reading and send to Algorithm PC
                   if (notStartFastestPath)
-                  {
-                    // face right to send sensor data to everyone to check for blind spot
-                    rightTurn(90);
-                    // to send IR sensor reading of obstacles to everyone
                     getSensorData();
-                    leftTurn(90);
-                    // calibrate angle and distance from the front wall
-                    CaliAngle(true, false);
-                  }
                   //delay(100);
                     
                   break;
