@@ -94,7 +94,7 @@ void getObstacleLocations()
     runningMedian_PS6.add(sharpIR_PS6.distance());
   }
 
-//  Serial.println(runningMedian_PS2.getMedian());  // debug
+//  Serial.println(runningMedian_PS6 .getMedian());  // debug
 
   // to return obstacle location via grid
   // PS1 (Short Front Right)
@@ -143,16 +143,20 @@ void getObstacleLocations()
 
   // to return obstacle location via grid
   // PS6 (Long Right Center)
-  if (runningMedian_PS6.getMedian() < 25.0)
-    sensorResult += "8\n";
-  else if (runningMedian_PS6.getMedian() < 34.0)
+  if (runningMedian_PS6.getMedian() < 12.0)
+    sensorResult += "1\n";
+  else if (runningMedian_PS6.getMedian() < 22.0)
+    sensorResult += "2\n";
+  else if (runningMedian_PS6.getMedian() < 31.0)
     sensorResult += "3\n";
-  else if (runningMedian_PS6.getMedian() < 43.0)
+  else if (runningMedian_PS6.getMedian() < 42.0)
     sensorResult += "4\n";
-  else if (runningMedian_PS6.getMedian() < 55.0)
+  else if (runningMedian_PS6.getMedian() < 51.0)
     sensorResult += "5\n";
-  else if (runningMedian_PS6.getMedian() < 64.0)
+  else if (runningMedian_PS6.getMedian() < 62.0)
     sensorResult += "6\n";
+  else if (runningMedian_PS6.getMedian() < 90.0)
+    sensorResult += "7\n";
   else
     sensorResult += "8\n";
 

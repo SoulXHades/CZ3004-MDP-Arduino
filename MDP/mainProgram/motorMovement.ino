@@ -8,7 +8,7 @@ volatile const int SPEED =  250; //Set the speed of the motor
 
 // PID Parameters
 // PID values for obstacle avoidance checklist because interupt not working well due to delay checking the sensor: Kp=6, Ki=0, Kd=0.008
-volatile double Kp=23, Ki=80, Kd=0.02; //Set PID values //Previous adjusted PID values: Kp=23, Ki=80, Kd=0.02 (When weight is one RPi and 2 powerbanks given PID values: Kp=30, Ki=80, Kd=0.02)
+volatile double Kp=20, Ki=80, Kd=0.02; //Set PID values //Previous adjusted PID values: Kp=23, Ki=80, Kd=0.02 (When weight is one RPi and 2 powerbanks given PID values: Kp=30, Ki=80, Kd=0.02)
 volatile double Output = 0; // Adjusted speed
 
 // Create PID Instance
@@ -40,7 +40,7 @@ void forward(double gridNumber){
 
 void backward(double gridNumber){
   // seperate number of ticks cause of the weight unevenness
-  double totalSteps = totalRegularSteps(gridNumber * 9.28);
+  double totalSteps = totalRegularSteps(gridNumber * 8.9);
   
   motorStart();
   for(int i=0; i<=SPEED; i++){

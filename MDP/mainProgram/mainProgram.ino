@@ -22,7 +22,7 @@ void setup() {
   // align the robot to start position properly
  alignment();
  // for d1ynamic angular calibration
-// dynamicAngularCalibration();
+ dynamicAngularCalibration();
 
   // turning manual calibration code
 //  rightTurn(90);
@@ -33,6 +33,17 @@ void setup() {
 //  leftTurn(90);
 //  leftTurn(90);
 //  leftTurn(90);
+
+  // testing of continuous movement
+//  CaliAngle(true, false);
+//  delay(2000);
+//  forward(4);
+//  delay(75);
+//  rightTurn(90);
+//  forward(2);
+//  delay(75);
+//  leftTurn(90);
+//  forward(4);
   
   //Motor test functions
 //  delay(2000);

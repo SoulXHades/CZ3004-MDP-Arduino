@@ -408,24 +408,51 @@ float SharpIR::distance()
 			calibratedDist = distanceList[numOfSamples/2];
 
 			// offset:
+			// for 10cm
+			if (calibratedDist < 24.0)
+				return calibratedDist - 11.0;
+			// for 20cm
+			else if (calibratedDist < 30.0)
+				return calibratedDist - 7.0;
 			// for 30cm
-			if (calibratedDist < 35.0)
-				return calibratedDist;
+			else if (calibratedDist < 40.0)
+				return calibratedDist - 7.0;
 			// for 40cm
-			else if (calibratedDist < 45.0)
-				return calibratedDist - 1.0;
+			else if (calibratedDist < 52.0)
+				return calibratedDist - 9.0;
 			// for 50cm
-			else if (calibratedDist < 60.0)
-				return calibratedDist - 3.0;
+			else if (calibratedDist < 63.0)
+				return calibratedDist - 11.0;
 			// for 60cm
-			else if (calibratedDist < 70.0)
-				return calibratedDist - 7.0;
+			else if (calibratedDist < 76.0)
+				return calibratedDist - 14.0;
 			// for 70cm
-			else if (calibratedDist < 85.0)
-				return calibratedDist - 7.0;
-			// for 80cm
-			else if (calibratedDist < 97.0)
-				return calibratedDist - 13.0;
+			else if (calibratedDist < 88.0)
+				return calibratedDist - 15.0;
+
+
+			// offset:
+			// for 20cm
+			// if (calibratedDist < 26.0)
+			// 	return calibratedDist - 3.0;
+			// // for 30cm
+			// else if (calibratedDist < 35.0)
+			// 	return calibratedDist;
+			// // for 40cm
+			// else if (calibratedDist < 45.0)
+			// 	return calibratedDist - 1.0;
+			// // for 50cm
+			// else if (calibratedDist < 60.0)
+			// 	return calibratedDist - 3.0;
+			// // for 60cm
+			// else if (calibratedDist < 70.0)
+			// 	return calibratedDist - 5.0;
+			// // for 70cm
+			// else if (calibratedDist < 85.0)
+			// 	return calibratedDist - 7.0;
+			// // for 80cm
+			// else if (calibratedDist < 97.0)
+			// 	return calibratedDist - 13.0;
 
 			return calibratedDist;
 	}
