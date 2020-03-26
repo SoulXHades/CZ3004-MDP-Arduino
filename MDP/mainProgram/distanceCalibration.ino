@@ -51,7 +51,7 @@ int dynamicAngularCalibration()
   CaliAngle(true, false);
 
   // dynamically calibrate left turn
-  for (uint16_t i=0; i<10; i++)
+  for (uint16_t i=0; i<2; i++)
   {
     delay(200);
     leftTurn(90);
@@ -76,7 +76,7 @@ int dynamicAngularCalibration()
   }
 
   // dynamically calibrate left turn (make it even more precise)
-  for (uint16_t i=0; i<5; i++)
+  for (uint16_t i=0; i<2; i++)
   {
     delay(200);
     leftTurn(90);
@@ -101,7 +101,7 @@ int dynamicAngularCalibration()
   }
 
   // dynamically calibrate right turn
-  for (uint16_t i=0; i<10; i++)
+  for (uint16_t i=0; i<2; i++)
   {
     delay(200);
     rightTurn(90);
@@ -126,7 +126,7 @@ int dynamicAngularCalibration()
   }
 
   // dynamically calibrate right turn (make it even more precise)
-  for (uint16_t i=0; i<5; i++)
+  for (uint16_t i=0; i<2; i++)
   {
     delay(200);
     rightTurn(90);
