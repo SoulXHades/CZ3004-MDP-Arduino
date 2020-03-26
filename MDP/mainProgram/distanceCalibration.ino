@@ -1,12 +1,12 @@
-const double one_grid = 9.26 *1; // let it go slightly more than a grid to counter skidding on the spot
-const double two_grid = 9.26   *2;
-const double three_grid = 9.3 *3;
-const double four_grid = 9.3 *4;
-const double five_grid = 9.415 *5;
-const double six_grid = 9.445 *6;
+const double one_grid = 9.23 *1; // let it go slightly more than a grid to counter skidding on the spot
+const double two_grid = 9.23 *2;
+const double three_grid = 9.28 *3;
+const double four_grid = 9.28 *4;
+const double five_grid = 9.35 *5;
+const double six_grid = 9.37 *6;
 const double seven_grid = 9.445 *7;
-const double eight_grid = 9.485 *8;
-const double nine_grid = 9.5 *9;
+const double eight_grid = 9.445 *8;
+const double nine_grid = 9.445 *9;
 const double ten_grid = 9.365 *10;
 const double eleven_grid = 9.365 *11;
 const double twelve_grid = 9.365 *12;
@@ -51,14 +51,17 @@ int dynamicAngularCalibration()
   CaliAngle(true, false);
 
   // dynamically calibrate left turn
-  for (uint16_t i=0; i<20; i++)
+  for (uint16_t i=0; i<10; i++)
   {
-    delay(100);
+    delay(200);
     leftTurn(90);
+    delay(200);
     leftTurn(90);
+    delay(200);
     leftTurn(90);
+    delay(200);
     leftTurn(90);
-    delay(100);
+    delay(200);
     distDiff = CaliAngle(true, false);
 
     // turned left too much so decrease offset
@@ -73,43 +76,49 @@ int dynamicAngularCalibration()
   }
 
   // dynamically calibrate left turn (make it even more precise)
-  for (uint16_t i=0; i<20; i++)
+  for (uint16_t i=0; i<5; i++)
   {
-    delay(100);
+    delay(200);
     leftTurn(90);
+    delay(200);
     leftTurn(90);
+    delay(200);
     leftTurn(90);
+    delay(200);
     leftTurn(90);
-    delay(100);
+    delay(200);
     distDiff = CaliAngle(true, false);
 
     // turned left too much so decrease offset
-    if (distDiff >= 0.004)
-      l_angularOffset -= 0.001;
+    if (distDiff > 0.02)
+      l_angularOffset -= 0.01;
     // turned left little much so increase offset
-    else if (distDiff <= -0.004)
-      l_angularOffset += 0.001;
+    else if (distDiff < -0.02)
+      l_angularOffset += 0.01;
     // roughly good to go hence exit calibrating left turn
     else
       break;
   }
 
   // dynamically calibrate right turn
-  for (uint16_t i=0; i<20; i++)
+  for (uint16_t i=0; i<10; i++)
   {
-    delay(100);
+    delay(200);
     rightTurn(90);
+    delay(200);
     rightTurn(90);
+    delay(200);
     rightTurn(90);
+    delay(200);
     rightTurn(90);
-    delay(100);
+    delay(200);
     distDiff = CaliAngle(true, false);
 
     // not turning right enough so increase offset
     if (distDiff >= 0.05)
       r_angularOffset += 0.05;
     // turned right too much so decrease offset
-    else if (distDiff <= -0.05)
+    else if (distDiff <= -0.05) 
       r_angularOffset -= 0.05;
     // roughly good to go hence exit calibrating left turn
     else
@@ -117,22 +126,25 @@ int dynamicAngularCalibration()
   }
 
   // dynamically calibrate right turn (make it even more precise)
-  for (uint16_t i=0; i<20; i++)
+  for (uint16_t i=0; i<5; i++)
   {
-    delay(100);
+    delay(200);
     rightTurn(90);
+    delay(200);
     rightTurn(90);
+    delay(200);
     rightTurn(90);
+    delay(200);
     rightTurn(90);
-    delay(100);
+    delay(200);
     distDiff = CaliAngle(true, false);
 
     // not turning right enough so increase offset
-    if (distDiff >= 0.004)
-      r_angularOffset += 0.001;
+    if (distDiff > 0.02)
+      r_angularOffset += 0.01;
     // turned right too much so decrease offset
-    else if (distDiff <= -0.004)
-      r_angularOffset -= 0.001;
+    else if (distDiff < -0.02)
+      r_angularOffset -= 0.01;
     // roughly good to go hence exit calibrating left turn
     else
       break;

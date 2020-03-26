@@ -116,6 +116,8 @@ double CaliAngle(bool firstTime, bool leftWall)
   int count = 0;
   int calSPEED = 50;
 
+  distDiff_retVal = getDistance(3) - getDistance(1);
+
   // only if all 3 are less than 3 grids away from a wall
   if (getDistance(3) < 30 && getDistance(4) < 30 && getDistance(1) < 30)
   {
@@ -159,10 +161,6 @@ double CaliAngle(bool firstTime, bool leftWall)
 
     // if different is a lot, means the robot is not perpenticular to the wall
     distDiff = getDistance(3) - getDistance(1);
-
-    // assign the original off value to be used for dynamic initial calibration
-    if(distDiff > distDiff_retVal)
-      distDiff_retVal = distDiff;
 
     // too tilted to the left, turn to the right
     if (distDiff >= 0.05) 
