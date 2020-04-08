@@ -23,57 +23,6 @@ void setup() {
  alignment();
  // for d1ynamic angular calibration
  dynamicAngularCalibration();
-
-  // turning manual calibration code
-//  rightTurn(90); 
-//  rightTurn(90);
-//  rightTurn(90);
-//  rightTurn(90);
-//  leftTurn(90);
-//  leftTurn(90);
-//  leftTurn(90);
-//  leftTurn(90);
-
-  // testing of continuous movement
-//  CaliAngle(true, false);
-//  delay(2000);
-//  forward(4);
-//  delay(75);
-//  rightTurn(90);
-//  forward(2);
-//  delay(75);
-//  leftTurn(90);
-//  forward(4);
-  //Motor test functions
-//  CaliAngle(true, false);
-//  delay(2000);
-//  forward(1);
-//  delay(100);
-//  forward(1);
-//  delay(100);
-//  forward(1);
-//  delay(100);
-//  forward(1);
-//  delay(100);
-//  forward(1);
-//  delay(100);
-//  forward(1);
-//  delay(100);
-//  forward(1);
-//  delay(100);
-//  forward(1);
-//  delay(100);
-//  forward(1);
-//  delay(100);
-//  forward(1);
-//  delay(100);
-//  delay(100);
-//  forward(8);
-//  rightTurn(90);
-//  forward(2);
-//  leftTurn(90);
-//  forward(3);
-//  backward(6);
 }
 
 void loop() 
@@ -81,17 +30,8 @@ void loop()
   // true if there are incoming byte(s)
    if (Serial.available() > 0)
     { 
-      // e.g of string format to receive "PA: A2"
-      //Serial.readBytes(buffer, sizeof buffer);
       // read content from RPi (Serial.read() is processed by Arduino way faster than Serial.readbytes())
       char cmd = Serial.read();
-  
-      /*//converts char array to string for easier processing
-      String inputString(buffer); 
-      int inputString_length = inputString.length();
-      char cmd = inputString.charAt(0);
-      // only extract the number of grids to move if there is
-      long distance_to_Move = inputString.substring(1,inputString_length-1).toInt();*/
   
       // commands received and process them    
       switch(cmd)
@@ -343,14 +283,4 @@ void getSensorData()
   // send obstacle locations to every other devices
   Serial.write(("AE: " + sensorResult).c_str());
 }
-
-  // Example of receiving data from RPi and to RPi
-  /*
-  if(strcmp(buffer, "Hello\n") == 0)
-    Serial.write("Hello RPi!\n");
-  else if(strcmp(buffer, "") > 0)
-    Serial.write("Not empty string!\n");
-  else if(strcmp(buffer, "") == 0)
-    Serial.write("Empty string!\n");
-  */
   

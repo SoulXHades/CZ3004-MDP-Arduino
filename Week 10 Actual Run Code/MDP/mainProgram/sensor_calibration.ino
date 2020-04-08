@@ -21,22 +21,6 @@ RunningMedian runningMedian_PS4(SAMPLE_SIZE);
 RunningMedian runningMedian_PS5(SAMPLE_SIZE);
 RunningMedian runningMedian_PS6(SAMPLE_SIZE);
 
-//int PS1_value;
- 
-//int PS3_value;
-//int PS4_value;
-//int PS5_value;
-//int PS6_value;
-
-//void sensorInit(){
-//  PS1_value = -1;
-//  PS2_value = -1;
-//  PS3_value = -1;
-//  PS4_value = -1;
-//  PS5_value = -1;
-//  PS6_value = -1;
-//  }
-
 
 // get distance of robot from the wall/obstacle from that sensor
 double getDistance(int sensorNum)
@@ -184,22 +168,3 @@ void PS2_obstacleDetection()
   else
     PS2_value = 8;
 }
-
-/*
-// https://wiki.dfrobot.com/Sharp_GP2Y0A21_Distance_Sensor__10-80cm___SKU_SEN0014_
-// stop range
-void loop () {
-    uint16_t value = analogRead (PS5);
-    uint16_t range = get_gp2d12 (value);
-    Serial.println (value);
-    Serial.print (range);
-    Serial.println (" mm");
-    Serial.println ();
-    delay (500);
-}
-
-uint16_t get_gp2d12 (uint16_t value) {
-    if (value < 10) value = 10;
-    return ((67870.0 / (value - 3.0)) - 40.0);
-}
-*/
