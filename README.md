@@ -11,7 +11,8 @@ In this page, we will only be introducing the foundation hardware components of 
 ## Arduino Uno
 The Arduino Uno was used as the microcontroller board in our robot, along with the Pololu Dual VHN5019 Motor Driver Shield mounted on top of it to drive the DC motors for its mobility (See Figure 2).
 
-![alt text](README%20Images/0J5212.300.jpg "Arduino UNO")
+![alt text](README%20Images/0J5212.300.jpg =250x250 "Arduino UNO")
+
 Figure 2: Motor Driver Shield mounted on the Arduino Uno
 
 The aim of the Arduino Uno is to provide the basic movements of the robot by controlling the DC motor. These movements includes moving forward, backward, and angle rotations of the robot. The program code offers predetermined values to move between each grid (each grid is 10cm), as well as 90 and 180 degree turns. Our code also includes functionalities such as taking in infrared (IR) sensor readings, obstacle detection and calibrations to align the robot’s position to provide accuracy and ensure that it stays on its original path at all times. These functionalities will be utilized as and when the main algorithm of the robot, deems it is useful.
