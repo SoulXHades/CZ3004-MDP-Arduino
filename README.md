@@ -24,22 +24,28 @@ The aim of the Arduino Uno is to provide the basic movements of the robot by con
 A SLA 6-Volt TLA633 battery (see Figure 3) is mounted at the back of the robot. It supplies power to the power regulator board that is mounted on top of the Motor Driver Shield. The power regulator board then distributes enough power for the rest of the components such as DC motors, IR sensors and the Arduino Uno to operate.
 
 <p align="center">
-  <img src="README%20Images/6v-33ah-sealed-lead-acid-battery.jpg" width="300" title="Arduino UNO">
+  <img src="README%20Images/6v-33ah-sealed-lead-acid-battery.jpg" width="300" title="6V Battery">
 </p>
 
 <div align="center"><i>Figure 3: An SLA 6-volt TLA633 battery</i></div>
 
 
 ## DC Motors
-![alt text](README%20Images/DC_Motor_with_Encoder.jpg "DC Motor with Encoder")
-Figure 4: DC Motor
+<p align="center">
+  <img src="README%20Images/DC_Motor_with_Encoder.jpg" width="300" title="DC Motor with Encoder">
+</p>
+
+<div align="center"><i>Figure 4: DC Motor</i></div>
 
 To give the robot the ability to move, two DC motors were used. However, even though both motors are of the same model, their speed performances may slightly be off, which causes the robot to swerve to the side. In order to have the motors run at the same speed and ensure that it travels in a straight line, a closed-loop control system was implemented.
 
 
 ### Encoders
-![alt text](README%20Images/Encoder.jpg "Encoder")
-Figure 4.1: Encoder
+<p align="center">
+  <img src="README%20Images/Encoder.jpg" width="300" title="Encoder">
+</p>
+
+<div align="center"><i>Figure 4.1: Encoder</i></div>
 
 Attached to the motors, are the encoders. They help to measure the pulse width and also in calculating the number of degrees the wheels have rotated. This allows us to keep track of how far the robot have moved, the number of revolutions it needs to turn either to the left or the right and the steps it needs to take for each grid. This would be used as the feedback for the close-loop control system.
 
