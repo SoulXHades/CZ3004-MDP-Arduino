@@ -11,7 +11,7 @@ In this page, we will only be introducing the foundation hardware components of 
 ## Arduino Uno
 The Arduino Uno was used as the microcontroller board in our robot, along with the Pololu Dual VHN5019 Motor Driver Shield mounted on top of it to drive the DC motors for its mobility (See Figure 2).
 
-![](README%20Images/0J5212.300.jpg =250x250)
+![alt text](README%20Images/0J5212.300.jpg "Arduino UNO") <!-- .element height="50%" width="50%" -->
 
 Figure 2: Motor Driver Shield mounted on the Arduino Uno
 
