@@ -15,7 +15,7 @@ The Arduino Uno was used as the microcontroller board in our robot, along with t
   <img src="README%20Images/0J5212.300.jpg" width="256" title="Arduino UNO">
 </p>
 
-*Figure 2: Motor Driver Shield mounted on the Arduino Uno*
+<div align="center"><i>Figure 2: Motor Driver Shield mounted on the Arduino Uno</i></div>
 
 The aim of the Arduino Uno is to provide the basic movements of the robot by controlling the DC motor. These movements includes moving forward, backward, and angle rotations of the robot. The program code offers predetermined values to move between each grid (each grid is 10cm), as well as 90 and 180 degree turns. Our code also includes functionalities such as taking in infrared (IR) sensor readings, obstacle detection and calibrations to align the robot’s position to provide accuracy and ensure that it stays on its original path at all times. These functionalities will be utilized as and when the main algorithm of the robot, deems it is useful.
 
