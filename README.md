@@ -63,3 +63,5 @@ Next, an RPM vs Speed graph was plotted to estimate the speed needed to achieved
 </p>
 
 <div align="center"><i>Figure 4.2a: RPM vs Speed Graph</i></div>
+
+To analyze the behavior of how each motors performed, a motor step test was plotted. This time, the graph was recorded by setting the speed at 300 for the first 5ms, followed by a sudden drop in speed at 250 for another 5ms.
