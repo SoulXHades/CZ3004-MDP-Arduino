@@ -58,8 +58,8 @@ The first step was to compute the number of revolutions per minute (RPM). Using 
 Next, an RPM vs Speed graph was plotted to estimate the speed needed to achieved the desired RPM and observe if any of motors is under performing. This was done by plotting at different speeds ranging from 0 to 400 at an increment of 50.
 
 <p align="center">
-  <img src="README%20Images/LeftMotorRPM.xlsx-Excel.png" width="300" title="Left Motor RPM">
-  <img src="README%20Images/RightMotorRPM.xlsx-Excel.png" width="300" title="Right Motor RPM">
+  <img src="README%20Images/LeftMotorRPM.xlsx-Excel.png" width="350" title="Left Motor RPM">
+  <img src="README%20Images/RightMotorRPM.xlsx-Excel.png" width="350" title="Right Motor RPM">
 </p>
 
 <div align="center"><i>Figure 4.2a: RPM vs Speed Graph</i></div>
