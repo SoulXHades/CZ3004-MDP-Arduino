@@ -21,7 +21,7 @@ The aim of the Arduino Uno is to provide the basic movements of the robot by con
 ## 6-Volt Battery
 A SLA 6-Volt TLA633 battery (see Figure 3) is mounted at the back of the robot. It supplies power to the power regulator board that is mounted on top of the Motor Driver Shield. The power regulator board then distributes enough power for the rest of the components such as DC motors, IR sensors and the Arduino Uno to operate.
 
-![alt text](README%20Images/6v-33ah-sealed-lead-acid-battery.jpg "6V Battery") <!-- .element height="50%" width="50%" -->
+![alt text](README%20Images/6v-33ah-sealed-lead-acid-battery.jpg "6V Battery") <!-- .element height="25%" width="25%" -->
 
 *Figure 3: An SLA 6-volt TLA633 battery*
 
