@@ -65,3 +65,36 @@ Next, an RPM vs Speed graph was plotted to estimate the speed needed to achieved
 <div align="center"><i>Figure 4.2a: RPM vs Speed Graph</i></div>
 
 To analyze the behavior of how each motors performed, a motor step test was plotted. This time, the graph was recorded by setting the speed at 300 for the first 5ms, followed by a sudden drop in speed at 250 for another 5ms.
+
+<p align="center">
+  <img src="README%20Images/LeftMotorStepTest.xlsx-Excel.png" width="425" title="Left Motor Step Test">
+  <img src="README%20Images/RightMotorRPM.xlsx-Excel.png" width="425" title="Right Motor Step Test">
+</p>
+
+<div align="center"><i>Figure 4.2b: Motor Step Test Graph</i></div>
+
+It can be observed that the RPM values for the right motor fluctuates a lot more compared to the left motor. As expected, this causes the robot to swerve to the right as its RPM is slightly slower compared to the left motor at any given speed.
+
+
+### 4.3. Closed-Loop Control
+After gathering the data needed, a Proportional-Integral-Derivative(PID) Controller was used for our closed-loop control system to reduce the error. In this case, the PID controller was used on the right motor, with the left motor chosen as its set point since it has a more stable RPM at any given speed. This way, the PID controller would aim to increase the the right motor’s RPM to catch up with the left motor’s to ensure it rotates at the same desired speed.
+
+<p align="center">
+  <img src="README%20Images/PID-Controller-Block-Diagram.pptx.png" title="PID Controller Block Diagram">
+</p>
+
+<div align="center"><i>Figure 4.3: PID Controller Block Diagram</i></div>
+
+After some tests with trials and errors, it was found that the value of the proportional response, Kp, is to be at 20. However, although the error is now zero and the robot moves straight, it tends to deviate to the right at the start due to the right motor needing some time to catch up to the left motor thus, building accumulated constant error overtime.
+
+To counter this problem, we added the integral response, Ki which helps to remove constant errors in the control system. This would continually sum the error up, no matter how small it is which will eventually be significantly enough to adjust the controller output. Eventually the value of Ki, was found to be at 80, further reducing the steady-state error and finally allowing our robot to move in a straight line motion.
+
+
+## 5. Infrared (IR) Sensors
+As the robot traverse around the arena, sensors are required for the robot to detect obstacle blocks and walls. Therefore, our robot used 5 Sharp GP2Y0A21YK short-range IR sensors and 1 Sharp GP2Y0A02YK long-range sensor (see Figure 5) to traverse around the arena.
+
+<p align="center">
+  <img src="README%20Images/IR_Sensors.jpg" width="300" title="IR Sensors">
+</p>
+
+<div align="center"><i>Figure 5: A short-range IR sensor (left) and a long-range IR sensor (right)</i></div>
