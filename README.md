@@ -98,3 +98,81 @@ As the robot traverse around the arena, sensors are required for the robot to de
 </p>
 
 <div align="center"><i>Figure 5: A short-range IR sensor (left) and a long-range IR sensor (right)</i></div>
+
+
+### 5.1. Infrared (IR) Sensors Calibration
+When reading raw values from the IR sensors, the analog output voltage will be returned. The closer the obstacle is from the IR sensor, the higher the analog output voltage (see Figure 5.1).
+
+<p align="center">
+  <img src="README%20Images/babQg.png" width="300" title="IR graph distance vs voltage">
+</p>
+
+<div align="center"><i>Figure 5.1: Graph of the distance of object vs the analog output voltage</i></div>
+
+However, having an analog output voltage is not very useful. We have to convert it into a distance in centimeters from the obstacle to the robot. Below are the formulas used to the short-range sensor and the long-range sensor:
+
+**Short-range sensor**
+> Distance = ((67870.0 / (AnalogOutputVoltage- 3.0)) - 40.0)/10
+**Long-range sensor**
+> Distance = 65*pow(AnalogOutputVoltage*0.0048828125, -1.10)
+
+Below are the steps to calibrate the IR sensors:
+
+1. Firstly, the IR sensors are to be mounted on the robot to get the analog output voltage. This will take consideration of the offset of the IR sensor from the edge of the robot.
+2. Next, place the edge of the robot at the start of the measuring tape.
+3. Place the obstacle away from the robot.
+4. Record the distance of the obstacle away from the robot and the distance value obtained.
+5. Offset the distance value to the right value.
+
+Despite obtaining the distance during sensor reading, noises may occur, causing inaccurate readings. To solve this issue, sampling was implemented. 11 sample readings were taken, placed in an array, sorted in ascending order and the median value was taken. To increased the accurate more, we did another 16 samplings of the median values that were obtained. Therefore, the sampling is 11 by 16 which is the optimal sampling size to allow us to have a high accuracy of readings and not sacrificing the speed of computation.
+
+
+### 5.2. Robot obstacle detection in the arena
+As our robot is to be placed in the center of a 3 by 3 spacing, IR sensors have to be placed in different positions of the robot and facing different directions. This allows the robot to detect obstacles and not having any blind spots. Due to the algorithm of the exploration of the map, our robot will be doing the left wall hug. Therefore, it affected the decision of the placement of the IR sensors. More IR sensors are placed facing the front and the left of the robot.
+
+After each movement or when requested by the main algorithm that is hosted in a Personal Computer, values of 1 to 8 will be sent over the communication. Value 1 to 7 represents the number of grids the obstacle is away from the robot. Value 8 means no obstacle is detected within the effective range. When there is an obstacle out of the effective range, the value readings are very unstable. Thus, only an effective range will be used. Therefore, short-range sensors will give a value of 1, 2, or 8 while the long-range sensor will give a value between 1 to 8.
+
+Below shows the IR sensors placement and the sensor readings to be returned to the main algorithm:
+
+<p align="center">
+  <img src="README%20Images/Untitled Diagram.png" width="300" title="Sensor reading to Algorithm">
+</p>
+
+<div align="center"><i>Figure 5.2: Placement of robot and possible sensor readings</i></div>
+
+
+### 5.3. Position Calibration of the Robot
+As the robot traverse around the arena, it may begin to misalign. The robot may not face the correct angle or at the wrong position. Therefore, calibration is required to align the robot. This calibration functionality will be utilized by the main algorithm in the Personal Computer after the robot traversed every 3 grids during arena exploration.
+
+When the calibration command is issued from the main algorithm from the Personal Computer, the robot will first calibrate the angle of the robot. To calibrate the angle of the robot, the robot will use the front right and the left short-range sensors to compare the distance difference. If the difference in distance is larger than the allowable threshold (we used 0.15cm), angle calibration will occur. As we used the distance received from the left sensor minus the distance received from the right sensor, if the difference in distance is positive, it means the robot is facing the left more (see Figure 5.3a). The robot has to turn right to face perpendicular to the front. Else, the robot has to turn left till it faces perpendicular to the front.
+
+<p align="center">
+  <img src="README%20Images/calibrationAngle.png" width="300" title="Calibrate angle of the robot">
+</p>
+
+<div align="center"><i>Figure 5.3a: Angle Calibration of the Robot</i></div>
+
+In a situation when the robot faces a corner when it is misaligned, utilizing only the left and right short-range sensors will not work. The robot will not know it is facing a corner and calibrating using the left and right short-range sensors result in it to alight to the corner in a straight line. Therefore, the middle short-range sensor will be utilized to solve this issue. If the distance received from the middle sensor is longer than the right and left sensors, it means the robot is facing a corner (see Figure 5.3b). The robot will keep turning 10 degrees left until it is no longer facing a corner if there is no left wall. If there is a left wall, it may be facing a corner of the front and left wall (see right of Figure 5.3b). Turning 10 degrees left will mess up the position. Therefore, it will turn left 90 degrees to calibrate before turning back to the front to calibrate.
+
+<p align="center">
+  <img src="README%20Images/CalibrateCorner.png" width="300" title="Calibrate corner of the robot">
+</p>
+
+<div align="center"><i>Figure 5.3b: Angle Calibration when facing a corner</i></div>
+
+Despite calibrating the angle of the robot it is facing, calibration of the position of the robot is required. Using the front right and left short-range sensors, the robot will move forward or backward if the distance from the wall to the robot is too big or small respectively till it is within a threshold (see Figure 5.3c).
+
+<p align="center">
+  <img src="README%20Images/CalibrateDist.png" width="300" title="Calibrate distance of the robot">
+</p>
+
+<div align="center"><i>Figure 5.3c: Distance Calibration of the robot from the wall</i></div>
+
+The algorithm of the robot:
+
+1. Check if the robot if is facing a corner. If true, calibrate away from the corner.
+2. Calibrate the angle of the robot against the wall or obstacle blocks.
+3. Calibrate the distance of the robot against the wall or obstacle blocks.
+4. Calibrate the angle of the robot again.
+5. If there is a left wall, turn left and repeat from step 2 before turning right to face the front again.
+
