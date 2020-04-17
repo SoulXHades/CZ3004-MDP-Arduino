@@ -117,6 +117,7 @@ However, having an analog output voltage is not very useful. We have to convert 
 
 **Short-range sensor**
 > Distance = ((67870.0 / (AnalogOutputVoltage- 3.0)) - 40.0)/10
+
 **Long-range sensor**
 > Distance = 65*pow(AnalogOutputVoltage*0.0048828125, -1.10)
 
