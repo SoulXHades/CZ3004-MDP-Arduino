@@ -135,7 +135,7 @@ After each movement or when requested by the main algorithm that is hosted in a 
 Below shows the IR sensors placement and the sensor readings to be returned to the main algorithm:
 
 <p align="center">
-  <img src="README%20Images/Untitled Diagram.png" width="300" title="Sensor reading to Algorithm">
+  <img src="README%20Images/Untitled Diagram.png" title="Sensor reading to Algorithm">
 </p>
 
 <div align="center"><i>Figure 5.2: Placement of robot and possible sensor readings</i></div>
@@ -147,7 +147,7 @@ As the robot traverse around the arena, it may begin to misalign. The robot may 
 When the calibration command is issued from the main algorithm from the Personal Computer, the robot will first calibrate the angle of the robot. To calibrate the angle of the robot, the robot will use the front right and the left short-range sensors to compare the distance difference. If the difference in distance is larger than the allowable threshold (we used 0.15cm), angle calibration will occur. As we used the distance received from the left sensor minus the distance received from the right sensor, if the difference in distance is positive, it means the robot is facing the left more (see Figure 5.3a). The robot has to turn right to face perpendicular to the front. Else, the robot has to turn left till it faces perpendicular to the front.
 
 <p align="center">
-  <img src="README%20Images/calibrationAngle.png" width="300" title="Calibrate angle of the robot">
+  <img src="README%20Images/calibrationAngle.png" width="200" title="Calibrate angle of the robot">
 </p>
 
 <div align="center"><i>Figure 5.3a: Angle Calibration of the Robot</i></div>
@@ -155,7 +155,7 @@ When the calibration command is issued from the main algorithm from the Personal
 In a situation when the robot faces a corner when it is misaligned, utilizing only the left and right short-range sensors will not work. The robot will not know it is facing a corner and calibrating using the left and right short-range sensors result in it to alight to the corner in a straight line. Therefore, the middle short-range sensor will be utilized to solve this issue. If the distance received from the middle sensor is longer than the right and left sensors, it means the robot is facing a corner (see Figure 5.3b). The robot will keep turning 10 degrees left until it is no longer facing a corner if there is no left wall. If there is a left wall, it may be facing a corner of the front and left wall (see right of Figure 5.3b). Turning 10 degrees left will mess up the position. Therefore, it will turn left 90 degrees to calibrate before turning back to the front to calibrate.
 
 <p align="center">
-  <img src="README%20Images/CalibrateCorner.png" width="300" title="Calibrate corner of the robot">
+  <img src="README%20Images/CalibrateCorner.png" width="425" title="Calibrate corner of the robot">
 </p>
 
 <div align="center"><i>Figure 5.3b: Angle Calibration when facing a corner</i></div>
@@ -163,7 +163,7 @@ In a situation when the robot faces a corner when it is misaligned, utilizing on
 Despite calibrating the angle of the robot it is facing, calibration of the position of the robot is required. Using the front right and left short-range sensors, the robot will move forward or backward if the distance from the wall to the robot is too big or small respectively till it is within a threshold (see Figure 5.3c).
 
 <p align="center">
-  <img src="README%20Images/CalibrateDist.png" width="300" title="Calibrate distance of the robot">
+  <img src="README%20Images/CalibrateDist.png" width="200" title="Calibrate distance of the robot">
 </p>
 
 <div align="center"><i>Figure 5.3c: Distance Calibration of the robot from the wall</i></div>
