@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="README%20Images/WhatsApp Image 2020-04-08 at 13.35.02.png" width="300" title="Our robot">
+  <img src="README%20Images/WhatsApp Image 2020-04-08 at 13.35.02.jpeg" width="300" title="Our robot">
 </p>
 
 ## 1. Overview
