@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="README%20Images/WhatsApp Image 2020-04-08 at 13.35.02.png" width="300" title="Our robot">
+</p>
+
 ## 1. Overview
 In this project, a robot was developed to traverse an arena that contains walls, obstacle blocks, images attached to the obstacle blocks, the start zone, and the goal zone. The aim of the robot is to explore the arena, capture images, and race from the start to the goal zone through the fastest path. To develop such robot, hardware components such as an Arduino Uno, a Raspberry Pi, a 6-volt battery, power banks, DC motors with wheels, Infrared (IR) sensors, and a Raspberry Pi camera, is required.
 
