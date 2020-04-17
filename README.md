@@ -72,7 +72,7 @@ To analyze the behavior of how each motors performed, a motor step test was plot
 
 <p align="center">
   <img src="README%20Images/LeftMotorStepTest.xlsx-Excel.png" width="425" title="Left Motor Step Test">
-  <img src="README%20Images/RightMotorRPM.xlsx-Excel.png" width="425" title="Right Motor Step Test">
+  <img src="README%20Images/RightMotorStepTest.xlsx-Excel.png" width="425" title="Right Motor Step Test">
 </p>
 
 <div align="center"><i>Figure 4.2b: Motor Step Test Graph</i></div>
