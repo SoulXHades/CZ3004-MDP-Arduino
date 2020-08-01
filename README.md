@@ -193,8 +193,7 @@ Below contains the sensor names we have given which you will notice in the sourc
 
 <div align="center"><i>Sensor naming</i></div>
 
-Legend:
-
+**Legend:**
 * LRL = Long Right Left
 * SFR = Short Front Right
 * SFC = Short Front Center
