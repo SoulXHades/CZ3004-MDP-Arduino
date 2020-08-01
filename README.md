@@ -188,7 +188,7 @@ You might have noticed that week 8 to week 10 have difference in source code. I 
 Below contains the sensor names we have given which you will notice in the source code:
 
 <p align="center">
-  <img src="README%20Images/Sensor_Position.png" width="425" title="Sensor naming">
+  <img src="README%20Images/Sensor_Position.png" title="Sensor naming">
 </p>
 
 <div align="center"><i>Sensor naming</i></div>
