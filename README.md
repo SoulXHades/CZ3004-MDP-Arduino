@@ -195,12 +195,12 @@ Below contains the sensor names we have given which you will notice in the sourc
 
 Legend:
 
-. LRL = Long Right Left
-. SFR = Short Front Right
-. SFC = Short Front Center
-. SFL = Short Front Left
-. SLR = Short Left Right
-. SLC = Short Left Center
+* LRL = Long Right Left
+* SFR = Short Front Right
+* SFC = Short Front Center
+* SFL = Short Front Left
+* SLR = Short Left Right
+* SLC = Short Left Center
 
 
 ## Extra Notes to Juniors
