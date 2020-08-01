@@ -182,6 +182,27 @@ The algorithm of the robot:
 5. If there is a left wall, turn left and repeat from step 2 before turning right to face the front again.
 
 
+## Additional source code notes
+You might have noticed that week 8 to week 10 have difference in source code. I would recommend you to look at week 10's code instead as it is the most optimized code and hardware changes we have made to the robot and algorithm side.
+
+Below contains the sensor names we have given which you will notice in the source code:
+
+<p align="center">
+  <img src="README%20Images/Sensor_Position.png" width="425" title="Sensor naming">
+</p>
+
+<div align="center"><i>Sensor naming</i></div>
+
+Legend:
+
+. LRL = Long Right Left
+. SFR = Short Front Right
+. SFC = Short Front Center
+. SFL = Short Front Left
+. SLR = Short Left Right
+. SLC = Short Left Center
+
+
 ## Extra Notes to Juniors
 1. Every hardware is different. The offsets for sensors and PID values cannot be reused from this code. Copy and pasting the code won't work. You need to start from scratch and follow the instructions from the lab manual for PID. Altneratively, most people will do trial and error for PID values which is faster.
 2. Robot weight matters. Adding of Raspberry Pi and Powerbank will affect the robot's turning and moving straight. Add powerbank from the start so you won't have to waste time recalibrating again during integration with all components.
